@@ -54,6 +54,8 @@ const UserDropdown = () => {
           setIsLoader(false);
           setIsModalOpen(false);
 
+          setToastType(null);
+          setToastMessage("");
           navigate("/");
         }
       });
