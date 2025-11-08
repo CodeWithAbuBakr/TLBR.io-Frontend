@@ -31,7 +31,18 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [allUsers, setAllUsers] = useState<StoredAllUserDetailsProps | null>(null);
 
     useEffect(() => {
+
+    }, []);
+
+    useEffect(() => {
         const isAuth = localStorage.getItem("isAuth");
+        const theme = localStorage.getItem("theme");
+
+        if (theme === "dark") {
+            setDarkMode(true);
+        } else {
+            setDarkMode(false);
+        }
 
         if (isAuth === "true") {
             setIsLoader(true);
@@ -54,7 +65,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
                     localStorage.removeItem("userDetails");
                     localStorage.removeItem("userSession");
-                    navigate("/signin");
+                    navigate("/");
                 } else if (data) {
                     const formattedUser = data as StoredUserDetailsProps;
                     setUserData(formattedUser);

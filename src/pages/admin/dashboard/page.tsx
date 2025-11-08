@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useData } from "../../../utilities/useData";
 import type { UserProps } from "../../../utilities/type";
+import { DashboardLayout } from "../../../layout/page";
 import ConfirmDeteleUser from "./confirmDeteleUser";
 import UserTable from "./UserTable";
 
@@ -31,41 +32,43 @@ const Dashboard: React.FC = () => {
 
     return (
         <>
-            <div className="flex-1 box-border min-h-screen transition-colors duration-300">
-                {/* Stats Section */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-                    {[
-                        { label: "Total Users", value: users.length },
-                        { label: "Active Users", value: 2 },
-                        { label: "Admins", value: users.filter(u => u.role === "admin").length },
-                        { label: "Pending Requests", value: 1 },
-                    ].map((stat, index) => (
-                        <div
-                            key={index}
-                            className="bg-[#FFAB00] text-white p-6 rounded-2xl shadow-md"
-                        >
-                            <h3 className="text-lg font-medium mb-2">{stat.label}</h3>
-                            <p className="text-3xl font-bold">{stat.value}</p>
-                        </div>
-                    ))}
+            <DashboardLayout>
+                <div className="flex-1 box-border min-h-screen transition-colors duration-300">
+                    {/* Stats Section */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+                        {[
+                            { label: "Total Users", value: users.length },
+                            { label: "Active Users", value: 2 },
+                            { label: "Admins", value: users.filter(u => u.role === "admin").length },
+                            { label: "Pending Requests", value: 1 },
+                        ].map((stat, index) => (
+                            <div
+                                key={index}
+                                className="bg-[#FFAB00] text-white p-6 rounded-2xl shadow-md"
+                            >
+                                <h3 className="text-lg font-medium mb-2">{stat.label}</h3>
+                                <p className="text-3xl font-bold">{stat.value}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* User Management Table */}
+                    <UserTable users={users} isLoading={isUsersLoading} handleDelete={handleDelete} />
                 </div>
 
-                {/* User Management Table */}
-                <UserTable users={users} isLoading={isUsersLoading} handleDelete={handleDelete} />
-            </div>
-
-            {/* Confirmation Modal */}
-            {isModalOpen && isLoader !== true && (
-                <ConfirmDeteleUser
-                    userId={selectedUserId}
-                    isLoader={isLoader}
-                    setIsLoader={setIsLoader}
-                    isModalOpen={isModalOpen}
-                    setIsModalOpen={setIsModalOpen}
-                    setToastType={setToastType}
-                    setToastMessage={setToastMessage}
-                />
-            )}
+                {/* Confirmation Modal */}
+                {isModalOpen && isLoader !== true && (
+                    <ConfirmDeteleUser
+                        userId={selectedUserId}
+                        isLoader={isLoader}
+                        setIsLoader={setIsLoader}
+                        isModalOpen={isModalOpen}
+                        setIsModalOpen={setIsModalOpen}
+                        setToastType={setToastType}
+                        setToastMessage={setToastMessage}
+                    />
+                )}
+            </DashboardLayout>
         </>
     );
 };

@@ -7,7 +7,15 @@ const NotFound: React.FC = () => {
     const navigate = useNavigate();
 
     const handleGoBackToMainPage = () => {
-        navigate("/");
+        const savedUser = localStorage.getItem("userSession");
+        if (savedUser) {
+            const parsedUser = JSON.parse(savedUser);
+            if (parsedUser.keepMeLoggedIn === true) {
+                navigate("/dashboard");
+            }
+        } else {
+            navigate("/");
+        }
     };
 
     return (

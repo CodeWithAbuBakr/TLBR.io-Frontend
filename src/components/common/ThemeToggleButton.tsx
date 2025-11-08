@@ -1,24 +1,28 @@
+"use client";
 import React from "react";
+import { useData } from "../../utilities/useData";
 import { useTheme } from "../../context/ThemeContext";
-import { MdOutlineLightMode } from "react-icons/md";
-import { MdOutlineDarkMode } from "react-icons/md";
+import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 
 export const ThemeToggleButton: React.FC = () => {
+  const { darkMode, setDarkMode } = useData();
   const { toggleTheme } = useTheme();
 
+  const handleToggle = () => {
+    toggleTheme();
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <>
-      <button
-        onClick={toggleTheme}
-        className="relative flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
-      >
-        <button className="hidden dark:flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
-          <MdOutlineLightMode className="text-xl" />
-        </button>
-        <button className="dark:hidden flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
-          <MdOutlineDarkMode className="text-xl" />
-        </button>
-      </button>
-    </>
+    <button
+      onClick={handleToggle}
+      className={`flex items-center justify-center cursor-pointer h-11 w-11 rounded-full border transition-colors duration-300
+      ${darkMode
+          ? "bg-[#1E1E1E] border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
+          : "bg-white border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900"}`}
+      aria-label="Toggle Theme"
+    >
+      {darkMode ? <MdOutlineLightMode className="text-xl" /> : <MdOutlineDarkMode className="text-xl" />}
+    </button>
   );
 };

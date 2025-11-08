@@ -2,9 +2,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import UIText from '../../utilities/testResource';
+import { useData } from '../../utilities/useData';
 
 const GetStarted: React.FC = () => {
     const navigate = useNavigate();
+    const { darkMode } = useData();
 
     const handleDownload = () => {
         navigate('/download');
@@ -20,13 +22,13 @@ const GetStarted: React.FC = () => {
 
     return (
         <>
-            <div className="bg-[#FAFAFA] dark:bg-[#555555] rounded-2xl p-6 shadow-md">
+            <div className={`${darkMode ? "bg-[#333333]" : "bg-[#FAFAFA]"} rounded-2xl p-6 shadow-md`}>
                 {/* Header */}
                 <div className="mb-10">
-                    <h1 className="text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-[#0A0A04] dark:text-[#CCCCCC]">
+                    <h1 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold`}>
                         {UIText.dashboard.get_started.title}
                     </h1>
-                    <p className="text-sm md:text-base text-[#333333] dark:text-[#CCCCCC] mt-1">
+                    <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm md:text-base mt-1`}>
                         {UIText.dashboard.get_started.description}
                     </p>
                 </div>
@@ -34,39 +36,39 @@ const GetStarted: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {/* Download Add-in */}
                     <div
-                        className="bg-white dark:bg-[#333333] border border-[#FFAB00] cursor-pointer rounded-xl p-5 hover:shadow-lg transition-shadow"
+                        className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg border border-[#FFAB00] ${darkMode ? "bg-[#333333]" : "bg-white"}`}
                         onClick={handleDownload}
                     >
-                        <h3 className="text-lg md:text-xl font-semibold text-[#0A0A04] dark:text-[#CCCCCC] mb-1">
+                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
                             {UIText.dashboard.get_started.download.title}
                         </h3>
-                        <p className="text-sm text-[#333333] dark:text-[#CCCCCC] font-light">
+                        <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm font-light`}>
                             {UIText.dashboard.get_started.download.description}
                         </p>
                     </div>
 
                     {/* View Billing */}
                     <div
-                        className="bg-white dark:bg-[#333333] border border-[#FFAB00] cursor-pointer rounded-xl p-5 hover:shadow-lg transition-shadow"
+                        className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg border border-[#FFAB00] ${darkMode ? "bg-[#333333]" : "bg-white"}`}
                         onClick={handleBilling}
                     >
-                        <h3 className="text-lg md:text-xl font-semibold text-[#0A0A04] dark:text-[#CCCCCC] mb-1">
+                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
                             {UIText.dashboard.get_started.billing.title}
                         </h3>
-                        <p className="text-sm text-[#333333] dark:text-[#CCCCCC] font-light">
+                        <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm font-light`}>
                             {UIText.dashboard.get_started.billing.description}
                         </p>
                     </div>
 
                     {/* Update Settings */}
                     <div
-                        className="bg-white dark:bg-[#333333] border border-[#FFAB00] cursor-pointer rounded-xl p-5 hover:shadow-lg transition-shadow"
+                        className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg border border-[#FFAB00] ${darkMode ? "bg-[#333333]" : "bg-white"}`}
                         onClick={handleSetting}
                     >
-                        <h3 className="text-lg md:text-xl font-semibold text-[#0A0A04] dark:text-[#CCCCCC] mb-1">
+                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
                             {UIText.dashboard.get_started.setting.title}
                         </h3>
-                        <p className="text-sm text-[#333333] dark:text-[#CCCCCC] font-light">
+                        <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm font-light`}>
                             {UIText.dashboard.get_started.setting.description}
                         </p>
                     </div>

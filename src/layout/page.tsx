@@ -1,16 +1,18 @@
 "use client";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useData } from "../utilities/useData";
 import { useSidebar } from "../context/SidebarContext";
 import AppHeader from "./AppHeader";
 import AppSidebar from "./AppSidebar";
 import Backdrop from "./Backdrop";
 
-export const AdminLayout = ({
+export const DashboardLayout = ({
     children,
 }: {
     children: React.ReactNode;
 }) => {
+    const { darkMode } = useData();
     const navigate = useNavigate();
     const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
@@ -50,7 +52,10 @@ export const AdminLayout = ({
             : "lg:ml-[90px]";
 
     return (
-        <div className="min-h-screen xl:flex">
+        <div
+            className={`min-h-screen xl:flex transition-colors duration-300
+                ${darkMode ? "bg-[#1E1E1E] text-gray-100" : "bg-white text-gray-900"}`}
+        >
             {/* Sidebar and Backdrop */}
             <AppSidebar />
             <Backdrop />

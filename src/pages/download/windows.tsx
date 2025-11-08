@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import UIText from '../../utilities/testResource';
 import { FaWindows } from 'react-icons/fa';
 import Toast from '../../hooks/useToast';
+import { useData } from '../../utilities/useData';
 
 const Windows: React.FC = () => {
+    const { darkMode } = useData();
     const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
     const [toastMessage, setToastMessage] = useState("");
 
@@ -12,7 +14,6 @@ const Windows: React.FC = () => {
         setToastType(null);
         setToastMessage("");
 
-        // Trigger toast after a short delay
         setTimeout(() => {
             setToastType("info");
             setToastMessage("This feature is currently in development. Stay tuned!");
@@ -21,12 +22,17 @@ const Windows: React.FC = () => {
 
     return (
         <>
-            <div className="bg-white dark:bg-[#333333] dark:border-[#FFAB00] border border-gray-100 rounded-2xl p-6 flex flex-col items-center text-center hover:shadow-lg transition-all">
-                <FaWindows className="text-5xl text-[#0A0A04] dark:text-[#FFAB00] mb-3" />
-                <h3 className="font-semibold text-xl text-[#0A0A04] dark:text-white mb-2">
+            <div
+                className={`rounded-2xl p-6 flex flex-col items-center text-center border transition-all hover:shadow-lg
+                    ${darkMode
+                        ? "bg-[#333333] border-[#FFAB00]"
+                        : "bg-white border-gray-100"}`}
+            >
+                <FaWindows className={`text-5xl mb-3 ${darkMode ? "text-[#FFAB00]" : "text-[#0A0A04]"}`} />
+                <h3 className={`font-semibold text-xl mb-2 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                     {UIText.download.windows.title}
                 </h3>
-                <p className="text-sm text-[#666666] dark:text-[#CCCCCC] mb-4">
+                <p className={`text-sm mb-4 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}>
                     {UIText.download.windows.description}
                 </p>
 

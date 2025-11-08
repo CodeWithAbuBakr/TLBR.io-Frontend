@@ -12,7 +12,7 @@ import Loader from "../../loader/loader";
 
 const UserDropdown = () => {
   const navigate = useNavigate();
-  const { isOpen, setIsOpen, isLoader, setIsLoader, isModalOpen, setIsModalOpen,
+  const { darkMode, isOpen, setIsOpen, isLoader, setIsLoader, isModalOpen, setIsModalOpen,
     toastType, setToastType, toastMessage, setToastMessage, userData } = useData();
 
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -54,7 +54,7 @@ const UserDropdown = () => {
           setIsLoader(false);
           setIsModalOpen(false);
 
-          navigate("/signin");
+          navigate("/");
         }
       });
     }
@@ -72,45 +72,74 @@ const UserDropdown = () => {
       <div className="relative">
         <button
           onClick={toggleDropdown}
-          className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle"
+          className={`flex items-center dropdown-toggle cursor-pointer transition-colors duration-300 ${darkMode ? "text-gray-300" : "text-gray-700"
+            }`}
         >
-          <span className="mr-3 bg-[#333333] flex justify-center items-center text-white rounded-full h-11 w-11">
+          <span
+            className={`mr-3 flex justify-center items-center rounded-full h-11 w-11 font-semibold ${darkMode ? "bg-gray-700 text-gray-100" : "bg-[#333333] text-white"
+              }`}
+          >
             {getInitials(userData?.user?.name ?? "")}
           </span>
 
-          <span className="block mr-1 font-medium text-theme-sm text-[#666666] dark:text-[#CCCCCC]">
+          <span
+            className={`block mr-1 font-medium text-theme-sm ${darkMode ? "text-gray-300" : "text-[#666666]"
+              }`}
+          >
             {userData?.user?.name ?? "User"}
           </span>
 
           <IoIosArrowDown
-            className={`text-gray-500 dark:text-gray-400 transition-transform duration-200 w-[18px] h-5 ${isOpen ? "hidden" : ""}`}
+            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? "hidden" : darkMode ? "text-gray-400" : "text-gray-500"
+              }`}
           />
           <IoIosArrowUp
-            className={`text-gray-500 dark:text-gray-400 transition-transform duration-200 w-[18px] h-5 ${isOpen ? "" : "hidden"}`}
+            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? (darkMode ? "text-gray-400" : "text-gray-500") : "hidden"
+              }`}
           />
         </button>
 
         <Dropdown
           isOpen={isOpen}
           onClose={closeDropdown}
-          className="absolute right-0 mt-[17px] z-10 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark"
+          className={`absolute right-0 mt-[17px] z-10 flex w-[260px] flex-col rounded-2xl border p-3 shadow-theme-lg transition-colors duration-300
+            ${darkMode
+              ? "border-gray-700 bg-[#1E1E1E] text-gray-200"
+              : "border-gray-200 bg-white text-gray-900"
+            }`}
         >
           <div>
-            <span className="block font-medium text-[#666666] dark:text-[#CCCCCC] text-theme-sm">
+            <span
+              className={`block font-medium text-theme-sm ${darkMode ? "text-gray-200" : "text-[#666666]"
+                }`}
+            >
               {userData?.user?.name}
             </span>
-            <span className="mt-0.5 block text-theme-xs text-[#666666] dark:text-[#CCCCCC]">
+            <span
+              className={`mt-0.5 block text-theme-xs ${darkMode ? "text-gray-400" : "text-[#666666]"
+                }`}
+            >
               {userData?.user?.email}
             </span>
           </div>
 
-          <div className="my-3 h-px bg-[#666666] dark:bg-[#CCCCCC]" />
+          <div
+            className={`my-3 h-px ${darkMode ? "bg-gray-700" : "bg-[#E5E5E5]"
+              }`}
+          />
 
           <button
-            className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-[#666666] dark:text-[#CCCCCC] rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-white/5 dark:hover:text-gray-300"
             onClick={handleLogout}
+            className={`flex items-center gap-3 px-3 py-2 mt-3 font-medium rounded-lg group text-theme-sm transition-colors duration-300
+              ${darkMode
+                ? "text-gray-300 hover:bg-gray-800 hover:text-gray-100"
+                : "text-[#666666] hover:bg-gray-100 hover:text-gray-700"
+              }`}
           >
-            <TbLogout2 className="text-xl text-[#666666]" />
+            <TbLogout2
+              className={`text-xl ${darkMode ? "text-gray-400" : "text-[#666666]"
+                }`}
+            />
             {UIText.header.user_Dropdown.button}
           </button>
         </Dropdown>
