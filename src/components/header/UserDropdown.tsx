@@ -83,18 +83,18 @@ const UserDropdown = () => {
           </span>
 
           <span
-            className={`block mr-1 font-medium text-theme-sm ${darkMode ? "text-gray-300" : "text-[#666666]"
+            className={`block mr-1 font-medium text-theme-sm ${darkMode ? "text-white" : "text-[#666666]"
               }`}
           >
             {userData?.user?.name ?? "User"}
           </span>
 
           <IoIosArrowDown
-            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? "hidden" : darkMode ? "text-gray-400" : "text-gray-500"
+            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? "hidden" : darkMode ? "text-white" : "text-gray-500"
               }`}
           />
           <IoIosArrowUp
-            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? (darkMode ? "text-gray-400" : "text-gray-500") : "hidden"
+            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? (darkMode ? "text-white" : "text-gray-500") : "hidden"
               }`}
           />
         </button>
@@ -104,21 +104,15 @@ const UserDropdown = () => {
           onClose={closeDropdown}
           className={`absolute right-0 mt-[17px] z-10 flex w-[260px] flex-col rounded-2xl border p-3 shadow-theme-lg transition-colors duration-300
             ${darkMode
-              ? "border-gray-700 bg-[#1E1E1E] text-gray-200"
+              ? "border-[#666666] bg-[#1E1E1E] text-gray-200"
               : "border-gray-200 bg-white text-gray-900"
             }`}
         >
           <div>
-            <span
-              className={`block font-medium text-theme-sm ${darkMode ? "text-gray-200" : "text-[#666666]"
-                }`}
-            >
+            <span className={`block font-medium text-theme-sm ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}>
               {userData?.user?.name}
             </span>
-            <span
-              className={`mt-0.5 block text-theme-xs ${darkMode ? "text-gray-400" : "text-[#666666]"
-                }`}
-            >
+            <span className={`mt-0.5 block text-theme-xs ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}>
               {userData?.user?.email}
             </span>
           </div>
@@ -130,7 +124,7 @@ const UserDropdown = () => {
 
           <button
             onClick={handleLogout}
-            className={`flex items-center gap-3 px-3 py-2 mt-3 font-medium rounded-lg group text-theme-sm transition-colors duration-300
+            className={`flex items-center gap-3 px-3 py-2 mt-3 cursor-pointer font-medium rounded-lg group text-theme-sm transition-colors duration-300
               ${darkMode
                 ? "text-gray-300 hover:bg-gray-800 hover:text-gray-100"
                 : "text-[#666666] hover:bg-gray-100 hover:text-gray-700"

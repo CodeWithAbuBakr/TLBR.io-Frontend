@@ -192,7 +192,7 @@ const OTPDialog: React.FC<DialogProps> = ({
                                         onKeyDown={(e) => handleKeyDown(e, index)}
                                         onPaste={index === 0 ? handlePaste : undefined}
                                         className={`w-12 h-12 text-center text-lg font-semibold border rounded-xl outline-none transition-all
-                                        focus:border-[#FFAB00] focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-800
+                                        focus:border-[#FFAB00] focus:ring-2 focus:ring-orange-200 dark:focus:ring-[#FFAB00]
                                             ${darkMode
                                                 ? "bg-[#2A2A2A] text-gray-100 border-gray-700 focus:border-[#FFAB00]"
                                                 : "bg-white text-gray-800 border-gray-300"}`}

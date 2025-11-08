@@ -171,166 +171,44 @@
 // };
 
 // Without csrf token
-// const server = import.meta.env.VITE_BASE_URL;
-
-// let isRefreshing = false;
-
-// let failedQueue: {
-//     resolve: (token?: string | null) => void;
-//     reject: (error: unknown) => void;
-// }[] = [];
-
-// // Processes the failed queue for token refresh
-// const processQueue = (error: unknown, token: string | null = null): void => {
-//     failedQueue.forEach((prom) => {
-//         if (error) {
-//             prom.reject(error);
-//         } else {
-//             prom.resolve(token);
-//         }
-//     });
-//     failedQueue = [];
-// };
-
-// // Refresh access token when expired
-// const refreshAccessToken = async (): Promise<string | null> => {
-//     try {
-//         const response = await fetch(`${server}/api/v1/refresh/token`, {
-//             method: "GET",
-//             credentials: "include",
-//         });
-
-//         if (!response.ok) throw new Error("Failed to refresh token");
-
-//         const data = await response.json();
-//         const newToken = data?.token || null;
-
-//         if (newToken) {
-//             localStorage.setItem("token", newToken);
-//         }
-
-//         return newToken;
-//     } catch (err) {
-//         console.error("Token refresh failed:", err);
-//         return null;
-//     }
-// };
-
-// // Main fetch wrapper with automatic token handling
-// export const apiFetch = async (
-//     url: string,
-//     options: RequestInit = {}
-// ): Promise<Response> => {
-//     const token = localStorage.getItem("token");
-//     const headers = new Headers(options.headers || {});
-
-//     // Add Authorization header if token exists
-//     if (token) {
-//         headers.set("Authorization", `Bearer ${token}`);
-//     }
-
-//     const requestOptions: RequestInit = {
-//         ...options,
-//         headers,
-//         credentials: "include",
-//     };
-
-//     const response = await fetch(`${server}${url}`, requestOptions);
-
-//     // Handle access token refresh on 403
-//     if (response.status === 403) {
-//         if (!isRefreshing) {
-//             isRefreshing = true;
-
-//             try {
-//                 const newToken = await refreshAccessToken();
-//                 processQueue(null, newToken);
-
-//                 if (newToken) {
-//                     headers.set("Authorization", `Bearer ${newToken}`);
-//                     return fetch(`${server}${url}`, { ...requestOptions, headers });
-//                 } else {
-//                     throw new Error("No new token received");
-//                 }
-//             } catch (err) {
-//                 processQueue(err, null);
-//                 throw err;
-//             } finally {
-//                 isRefreshing = false;
-//             }
-//         } else {
-//             // Queue requests while refreshing token
-//             return new Promise<Response>((resolve, reject) => {
-//                 failedQueue.push({
-//                     resolve: (token) => {
-//                         if (token) {
-//                             headers.set("Authorization", `Bearer ${token}`);
-//                         }
-//                         resolve(fetch(`${server}${url}`, { ...requestOptions, headers }));
-//                     },
-//                     reject,
-//                 });
-//             });
-//         }
-//     }
-
-//     return response;
-// };
-
-// Updated code with csrf token
 const server = import.meta.env.VITE_BASE_URL;
 
 let isRefreshing = false;
-let isRefreshingCSRFToken = false;
 
 let failedQueue: {
     resolve: (token?: string | null) => void;
     reject: (error: unknown) => void;
 }[] = [];
 
-let csrfFailedQueue: {
-    resolve: () => void;
-    reject: (error: unknown) => void;
-}[] = [];
-
-// Helper to get cookie by name
-const getCookie = (name: string): string | undefined => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift();
-};
-
-// Process failed queue for access token
+// Processes the failed queue for token refresh
 const processQueue = (error: unknown, token: string | null = null): void => {
     failedQueue.forEach((prom) => {
-        if (error) prom.reject(error);
-        else prom.resolve(token);
+        if (error) {
+            prom.reject(error);
+        } else {
+            prom.resolve(token);
+        }
     });
     failedQueue = [];
 };
 
-// Process failed queue for CSRF token
-const processCSRFQueue = (error: unknown): void => {
-    csrfFailedQueue.forEach((prom) => {
-        if (error) prom.reject(error);
-        else prom.resolve();
-    });
-    csrfFailedQueue = [];
-};
-
-// Refresh access token
+// Refresh access token when expired
 const refreshAccessToken = async (): Promise<string | null> => {
     try {
         const response = await fetch(`${server}/api/v1/refresh/token`, {
             method: "GET",
             credentials: "include",
         });
+
         if (!response.ok) throw new Error("Failed to refresh token");
 
         const data = await response.json();
         const newToken = data?.token || null;
 
-        if (newToken) localStorage.setItem("token", newToken);
+        if (newToken) {
+            localStorage.setItem("token", newToken);
+        }
+
         return newToken;
     } catch (err) {
         console.error("Token refresh failed:", err);
@@ -338,58 +216,32 @@ const refreshAccessToken = async (): Promise<string | null> => {
     }
 };
 
-// Main fetch wrapper
-export const apiFetch = async (url: string, options: RequestInit = {}): Promise<Response> => {
+// Main fetch wrapper with automatic token handling
+export const apiFetch = async (
+    url: string,
+    options: RequestInit = {}
+): Promise<Response> => {
     const token = localStorage.getItem("token");
     const headers = new Headers(options.headers || {});
 
-    // Add Authorization if token exists
-    if (token) headers.set("Authorization", `Bearer ${token}`);
-
-    // Add CSRF token for mutating requests
-    const method = options.method?.toLowerCase() || "get";
-    if (["post", "put", "delete"].includes(method)) {
-        const csrfToken = getCookie("csrfToken");
-        if (csrfToken) headers.set("x-csrf-token", csrfToken);
+    // Add Authorization header if token exists
+    if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
     }
 
-    const requestOptions: RequestInit = { ...options, headers, credentials: "include" };
+    const requestOptions: RequestInit = {
+        ...options,
+        headers,
+        credentials: "include",
+    };
+
     const response = await fetch(`${server}${url}`, requestOptions);
-
-    // Handle CSRF errors (custom code starting with CSRF_)
-    if (!response.ok) {
-        const data = await response.clone().json().catch(() => ({}));
-        const errorCode = data?.code || "";
-
-        if (typeof errorCode === "string" && errorCode.startsWith("CSRF_")) {
-            if (isRefreshingCSRFToken) {
-                return new Promise<Response>((resolve, reject) => {
-                    csrfFailedQueue.push({
-                        resolve: async () => resolve(apiFetch(url, options)),
-                        reject,
-                    });
-                });
-            }
-
-            isRefreshingCSRFToken = true;
-            try {
-                await apiFetch("/api/v1/refresh-csrf", { method: "POST" });
-                processCSRFQueue(null);
-                return apiFetch(url, options);
-            } catch (err) {
-                processCSRFQueue(err);
-                console.error("Failed to refresh CSRF token", err);
-                return Promise.reject(err);
-            } finally {
-                isRefreshingCSRFToken = false;
-            }
-        }
-    }
 
     // Handle access token refresh on 403
     if (response.status === 403) {
         if (!isRefreshing) {
             isRefreshing = true;
+
             try {
                 const newToken = await refreshAccessToken();
                 processQueue(null, newToken);
@@ -397,7 +249,9 @@ export const apiFetch = async (url: string, options: RequestInit = {}): Promise<
                 if (newToken) {
                     headers.set("Authorization", `Bearer ${newToken}`);
                     return fetch(`${server}${url}`, { ...requestOptions, headers });
-                } else throw new Error("No new token received");
+                } else {
+                    throw new Error("No new token received");
+                }
             } catch (err) {
                 processQueue(err, null);
                 throw err;
@@ -405,10 +259,13 @@ export const apiFetch = async (url: string, options: RequestInit = {}): Promise<
                 isRefreshing = false;
             }
         } else {
+            // Queue requests while refreshing token
             return new Promise<Response>((resolve, reject) => {
                 failedQueue.push({
-                    resolve: (newToken) => {
-                        if (newToken) headers.set("Authorization", `Bearer ${newToken}`);
+                    resolve: (token) => {
+                        if (token) {
+                            headers.set("Authorization", `Bearer ${token}`);
+                        }
                         resolve(fetch(`${server}${url}`, { ...requestOptions, headers }));
                     },
                     reject,

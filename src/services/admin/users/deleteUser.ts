@@ -7,11 +7,6 @@ export const deleteUser = async (
 ): Promise<void> => {
     try {
         const response = await apiFetch(`/api/v1/admin/users/${userId}`, { method: "DELETE" });
-
-        if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}`);
-        }
-
         const result: StoredUserDetailsProps & { message?: string } = await response.json();
 
         if (result?.message === "User deleted successfully") {

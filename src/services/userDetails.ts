@@ -6,11 +6,6 @@ export const userDetails = async (
 ): Promise<void> => {
     try {
         const response = await apiFetch("/api/v1/me", { method: "GET" });
-
-        if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}`);
-        }
-
         const result: StoredUserDetailsProps & { message?: string } = await response.json();
 
         if (result?.user?._id) {

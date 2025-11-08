@@ -29,9 +29,7 @@ export const DashboardLayout = ({
         try {
             const parsedUser = JSON.parse(savedUser);
 
-            if (parsedUser.keepMeLoggedIn === true) {
-                navigate("/dashboard");
-            } else {
+            if (parsedUser.keepMeLoggedIn === false) {
                 // User didn’t choose "keep me logged in" clear session
                 localStorage.removeItem("userSession");
                 navigate("/");
