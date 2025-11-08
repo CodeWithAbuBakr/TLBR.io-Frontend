@@ -81,7 +81,7 @@ const Auth: React.FC = () => {
                                 }`}
                         >
                             {activeForm === "signin"
-                                ? "Sign in or get started – your slides are waiting!"
+                                ? "Sign in to get started – your slides are waiting!"
                                 : "Create your account – your slides are awaiting!"}
                         </p>
                     </div>
