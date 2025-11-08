@@ -1,5 +1,5 @@
 // With csrf token
-// const server = process.env.NEXT_PUBLIC_BASE_URL;
+// const server = import.meta.env.NEXT_PUBLIC_BASE_URL;
 
 // let isRefreshing = false;
 // let isRefreshingCSRFToken = false;
@@ -236,9 +236,10 @@ export const apiFetch = async (
     };
 
     const response = await fetch(`${server}${url}`, requestOptions);
+    console.log(response);
 
     // Handle access token refresh on 403
-    if (response.status === 403) {
+    if (response.status === 403 && response.type !== "cors") {
         if (!isRefreshing) {
             isRefreshing = true;
 
