@@ -107,7 +107,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="sm:col-span-1">
             <Label>
-              {UIText.auth.signUp.email}
+              {UIText.auth.signUp.f_name}
               <span className="text-error-500">*</span>
             </Label>
             <Input
@@ -201,7 +201,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           {passwordStrength.message && (
             <p
               className={`mt-1 text-sm 
-      ${passwordStrength.color === "text-error-500"
+                ${passwordStrength.color === "text-error-500"
                   ? darkMode
                     ? "text-red-500"
                     : "text-red-600"
