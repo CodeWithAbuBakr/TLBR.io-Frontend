@@ -86,6 +86,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             localStorage.setItem("isAuth", "false");
 
                             navigate("/");
+                            setToastType(null);
+                            setToastMessage("");
                         }, 2000);
                     }
                 });

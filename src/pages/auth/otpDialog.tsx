@@ -8,6 +8,7 @@ import { GoVerified } from "react-icons/go";
 import { verifyOTP } from "../../services/auth/signin/verifyOTP";
 import { loginUser } from "../../services/auth/signin/loginUser";
 import UIText from "../../utilities/testResource";
+import { refreshCSRFToken } from "../../services/auth/refreshCSRFToken";
 
 const OTPDialog: React.FC<DialogProps> = ({
     isModalOpen,
@@ -70,6 +71,14 @@ const OTPDialog: React.FC<DialogProps> = ({
 
                 setToastType("success");
                 setToastMessage("Your account has been verified successfully.");
+
+                refreshCSRFToken((refreshCSRFError, data) => {
+                    if (refreshCSRFError) {
+                        console.log(refreshCSRFError);
+                    } else {
+                        console.log(data);
+                    }
+                });
 
                 // Redirect after short delay
                 setTimeout(() => {

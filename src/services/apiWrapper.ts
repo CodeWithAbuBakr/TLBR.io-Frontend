@@ -4,6 +4,7 @@ import { userDetails } from "../services/userDetails";
 import { allUserDetails } from "../services/admin/users/getUsers";
 import { deleteUser } from "../services/admin/users/deleteUser";
 import { logoutUser } from "../services/auth/logout";
+import { refreshCSRFToken } from "./auth/refreshCSRFToken";
 
 // Wraps a callback-based API in a Promise
 const wrapWithPromise = <T>(
@@ -31,6 +32,15 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
                         reject(refreshError);
                     } else {
                         console.log(data);
+
+                        // Refresh CSRF token
+                        refreshCSRFToken((refreshCSRFError, data) => {
+                            if (refreshCSRFError) {
+                                console.log(refreshCSRFError);
+                            } else {
+                                console.log(data);
+                            }
+                        });
 
                         // Retry original function after token refresh
                         fn().then(resolve).catch(reject);
