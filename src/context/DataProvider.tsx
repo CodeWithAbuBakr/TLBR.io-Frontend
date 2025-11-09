@@ -78,6 +78,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             ? "Session expired. You have been logged in from another device"
                             : err.message || "Error getting user details."
                     );
+
+                    if (err.message === "Session expired. You have been logged in from another device") {
+                        setTimeout(() => {
+                            localStorage.removeItem("userDetails");
+                            localStorage.removeItem("userSession");
+                            localStorage.setItem("isAuth", "false");
+
+                            navigate("/");
+                        }, 2000);
+                    }
                 });
         }
     }, [navigate]);
