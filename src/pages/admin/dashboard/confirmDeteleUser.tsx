@@ -1,11 +1,10 @@
 import React from 'react';
 import { Modal } from '../../../components/ui/modal';
 import Loader from '../../../loader/loader';
-import type { ConfirmDeleteUserDialogProps, StoredAllUserDetailsProps } from '../../../utilities/type';
-import { deleteUser } from '../../../services/admin/users/deleteUser';
-import { allUserDetails } from '../../../services/admin/users/getUsers';
+import type { ConfirmDeleteUserDialogProps } from '../../../utilities/type';
 import { useData } from '../../../utilities/useData';
 import UIText from '../../../utilities/testResource';
+import { getAllUserDetails, removeUser } from '../../../services/apiWrapper';
 
 const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
     isLoader,
@@ -25,26 +24,8 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
         if (userId) {
             setIsLoader(true);
 
-            deleteUser(userId, (error, data) => {
-                if (error) {
-                    console.log("Delete user error:", error);
-                    setIsLoader(false);
-
-                    if (error.message === "Admins cannot delete other admins (including themselves)") {
-                        setIsModalOpen(false);
-
-                        setToastType("info");
-                        setToastMessage(error.message || "Admins cannot delete other admins (including themselves)");
-                    } else if (error.message === "You cannot delete your own account") {
-                        setIsModalOpen(false);
-
-                        setToastType("info");
-                        setToastMessage(error.message || "You cannot delete your own account");
-                    } else {
-                        setToastType("error");
-                        setToastMessage(error.message || "Error getting all users details.");
-                    };
-                } else if (data) {
+            removeUser(userId)
+                .then((data) => {
                     console.log("Delete user success:", data);
                     setIsModalOpen(false);
                     setIsUsersLoading(true);
@@ -52,23 +33,36 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
                     setToastType("success");
                     setToastMessage(data.message || "User deleted successfully");
 
-                    allUserDetails((error, data) => {
-                        if (error) {
-                            console.log("All User Details error:", error);
+                    // Refresh all users after delete
+                    getAllUserDetails()
+                        .then((all) => {
+                            setAllUsers(all);
                             setIsLoader(false);
-
+                            setIsUsersLoading(false);
+                        })
+                        .catch((err) => {
                             setToastType("error");
-                            setToastMessage(error.message || "Error getting all users details.");
-                        } else if (data) {
-                            console.log("All User Details success:", data);
+                            setToastMessage(err.message || "Error getting all users details.");
                             setIsLoader(false);
+                            setIsUsersLoading(false);
+                        });
+                })
+                .catch((error) => {
+                    console.log("Delete user error:", error);
+                    setIsLoader(false);
 
-                            const formattedData = data as StoredAllUserDetailsProps;
-                            setAllUsers(formattedData);
-                        }
-                    });
-                }
-            });
+                    if (
+                        error.message === "Admins cannot delete other admins (including themselves)" ||
+                        error.message === "You cannot delete your own account"
+                    ) {
+                        setIsModalOpen(false);
+                        setToastType("info");
+                        setToastMessage(error.message);
+                    } else {
+                        setToastType("error");
+                        setToastMessage(error.message || "Error deleting user.");
+                    }
+                });
         }
     };
 

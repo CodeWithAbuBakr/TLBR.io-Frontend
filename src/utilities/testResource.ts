@@ -76,7 +76,6 @@ const UIText = {
     dashboard: {
         trial_period: {
             title: "Trial Period",
-            welcome: "Welcome Jayvin!",
             description: "Days remaining in your free trial",
             seven: "7",
             remaining_days: "/ 7 days remaining",

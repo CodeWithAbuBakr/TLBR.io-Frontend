@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import tlbr_icon from "../assets/tlbr.io-icon.png";
 import tlbr_white from "../assets/tlbr.io-white.png";
@@ -22,10 +22,16 @@ const navItems: NavItem[] = [
 const AppSidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { darkMode } = useData();
+  const { darkMode, setToastType, setToastMessage } = useData();
   const { isExpanded, isMobileOpen, isHovered, setIsHovered, setIsMobileOpen } = useSidebar();
   const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
-  const isActive = (path: string) => path === location.pathname;;
+  const isActive = (path: string) => path === location.pathname;
+
+  // Clear toast on navigation
+  useEffect(() => {
+    setToastType(null);
+    setToastMessage("");
+  }, [location.pathname, setToastType, setToastMessage]);
 
   const handleSubmenuToggle = (index: number) => {
     setOpenSubmenu((prev) => (prev === index ? null : index));

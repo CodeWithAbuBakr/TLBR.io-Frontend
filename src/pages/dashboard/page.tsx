@@ -1,5 +1,4 @@
 'use client';
-import UIText from "../../utilities/testResource";
 import { useData } from "../../utilities/useData";
 import { DashboardLayout } from "../../layout/page";
 import AdminDashboard from "../../pages/admin/dashboard/page";
@@ -9,7 +8,7 @@ import AccountStatus from "./accountStatus";
 import QuickStats from "./quickStats";
 
 const Dashboard = () => {
-    const { darkMode } = useData();
+    const { darkMode, userData } = useData();
 
     // Safely get and parse user data from localStorage
     let parsed = null;
@@ -33,7 +32,7 @@ const Dashboard = () => {
                         className={`text-xl md:text-2xl lg:text-4xl xl:text-5xl mb-10 font-semibold
                         ${darkMode ? "text-gray-100" : "text-[#0A0A04]"}`}
                     >
-                        {UIText.dashboard.trial_period.welcome}
+                        {`Welcome ${userData?.user?.name}`}
                     </h1>
 
                     {userRole !== "admin" ? (

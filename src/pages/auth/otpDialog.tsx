@@ -112,15 +112,28 @@ const OTPDialog: React.FC<DialogProps> = ({
         e.preventDefault();
         const pastedData = e.clipboardData.getData("text").trim();
 
-        // Only take first 6 characters (or however many fields you have)
+        // Only take up to the number of inputs available
         const chars = pastedData.slice(0, inputsRef.current.length).split("");
 
+        let hasInvalidChar = false;
+
         chars.forEach((char, i) => {
+            if (!/^[0-9]$/.test(char) && char !== "") {
+                hasInvalidChar = true;
+                return;
+            }
+
             const input = inputsRef.current[i];
             if (input) {
                 input.value = char;
             }
         });
+
+        if (hasInvalidChar) {
+            setToastType("info");
+            setToastMessage("Please enter only digits.");
+            return;
+        }
 
         // Focus the next empty input
         const nextEmpty = chars.length < inputsRef.current.length ? chars.length : inputsRef.current.length - 1;

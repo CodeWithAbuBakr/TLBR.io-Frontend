@@ -7,8 +7,8 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { TbLogout2 } from "react-icons/tb";
 import UIText from "../../utilities/testResource";
 import Toast from "../../hooks/useToast";
-import { logoutUser } from "../../services/auth/logout";
 import Loader from "../../loader/loader";
+import { doLogout } from "../../services/apiWrapper";
 
 const UserDropdown = () => {
   const navigate = useNavigate();
@@ -41,15 +41,8 @@ const UserDropdown = () => {
 
     const storedData = localStorage.getItem("userDetails");
     if (storedData) {
-      logoutUser((error, data) => {
-        if (error) {
-          console.log("Logout error:", error);
-          setToastType("error");
-          setToastMessage(error.message || "An error occurred during logout.");
-
-          setIsLoader(false);
-          setIsModalOpen(false);
-        } else if (data) {
+      doLogout()
+        .then((data) => {
           console.log("Logout success:", data);
           setIsLoader(false);
           setIsModalOpen(false);
@@ -57,8 +50,14 @@ const UserDropdown = () => {
           setToastType(null);
           setToastMessage("");
           navigate("/");
-        }
-      });
+        })
+        .catch((error) => {
+          console.log("Logout error:", error);
+          setToastType("error");
+          setToastMessage(error.message || "An error occurred during logout.");
+          setIsLoader(false);
+          setIsModalOpen(false);
+        });
     }
   };
 
