@@ -182,6 +182,7 @@ export interface ConfirmDeleteUserDialogProps {
 export interface DataContextTypeProps {
     activeForm: "signin" | "signup";
     setActiveForm: React.Dispatch<React.SetStateAction<"signin" | "signup">>;
+    hasFetchedUser: React.MutableRefObject<boolean>;
     toastType: "error" | "success" | "info" | null;
     setToastType: React.Dispatch<React.SetStateAction<"error" | "success" | "info" | null>>;
     toastMessage: string;

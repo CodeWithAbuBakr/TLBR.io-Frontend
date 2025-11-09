@@ -13,7 +13,7 @@ import { doLogout } from "../../services/apiWrapper";
 const UserDropdown = () => {
   const navigate = useNavigate();
   const { darkMode, isOpen, setIsOpen, isLoader, setIsLoader, isModalOpen, setIsModalOpen,
-    toastType, setToastType, toastMessage, setToastMessage, userData } = useData();
+    toastType, setToastType, toastMessage, setToastMessage, userData, hasFetchedUser } = useData();
 
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -47,8 +47,10 @@ const UserDropdown = () => {
           setIsLoader(false);
           setIsModalOpen(false);
 
+          setIsOpen(false);
           setToastType(null);
           setToastMessage("");
+          hasFetchedUser.current = false;
           navigate("/");
         })
         .catch((error) => {

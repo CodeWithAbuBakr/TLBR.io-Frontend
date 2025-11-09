@@ -97,6 +97,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const contextValue: DataContextTypeProps = {
         activeForm,
         setActiveForm,
+        hasFetchedUser,
         toastType,
         setToastType,
         toastMessage,
