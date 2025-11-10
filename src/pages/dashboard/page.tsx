@@ -31,7 +31,7 @@ const Dashboard = () => {
                     <h1
                         className={`text-xl md:text-2xl lg:text-4xl xl:text-5xl mb-10 font-semibold
                         ${darkMode ? "text-gray-100" : "text-[#0A0A04]"}`}>
-                        {userRole !== ""
+                        {userData?.user?.name !== undefined
                             ? `Welcome ${userData?.user?.name}`
                             : "Loading..."}
                     </h1>

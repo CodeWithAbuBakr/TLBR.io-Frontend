@@ -81,7 +81,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
                             setToastType("error");
                             setToastMessage(
-                                err.message === "Request failed with status 401"
+                                err.message === "Session expired.You have been logged in from another device"
                                     ? "Session expired. You have been logged in from another device"
                                     : err.message || "Error getting user details."
                             );

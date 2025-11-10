@@ -1,10 +1,10 @@
 import { refreshToken } from "../services/auth/refreshToken";
-import type { StoredUserDetailsProps, StoredAllUserDetailsProps, ResponseProps } from "../utilities/type";
 import { userDetails } from "../services/userDetails";
 import { allUserDetails } from "../services/admin/users/getUsers";
 import { deleteUser } from "../services/admin/users/deleteUser";
 import { logoutUser } from "../services/auth/logout";
 import { refreshCSRFToken } from "./auth/refreshCSRFToken";
+import type { StoredUserDetailsProps, StoredAllUserDetailsProps, ResponseProps } from "../utilities/type";
 
 // Wraps a callback-based API in a Promise
 const wrapWithPromise = <T>(
@@ -20,6 +20,52 @@ const wrapWithPromise = <T>(
 };
 
 // Wraps a Promise-returning API with token refresh logic
+// export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> => {
+//     try {
+//         return await fn();
+//     } catch (err: unknown) {
+//         if (err instanceof Error && err.message === "Please login - no token") {
+//             let sessionExpired = false;
+
+//             // Refresh CSRF token
+//             await refreshCSRFToken((refreshCSRFError, data) => {
+//                 if (refreshCSRFError) {
+//                     console.log(refreshCSRFError);
+
+//                     if (refreshCSRFError.message === "Session expired. You have been logged in from another device") {
+//                         sessionExpired = true;
+//                         return;
+//                     }
+//                 } else {
+//                     console.log(data);
+//                 }
+//             });
+
+//             // Stop here if session expired
+//             if (sessionExpired) {
+//                 console.warn("Session expired — skipping refreshToken call.");
+//                 throw new Error("Session expired. You have been logged in from another device");
+//             }
+
+//             // Otherwise, continue to refreshToken
+//             return new Promise<T>((resolve, reject) => {
+//                 refreshToken((refreshError, data) => {
+//                     if (refreshError) {
+//                         reject(refreshError);
+//                     } else {
+//                         console.log(data);
+
+//                         // Retry the original function
+//                         fn().then(resolve).catch(reject);
+//                     }
+//                 });
+//             });
+//         } else {
+//             throw err;
+//         }
+//     }
+// };
+
 export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> => {
     try {
         return await fn();
@@ -29,6 +75,10 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
             await refreshCSRFToken((refreshCSRFError, data) => {
                 if (refreshCSRFError) {
                     console.log(refreshCSRFError);
+
+                    if (refreshCSRFError.message === "Session expired. You have been logged in from another device") {
+                        return;
+                    }
                 } else {
                     console.log(data);
                 }
