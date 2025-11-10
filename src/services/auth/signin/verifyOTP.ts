@@ -26,7 +26,6 @@ export const verifyOTP = async (
 
         if (result.message && result.message.includes("Welcome")) {
             callback(null, result);
-            localStorage.setItem("lgoinData", JSON.stringify(result));
         } else {
             const error = new Error(result.message || "OTP verification failed");
             callback(error, null);

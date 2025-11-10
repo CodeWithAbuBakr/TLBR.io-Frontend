@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { DataContext } from "./DataContext";
 import { getAllUserDetails, getUserDetails } from "../services/apiWrapper";
 import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps } from "../utilities/type";
+import { refreshCSRFToken } from "../services/auth/refreshCSRFToken";
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const navigate = useNavigate();
@@ -45,52 +46,60 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsModalOpen(true);
             hasFetchedUser.current = true;
 
-            getUserDetails()
-                .then((user) => {
-                    setUserData(user);
-                    setIsLoader(false);
-                    setIsModalOpen(false);
+            refreshCSRFToken((refreshCSRFError, data) => {
+                if (refreshCSRFError) {
+                    console.log(refreshCSRFError);
+                } else {
+                    console.log(data);
 
-                    if (user.user.role === "admin") {
-                        setIsUsersLoading(true);
-                        getAllUserDetails()
-                            .then((all) => {
-                                setAllUsers(all);
-                                setIsUsersLoading(false);
-                            })
-                            .catch((err) => {
-                                console.error(err);
-                                setToastType("error");
-                                setToastMessage(err.message || "Error getting all users details.");
-                                setIsUsersLoading(false);
-                            });
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
-                    setIsLoader(false);
-                    setIsModalOpen(false);
-                    hasFetchedUser.current = false;
+                    getUserDetails()
+                        .then((user) => {
+                            setUserData(user);
+                            setIsLoader(false);
+                            setIsModalOpen(false);
 
-                    setToastType("error");
-                    setToastMessage(
-                        err.message === "Request failed with status 401"
-                            ? "Session expired. You have been logged in from another device"
-                            : err.message || "Error getting user details."
-                    );
+                            if (user.user.role === "admin") {
+                                setIsUsersLoading(true);
+                                getAllUserDetails()
+                                    .then((all) => {
+                                        setAllUsers(all);
+                                        setIsUsersLoading(false);
+                                    })
+                                    .catch((err) => {
+                                        console.error(err);
+                                        setToastType("error");
+                                        setToastMessage(err.message || "Error getting all users details.");
+                                        setIsUsersLoading(false);
+                                    });
+                            }
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                            setIsLoader(false);
+                            setIsModalOpen(false);
+                            hasFetchedUser.current = false;
 
-                    if (err.message === "Session expired. You have been logged in from another device") {
-                        setTimeout(() => {
-                            localStorage.removeItem("userDetails");
-                            localStorage.removeItem("userSession");
-                            localStorage.setItem("isAuth", "false");
+                            setToastType("error");
+                            setToastMessage(
+                                err.message === "Request failed with status 401"
+                                    ? "Session expired. You have been logged in from another device"
+                                    : err.message || "Error getting user details."
+                            );
 
-                            navigate("/");
-                            setToastType(null);
-                            setToastMessage("");
-                        }, 2000);
-                    }
-                });
+                            if (err.message === "Session expired. You have been logged in from another device") {
+                                setTimeout(() => {
+                                    localStorage.removeItem("userDetails");
+                                    localStorage.removeItem("userSession");
+                                    localStorage.setItem("isAuth", "false");
+
+                                    navigate("/");
+                                    setToastType(null);
+                                    setToastMessage("");
+                                }, 2000);
+                            }
+                        });
+                }
+            });
         }
     }, [navigate]);
 
