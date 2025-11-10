@@ -25,6 +25,15 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
         return await fn();
     } catch (err: unknown) {
         if (err instanceof Error && err.message === "Please login - no token") {
+            // Refresh CSRF token
+            await refreshCSRFToken((refreshCSRFError, data) => {
+                if (refreshCSRFError) {
+                    console.log(refreshCSRFError);
+                } else {
+                    console.log(data);
+                }
+            });
+
             // Wrap callback-based refreshToken in a Promise
             return new Promise<T>((resolve, reject) => {
                 refreshToken((refreshError, data) => {
@@ -32,15 +41,6 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
                         reject(refreshError);
                     } else {
                         console.log(data);
-
-                        // Refresh CSRF token
-                        refreshCSRFToken((refreshCSRFError, data) => {
-                            if (refreshCSRFError) {
-                                console.log(refreshCSRFError);
-                            } else {
-                                console.log(data);
-                            }
-                        });
 
                         // Retry original function after token refresh
                         fn().then(resolve).catch(reject);

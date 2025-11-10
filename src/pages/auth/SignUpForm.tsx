@@ -17,7 +17,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
   useEffect(() => {
     if (activeForm !== "signin") {
       setIsChecked(false);
-    }
+    };
   }, [activeForm, setIsChecked]);
 
   // Evaluate Password Strength
