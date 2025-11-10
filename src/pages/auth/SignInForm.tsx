@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../../utilities/useData";
 import Label from "../../components/ui/input/Label";
@@ -12,8 +12,14 @@ import UIText from "../../utilities/testResource";
 import { loginUser } from "../../services/auth/signin/loginUser";
 
 const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, setIsLoader }) => {
-  const { darkMode, showPassword, setShowPassword, isChecked, setIsChecked, email, setEmail,
+  const { darkMode, activeForm, showPassword, setShowPassword, isChecked, setIsChecked, email, setEmail,
     password, setPassword, passwordStrength, setPasswordStrength, } = useData();
+
+  useEffect(() => {
+    if (activeForm !== "signup") {
+      setIsChecked(true);
+    }
+  }, [activeForm, setIsChecked]);
 
   // Evaluate Password Strength
   const evaluatePasswordStrength = (value: string) => {

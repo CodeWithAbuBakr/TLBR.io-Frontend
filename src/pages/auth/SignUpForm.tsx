@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useData } from "../../utilities/useData";
 import Label from "../../components/ui/input/Label";
 import Input from "../../components/ui/input/InputField";
@@ -11,8 +11,14 @@ import UIText from "../../utilities/testResource";
 import { registerUser } from "../../services/auth/signup/registerUser";
 
 const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, setIsLoader }) => {
-  const { darkMode, showPassword, setShowPassword, isChecked, setIsChecked, fname, setFname,
+  const { darkMode, activeForm, showPassword, setShowPassword, isChecked, setIsChecked, fname, setFname,
     lname, setLname, email, setEmail, password, setPassword, passwordStrength, setPasswordStrength } = useData();
+
+  useEffect(() => {
+    if (activeForm !== "signin") {
+      setIsChecked(false);
+    }
+  }, [activeForm, setIsChecked]);
 
   // Evaluate Password Strength
   const evaluatePasswordStrength = (value: string) => {
@@ -66,9 +72,6 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
       return;
     } else if (passwordStrength.message !== "Your password looks secure.") {
       onShowToast("info", "Please use a strong password.");
-      return;
-    } else if (!isChecked) {
-      onShowToast("info", "Please agree to the Terms and Privacy Policy.");
       return;
     } else {
       setIsLoader(true);

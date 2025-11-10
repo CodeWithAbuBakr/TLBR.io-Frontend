@@ -21,7 +21,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(true);
     const [passwordStrength, setPasswordStrength] = useState<{ message: string; color: string }>({
         message: "",
         color: "",
