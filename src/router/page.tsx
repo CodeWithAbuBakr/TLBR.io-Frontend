@@ -19,7 +19,7 @@ const RouterApp: React.FC = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/billing" element={<Billing />} />
                 <Route path="/download" element={<Download />} />
-                <Route path="/success" element={<Success />} />
+                <Route path="/success" element={<Success status={"success"} />} />
                 <Route path="/cancel" element={<Cancel />} />
                 <Route path="/setting" element={<Setting />} />
 

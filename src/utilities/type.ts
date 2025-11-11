@@ -172,6 +172,12 @@ export interface ConfirmDeleteUserDialogProps {
     setToastMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
+type Status = "success" | "failed" | "pending";
+
+export interface StatusProps {
+    status: Status;
+}
+
 export interface DataContextTypeProps {
     activeForm: "signin" | "signup";
     setActiveForm: React.Dispatch<React.SetStateAction<"signin" | "signup">>;

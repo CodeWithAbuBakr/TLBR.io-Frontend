@@ -4,16 +4,13 @@ import { useData } from "../../utilities/useData";
 import UIText from "../../utilities/testResource";
 import { GoVerified } from "react-icons/go";
 import { AiFillCloseCircle } from "react-icons/ai";
+import type { StatusProps } from "../../utilities/type";
 
-type Status = "success" | "failed" | "pending";
 
-interface Props {
-    status: Status;
-}
 
-const VerificationResult: React.FC<Props> = ({ status }) => {
+const VerificationResult: React.FC<StatusProps> = ({ status }) => {
     const { darkMode } = useData();
-    const [currentStatus, setCurrentStatus] = useState<Status>(status);
+    const [currentStatus, setCurrentStatus] = useState(status);
 
     // Example: you can update `currentStatus` dynamically based on API response
     useEffect(() => {
@@ -21,7 +18,7 @@ const VerificationResult: React.FC<Props> = ({ status }) => {
     }, [status]);
 
     if (currentStatus === "pending") {
-        return null; // or show loader
+        return null;
     }
 
     return (
