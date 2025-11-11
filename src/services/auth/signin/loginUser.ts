@@ -1,3 +1,4 @@
+import CryptoJS from "crypto-js";
 import type { ResponseProps } from "../../../utilities/type";
 
 export const loginUser = async (
@@ -27,7 +28,8 @@ export const loginUser = async (
 
         if (result.message === "If your email is valid, an OTP has been sent to your email address. It will expire in 1 minutes.") {
             const userData = { email, password, keepMeLoggedIn: isChecked };
-            localStorage.setItem("userSession", JSON.stringify(userData));
+            const encryptedUserData = CryptoJS.AES.encrypt(JSON.stringify(userData), import.meta.env.VITE_SECRET_KEY).toString();
+            localStorage.setItem("userSession", encryptedUserData);
             callback(null, result);
         } else {
             const error = new Error(result.message || "Registration failed");

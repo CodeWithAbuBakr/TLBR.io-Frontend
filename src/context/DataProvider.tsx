@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
 import { DataContext } from "./DataContext";
+import { isAuth } from "../utilities/getLocalStorageData";
 import { getAllUserDetails, getRefreshedCSRFToken, getUserDetails } from "../services/apiWrapper";
 import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps } from "../utilities/type";
 
@@ -31,7 +33,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [allUsers, setAllUsers] = useState<StoredAllUserDetailsProps | null>(null);
 
     useEffect(() => {
-        const isAuth = localStorage.getItem("isAuth");
+        const decryptedIsAuth = isAuth();
         const theme = localStorage.getItem("theme");
 
         if (theme === "dark") {
@@ -40,7 +42,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setDarkMode(false);
         }
 
-        if (isAuth === "true" && !hasFetchedUser.current) {
+        if (decryptedIsAuth === "true" && !hasFetchedUser.current) {
             setIsLoader(true);
             setIsModalOpen(true);
             hasFetchedUser.current = true;
@@ -87,7 +89,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                                 setTimeout(() => {
                                     localStorage.removeItem("userDetails");
                                     localStorage.removeItem("userSession");
-                                    localStorage.setItem("isAuth", "false");
+                                    const encryptedIsAuth = CryptoJS.AES.encrypt("false", import.meta.env.VITE_SECRET_KEY).toString();
+                                    localStorage.setItem("isAuth", encryptedIsAuth);
 
                                     navigate("/");
                                     setToastType(null);

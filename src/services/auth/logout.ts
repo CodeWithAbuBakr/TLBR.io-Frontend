@@ -1,3 +1,4 @@
+import CryptoJS from "crypto-js";
 import type { ResponseProps } from "../../utilities/type";
 
 export const logoutUser = async (
@@ -15,7 +16,8 @@ export const logoutUser = async (
             callback(null, result);
 
             // Clean up stored data
-            localStorage.setItem("isAuth", "false");
+            const encryptedIsAuth = CryptoJS.AES.encrypt("false", import.meta.env.VITE_SECRET_KEY).toString();
+            localStorage.setItem("isAuth", encryptedIsAuth);
             localStorage.removeItem("loginData");
             localStorage.removeItem("userSession");
             localStorage.removeItem("userDetails");

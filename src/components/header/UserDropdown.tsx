@@ -9,6 +9,7 @@ import UIText from "../../utilities/testResource";
 import Toast from "../../hooks/useToast";
 import Loader from "../../loader/loader";
 import { doLogout } from "../../services/apiWrapper";
+import { userDetails } from "../../utilities/getLocalStorageData";
 
 const UserDropdown = () => {
   const navigate = useNavigate();
@@ -38,9 +39,9 @@ const UserDropdown = () => {
   const handleLogout = () => {
     setIsLoader(true);
     setIsModalOpen(true);
+    const decryptedUserDetails = userDetails();
 
-    const storedData = localStorage.getItem("userDetails");
-    if (storedData) {
+    if (decryptedUserDetails) {
       doLogout()
         .then((data) => {
           console.log("Logout success:", data);

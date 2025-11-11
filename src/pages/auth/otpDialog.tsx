@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
 import { useData } from "../../utilities/useData";
 import { Modal } from "../../components/ui/modal";
 import type { DialogProps } from "../../utilities/type";
@@ -9,6 +10,7 @@ import { verifyOTP } from "../../services/auth/signin/verifyOTP";
 import { loginUser } from "../../services/auth/signin/loginUser";
 import UIText from "../../utilities/testResource";
 import { refreshCSRFToken } from "../../services/auth/refreshCSRFToken";
+import { userSession } from "../../utilities/getLocalStorageData";
 
 const OTPDialog: React.FC<DialogProps> = ({
     isModalOpen,
@@ -23,16 +25,15 @@ const OTPDialog: React.FC<DialogProps> = ({
     const { darkMode, showSuccessScreen, setShowSuccessScreen } = useData();
     const [resendTimer, setResendTimer] = useState(0);
     const [isResending, setIsResending] = useState(false);
-    const userSession = localStorage.getItem("userSession");
+    const decryptedUserSession = userSession();
 
     let email: string;
     let password: string;
     let isChecked: boolean;
-    if (userSession) {
-        const parsedSession = JSON.parse(userSession);
-        email = parsedSession.email;
-        password = parsedSession.password;
-        isChecked = parsedSession.isChecked;
+    if (decryptedUserSession) {
+        email = decryptedUserSession.email;
+        password = decryptedUserSession.password;
+        isChecked = decryptedUserSession.isChecked;
     }
 
     const handleCancel = () => {
@@ -67,7 +68,8 @@ const OTPDialog: React.FC<DialogProps> = ({
 
                 setIsLoader(false);
                 setShowSuccessScreen(true);
-                localStorage.setItem("isAuth", "true");
+                const encryptedIsAuth = CryptoJS.AES.encrypt("true", import.meta.env.VITE_SECRET_KEY).toString();
+                localStorage.setItem("isAuth", encryptedIsAuth);
 
                 setToastType("success");
                 setToastMessage("Your account has been verified successfully.");

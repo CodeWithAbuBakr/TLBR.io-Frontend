@@ -6,6 +6,7 @@ import { useSidebar } from "../context/SidebarContext";
 import AppHeader from "./AppHeader";
 import AppSidebar from "./AppSidebar";
 import Backdrop from "./Backdrop";
+import { userSession } from "../utilities/getLocalStorageData";
 
 export const DashboardLayout = ({
     children,
@@ -18,18 +19,16 @@ export const DashboardLayout = ({
 
     // Check login persistence on page load
     useEffect(() => {
-        const savedUser = localStorage.getItem("userSession");
+        const decryptedUserSession = userSession();
 
-        if (!savedUser) {
+        if (!decryptedUserSession) {
             // No session found force sign-in
             navigate("/");
             return;
         }
 
         try {
-            const parsedUser = JSON.parse(savedUser);
-
-            if (parsedUser.keepMeLoggedIn === false) {
+            if (decryptedUserSession.keepMeLoggedIn === false) {
                 // User didn’t choose "keep me logged in" clear session
                 localStorage.removeItem("userSession");
                 navigate("/");

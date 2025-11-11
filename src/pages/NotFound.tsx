@@ -2,15 +2,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import tlbr_404 from "../assets/tlbr-404.gif"
+import { userSession } from "../utilities/getLocalStorageData";
 
 const NotFound: React.FC = () => {
     const navigate = useNavigate();
 
     const handleGoBackToMainPage = () => {
-        const savedUser = localStorage.getItem("userSession");
-        if (savedUser) {
-            const parsedUser = JSON.parse(savedUser);
-            if (parsedUser.keepMeLoggedIn === true) {
+        const decryptedUserSession = userSession();
+        if (decryptedUserSession) {
+            if (decryptedUserSession.keepMeLoggedIn === true) {
                 navigate("/dashboard");
             }
         } else {

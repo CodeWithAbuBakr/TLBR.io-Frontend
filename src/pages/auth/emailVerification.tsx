@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Loader from "../../loader/loader";
 import Toast from "../../hooks/useToast";
+import CryptoJS from "crypto-js";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { useData } from "../../utilities/useData";
 import { verifyUser } from "../../services/auth/signup/verifyUser";
@@ -28,7 +29,8 @@ const EmailVerification: React.FC = () => {
             setIsLoader(true);
             setIsModalOpen(true);
             setVerificationStatus("pending");
-            localStorage.setItem("isAuth", "false");
+            const encryptedIsAuth = CryptoJS.AES.encrypt("false", import.meta.env.VITE_SECRET_KEY).toString();
+            localStorage.setItem("isAuth", encryptedIsAuth);
 
             if (hasVerified.current !== true) {
                 hasVerified.current = true;

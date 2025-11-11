@@ -6,20 +6,18 @@ import GetStarted from "./getStarted";
 import TrialPeriod from "./trialPeriod";
 import AccountStatus from "./accountStatus";
 import QuickStats from "./quickStats";
+import { userDetails } from "../../utilities/getLocalStorageData";
 
 const Dashboard = () => {
     const { darkMode, userData } = useData();
 
     // Safely get and parse user data from localStorage
-    let parsed = null;
+    let decryptedUserDetails;
     if (typeof window !== "undefined") {
-        const storedData = localStorage.getItem("userDetails");
-        if (storedData) {
-            parsed = JSON.parse(storedData);
-        }
+        decryptedUserDetails = userDetails();
     }
 
-    const userRole = parsed?.user?.role || "user";
+    const userRole = decryptedUserDetails?.user?.role || "user";
 
     return (
         <>

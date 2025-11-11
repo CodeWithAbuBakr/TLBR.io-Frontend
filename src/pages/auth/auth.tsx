@@ -10,6 +10,7 @@ import Toast from "../../hooks/useToast";
 import Loader from "../../loader/loader";
 import UIText from "../../utilities/testResource";
 import OTPDialog from "./otpDialog";
+import { userSession } from "../../utilities/getLocalStorageData";
 
 const Auth: React.FC = () => {
     const navigate = useNavigate();
@@ -29,10 +30,9 @@ const Auth: React.FC = () => {
 
     // Check login persistence on page load
     useEffect(() => {
-        const savedUser = localStorage.getItem("userSession");
-        if (savedUser) {
-            const parsedUser = JSON.parse(savedUser);
-            if (parsedUser.keepMeLoggedIn === true) {
+        const decryptedUserSession = userSession();
+        if (decryptedUserSession) {
+            if (decryptedUserSession.keepMeLoggedIn === true) {
                 navigate("/dashboard");
             } else {
                 localStorage.removeItem("userSession");

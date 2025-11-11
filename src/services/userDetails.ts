@@ -1,3 +1,4 @@
+import CryptoJS from "crypto-js";
 import type { StoredUserDetailsProps } from "../utilities/type";
 
 export const userDetails = async (
@@ -14,7 +15,8 @@ export const userDetails = async (
 
         if (result?.user?._id) {
             callback(null, result);
-            localStorage.setItem("userDetails", JSON.stringify(result));
+            const encryptedUserDetails = CryptoJS.AES.encrypt(JSON.stringify(result), import.meta.env.VITE_SECRET_KEY).toString();
+            localStorage.setItem("userDetails", encryptedUserDetails);
         } else {
             callback(new Error(result.message || "Failed to retrieve user details."), null);
         }
