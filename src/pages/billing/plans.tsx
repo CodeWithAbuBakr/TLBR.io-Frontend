@@ -1,56 +1,51 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import UIText from '../../utilities/testResource';
-import Toast from '../../hooks/useToast';
+import Loader from '../../loader/loader';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { CiGift } from "react-icons/ci";
 import { GiCalendarHalfYear } from 'react-icons/gi';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
 import { useData } from '../../utilities/useData';
 import { freePlan, monthlyPlan, yearlyPlan } from '../../utilities/data';
+import { userDetails } from '../../utilities/getLocalStorageData';
+import { getCreateCheckout } from '../../services/apiWrapper';
 
 const Plans: React.FC = () => {
-    const { darkMode } = useData();
-    const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
-    const [toastMessage, setToastMessage] = useState("");
-    const [plan, setPlan] = useState("monthly");
+    const decryptedUserDetails = userDetails();
+    const userId = decryptedUserDetails.user._id;
+    const { darkMode, isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
 
-    const handleMonthlyPlan = async () => {
-        setToastType(null);
-        setToastMessage("");
-        setPlan("monthly");
+    const handleSelectedPlan = (plan: "free" | "monthly" | "yearly") => {
+        setIsLoader(true);
+        setIsModalOpen(true);
 
-        const userId = "690f00ddaaba3c0627048fc9";
-        try {
-            const res = await fetch("https://tlbr-io-backend.vercel.app/api/v1/create-checkout-session", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userId, plan }),
-            });
-            const data = await res.json();
-            if (data.url) {
-                // redirect to Stripe Checkout
-                window.location.href = data.url;
-            } else {
-                alert(data.error || "Something went wrong. Please try again.");
-            }
-        } catch (err) {
-            console.error(err);
-            alert("Network error. Try again.");
+        if (userId && plan) {
+            getCreateCheckout(userId, plan)
+                .then((data) => {
+                    console.log("Checkout success:", data);
+
+                    if (data.url && typeof data.url === "string") {
+                        // redirect to Stripe Checkout
+                        window.location.href = data.url;
+                    }
+                })
+                .catch((error: Error) => {
+                    console.error("Checkout error:", error);
+                });
         }
-    };
-
-    const handleYearlyPlan = () => {
-        setToastType(null);
-        setToastMessage("");
-        setTimeout(() => {
-            setToastType("info");
-            setToastMessage("This feature is currently in development. Stay tuned!");
-        }, 10);
     };
 
     return (
         <>
+            {/* Loader */}
+            {isModalOpen && isLoader !== false && (
+                <Loader
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                />
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 {/* Free Trial */}
                 <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode
@@ -86,7 +81,7 @@ const Plans: React.FC = () => {
                             ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#FFAB00] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}
-                        onClick={handleYearlyPlan}
+                        onClick={() => handleSelectedPlan("free")}
                     >
                         {UIText.billing.yearly_plan.button}
                     </button>
@@ -126,7 +121,7 @@ const Plans: React.FC = () => {
                             ? 'bg-[#FFAB00] text-white hover:bg-[#ffbc37]/90'
                             : 'bg-[#FFAB00] text-white hover:bg-[#ffbc37]'
                             }`}
-                        onClick={handleMonthlyPlan}
+                        onClick={() => handleSelectedPlan("monthly")}
                     >
                         {UIText.billing.monthly_plan.button}
                     </button>
@@ -166,23 +161,12 @@ const Plans: React.FC = () => {
                             ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#FFAB00] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}
-                        onClick={handleYearlyPlan}
+                        onClick={() => handleSelectedPlan("yearly")}
                     >
                         {UIText.billing.yearly_plan.button}
                     </button>
                 </div>
             </div>
-
-            {/* Global Toast */}
-            {toastType && (
-                <div className="fixed bottom-6 right-6 z-50">
-                    <Toast
-                        infoMessage={toastType === "info" ? toastMessage : ""}
-                        errorMessage={toastType === "error" ? toastMessage : ""}
-                        successMessage={toastType === "success" ? toastMessage : ""}
-                    />
-                </div>
-            )}
         </>
     );
 };

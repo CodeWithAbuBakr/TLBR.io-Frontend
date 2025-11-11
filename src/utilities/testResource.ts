@@ -139,7 +139,7 @@ const UIText = {
             description: "Best value for individuals committed to long-term productivity — includes a $20 annual discount",
             dollar: "$120 ",
             per_year: "/ per year",
-            button: "Upgrade to Professional (Yearly – Save $20)"
+            button: "Upgrade to Professional (Monthly or Yearly)"
         },
         payment_history: {
             title: "Payment History",
