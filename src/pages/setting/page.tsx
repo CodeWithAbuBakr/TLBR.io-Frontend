@@ -11,16 +11,10 @@ const Setting: React.FC = () => {
     return (
         <>
             <DashboardLayout>
-                <h1
-                    className={`text-md md:text-lg lg:text-xl xl:text-2xl font-semibold mb-1 ${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"
-                        }`}
-                >
+                <h1 className={`text-md md:text-lg lg:text-xl xl:text-2xl font-semibold mb-1 ${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"}`}>
                     {UIText.setting.title}
                 </h1>
-                <p
-                    className={`mb-8 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"
-                        }`}
-                >
+                <p className={`mb-8 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}>
                     {UIText.setting.description}
                 </p>
 

@@ -13,14 +13,31 @@ const Plans: React.FC = () => {
     const { darkMode } = useData();
     const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
     const [toastMessage, setToastMessage] = useState("");
+    const [plan, setPlan] = useState("monthly");
 
-    const handleMonthlyPlan = () => {
+    const handleMonthlyPlan = async () => {
         setToastType(null);
         setToastMessage("");
-        setTimeout(() => {
-            setToastType("info");
-            setToastMessage("This feature is currently in development. Stay tuned!");
-        }, 10);
+        setPlan("monthly");
+
+        const userId = "690f00ddaaba3c0627048fc9";
+        try {
+            const res = await fetch("https://tlbr-io-backend.vercel.app/api/v1/create-checkout-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId, plan }),
+            });
+            const data = await res.json();
+            if (data.url) {
+                // redirect to Stripe Checkout
+                window.location.href = data.url;
+            } else {
+                alert(data.error || "Something went wrong. Please try again.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Network error. Try again.");
+        }
     };
 
     const handleYearlyPlan = () => {

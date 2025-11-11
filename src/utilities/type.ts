@@ -162,13 +162,6 @@ export interface DialogProps {
     setOpenOTPModel: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface DeleteUserAccountDialogProps {
-    isModalOpen: boolean;
-    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setToastType: React.Dispatch<React.SetStateAction<"error" | "success" | "info" | null>>;
-    setToastMessage: React.Dispatch<React.SetStateAction<string>>;
-}
-
 export interface ConfirmDeleteUserDialogProps {
     userId: string;
     isLoader: boolean;
