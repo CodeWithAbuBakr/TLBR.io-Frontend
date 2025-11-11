@@ -141,6 +141,14 @@ const UIText = {
             per_year: "/ per year",
             button: "Upgrade to Professional (Monthly or Yearly)"
         },
+        success: {
+            title: "Email Verified Successfully!",
+            description: "Your email has been verified. You can now continue to sign in and access your account."
+        },
+        failed: {
+            title: "Verification Failed",
+            description: "We could not verify your email. Please check the link or try signing up again."
+        },
         payment_history: {
             title: "Payment History",
             description: "Your recent billing transactions",
@@ -183,6 +191,12 @@ const UIText = {
             email: "Email Address",
             password: "Password",
             button: "Save Changes"
+        },
+        account_management: {
+            title: "Account Management",
+            description: "Secure your account and manage password settings.",
+            change_password: "Change Password",
+            delete: "Delete",
         }
     }
 };

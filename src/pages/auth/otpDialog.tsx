@@ -273,10 +273,10 @@ const OTPDialog: React.FC<DialogProps> = ({
                     ) : (
                         <div className="flex flex-col items-center justify-center py-8 animate-fadeIn">
                             <GoVerified className="text-5xl mb-8 text-[#FFAB00] animate-popIn animate-glow" />
-                            <h3 className="text-lg font-semibold text-[#0A0A04] dark:text-gray-100">
+                            <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-[#0A0A04]'}`}>
                                 {UIText.auth.verifyOTP.success.title}
                             </h3>
-                            <p className="text-sm text-[#666666] dark:text-gray-400 mt-2">
+                            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-[#666666]'}`}>
                                 {UIText.auth.verifyOTP.success.description}
                             </p>
                         </div>
