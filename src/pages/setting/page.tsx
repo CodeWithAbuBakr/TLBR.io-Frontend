@@ -4,7 +4,6 @@ import UIText from "../../utilities/testResource";
 import { DashboardLayout } from "../../layout/page";
 import { useData } from "../../utilities/useData";
 import ProfileInformation from "./profileInformation";
-import AccountManagement from "./accountManagement";
 
 const Setting: React.FC = () => {
     const { darkMode } = useData();
@@ -28,9 +27,6 @@ const Setting: React.FC = () => {
                 <div className="w-full gap-6 mt-8">
                     {/* Profile Settings */}
                     <ProfileInformation />
-
-                    {/* Account Management */}
-                    <AccountManagement />
                 </div>
             </DashboardLayout>
         </>

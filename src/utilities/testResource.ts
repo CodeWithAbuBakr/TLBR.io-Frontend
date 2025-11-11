@@ -181,13 +181,8 @@ const UIText = {
             title: "Profile Information",
             full_name: "Full Name",
             email: "Email Address",
+            password: "Password",
             button: "Save Changes"
-        },
-        account_management: {
-            title: "Account Management",
-            description: "Secure your account and manage password settings.",
-            change_password: "Change Password",
-            delete: "Delete",
         }
     }
 };

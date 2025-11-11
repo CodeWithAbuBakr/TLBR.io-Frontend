@@ -37,7 +37,7 @@ const Windows: React.FC = () => {
                 </p>
 
                 <button
-                    className="bg-[#FFAB00] text-white font-semibold px-6 py-2.5 rounded-full hover:bg-[#ffbc37] transition-colors w-full sm:w-auto"
+                    className="bg-[#FFAB00] text-white cursor-pointer font-semibold px-6 py-2.5 rounded-full hover:bg-[#ffbc37] transition-colors w-full sm:w-auto"
                     onClick={handleDownloads}
                 >
                     {UIText.download.windows.button}
