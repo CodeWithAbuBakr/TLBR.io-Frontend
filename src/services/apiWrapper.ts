@@ -3,8 +3,8 @@ import { userDetails } from "../services/userDetails";
 import { allUserDetails } from "../services/admin/users/getUsers";
 import { deleteUser } from "../services/admin/users/deleteUser";
 import { logoutUser } from "../services/auth/logout";
-import { refreshCSRFToken } from "./auth/refreshCSRFToken";
 import type { StoredUserDetailsProps, StoredAllUserDetailsProps, ResponseProps } from "../utilities/type";
+import { refreshCSRFToken } from "./auth/refreshCSRFToken";
 
 // Wraps a callback-based API in a Promise
 const wrapWithPromise = <T>(
@@ -71,22 +71,9 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
         return await fn();
     } catch (err: unknown) {
         if (err instanceof Error && err.message === "Please login - no token") {
-            // Refresh CSRF token
-            await refreshCSRFToken((refreshCSRFError, data) => {
-                if (refreshCSRFError) {
-                    console.log(refreshCSRFError);
-
-                    if (refreshCSRFError.message === "Session expired. You have been logged in from another device") {
-                        return;
-                    }
-                } else {
-                    console.log(data);
-                }
-            });
-
             // Wrap callback-based refreshToken in a Promise
             return new Promise<T>((resolve, reject) => {
-                refreshToken((refreshError, data) => {
+                refreshToken(async (refreshError, data) => {
                     if (refreshError) {
                         reject(refreshError);
                     } else {
@@ -104,6 +91,9 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
 };
 
 // API wrappers
+export const getRefreshedCSRFToken = (): Promise<ResponseProps> =>
+    wrapWithTokenRefresh(() => wrapWithPromise<ResponseProps>(refreshCSRFToken));
+
 export const getUserDetails = (): Promise<StoredUserDetailsProps> =>
     wrapWithTokenRefresh(() => wrapWithPromise<StoredUserDetailsProps>(userDetails));
 

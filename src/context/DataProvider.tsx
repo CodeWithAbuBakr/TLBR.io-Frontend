@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "./DataContext";
-import { getAllUserDetails, getUserDetails } from "../services/apiWrapper";
+import { getAllUserDetails, getRefreshedCSRFToken, getUserDetails } from "../services/apiWrapper";
 import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps } from "../utilities/type";
-import { refreshCSRFToken } from "../services/auth/refreshCSRFToken";
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const navigate = useNavigate();
@@ -46,10 +45,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsModalOpen(true);
             hasFetchedUser.current = true;
 
-            refreshCSRFToken((refreshCSRFError, data) => {
-                if (refreshCSRFError) {
-                    console.log(refreshCSRFError);
-                } else {
+            getRefreshedCSRFToken()
+                .then((data) => {
                     console.log(data);
 
                     getUserDetails()
@@ -98,8 +95,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                                 }, 2000);
                             }
                         });
-                }
-            });
+                })
+                .catch((refreshCSRFError) => {
+                    console.error("Error refreshing CSRF token:", refreshCSRFError);
+                });
         }
     }, [navigate]);
 
