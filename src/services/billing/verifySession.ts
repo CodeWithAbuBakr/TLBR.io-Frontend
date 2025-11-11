@@ -1,11 +1,12 @@
 import type { ResponseProps } from "../../utilities/type";
 
 export const verifySession = async (
+    sessionId: string,
     callback: (error: Error | null, data: ResponseProps | null) => void
 ): Promise<void> => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/create-checkout-session`, {
-            method: "POST",
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/verify-session/${sessionId}`, {
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
         });

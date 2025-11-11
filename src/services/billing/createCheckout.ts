@@ -7,7 +7,7 @@ export const createCheckout = async (
 ): Promise<void> => {
     try {
         const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/create-checkout-session`, {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userId, plan }),
             credentials: "include",

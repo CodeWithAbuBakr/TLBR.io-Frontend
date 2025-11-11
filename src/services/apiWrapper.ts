@@ -6,6 +6,7 @@ import { createCheckout } from "./billing/createCheckout";
 import { deleteUser } from "../services/admin/users/deleteUser";
 import { logoutUser } from "../services/auth/logout";
 import type { StoredUserDetailsProps, StoredAllUserDetailsProps, ResponseProps } from "../utilities/type";
+import { verifySession } from "./billing/verifySession";
 
 // Wraps a callback-based API in a Promise
 const wrapWithPromise = <T>(
@@ -58,6 +59,11 @@ export const getAllUserDetails = (): Promise<StoredAllUserDetailsProps> =>
 export const getCreateCheckout = (userId: string, plan: string): Promise<ResponseProps> =>
     wrapWithTokenRefresh(() =>
         wrapWithPromise<ResponseProps>((callback) => createCheckout(userId, plan, callback))
+    );
+
+export const getVerifySession = (sessionId: string): Promise<ResponseProps> =>
+    wrapWithTokenRefresh(() =>
+        wrapWithPromise<ResponseProps>((callback) => verifySession(sessionId, callback))
     );
 
 export const removeUser = (userId: string): Promise<ResponseProps> =>

@@ -44,7 +44,7 @@ const EmailVerification: React.FC = () => {
                         setVerificationStatus("error");
 
                         setToastType("error");
-                        setToastMessage(error.message || "An error occurred during verification.")
+                        setToastMessage(error.message || "An error occurred during verification.");
                     } else if (data) {
                         console.log("Verification success:", data);
                         setIsLoader(false);
@@ -52,7 +52,7 @@ const EmailVerification: React.FC = () => {
                         setVerificationStatus("success");
 
                         setToastType("success");
-                        setToastMessage("User verified successfully")
+                        setToastMessage("User verified successfully");
                     }
                 });
             }

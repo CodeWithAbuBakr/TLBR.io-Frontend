@@ -155,7 +155,7 @@ const UIText = {
             cancel: {
                 title: "Payment Canceled",
                 description: "You have canceled the payment. You can go back to billing to retry or choose a different plan.",
-                button: "Go to Billing"
+                button: "Continue to Billing"
             },
         },
         payment_history: {

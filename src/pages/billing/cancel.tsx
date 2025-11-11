@@ -5,7 +5,7 @@ import { useData } from "../../utilities/useData";
 import UIText from "../../utilities/testResource";
 import { AiFillCloseCircle } from "react-icons/ai";
 
-const Cancel: React.FC = () => {
+const PaymentCancel: React.FC = () => {
     const navigate = useNavigate();
     const { darkMode } = useData();
 
@@ -35,4 +35,4 @@ const Cancel: React.FC = () => {
     );
 };
 
-export default Cancel;
+export default PaymentCancel;
