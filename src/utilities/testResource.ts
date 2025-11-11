@@ -141,13 +141,22 @@ const UIText = {
             per_year: "/ per year",
             button: "Upgrade to Professional (Monthly or Yearly)"
         },
-        success: {
-            title: "Email Verified Successfully!",
-            description: "Your email has been verified. You can now continue to sign in and access your account."
-        },
-        failed: {
-            title: "Verification Failed",
-            description: "We could not verify your email. Please check the link or try signing up again."
+        payment: {
+            success: {
+                title: "Payment Successful!",
+                description: "Your payment has been processed successfully. You can now access your premium features.",
+                button: "Continue to Dashboard"
+            },
+            failed: {
+                title: "Payment Failed",
+                description: "Your payment could not be processed. Please try again or contact support.",
+                button: "Retry Payment"
+            },
+            cancel: {
+                title: "Payment Canceled",
+                description: "You have canceled the payment. You can go back to billing to retry or choose a different plan.",
+                button: "Go to Billing"
+            },
         },
         payment_history: {
             title: "Payment History",
