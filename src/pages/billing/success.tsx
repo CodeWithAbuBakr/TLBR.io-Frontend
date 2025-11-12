@@ -20,12 +20,11 @@ const PaymentResult: React.FC = () => {
 
     useEffect(() => {
         if (!sessionId) return;
-        console.log(sessionId);
 
         setIsLoader(true);
         setIsModalOpen(true);
 
-        getVerifySession("2312asdfsg235")
+        getVerifySession(sessionId)
             .then((data) => {
                 console.log("Payment verification result:", data);
                 setVerificationStatus("success");
@@ -75,16 +74,16 @@ const PaymentResult: React.FC = () => {
                                 <AiFillCloseCircle className="w-20 h-20 text-red-500" />
                             </div>
                             <h1 className={`text-2xl font-semibold mb-3 ${darkMode ? "text-gray-100" : "text-red-500"}`}>
-                                {UIText.billing.payment.cancel.title}
+                                {UIText.billing.payment.failed.title}
                             </h1>
                             <p className={`text-base mb-8 leading-relaxed ${darkMode ? "text-gray-300" : "text-[#666666]"}`}>
-                                {UIText.billing.payment.cancel.description}
+                                {UIText.billing.payment.failed.description}
                             </p>
                             <button
                                 onClick={() => navigate("/billing")}
                                 className="bg-red-500 hover:bg-red-600 cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
                             >
-                                {UIText.billing.payment.cancel.button}
+                                {UIText.billing.payment.failed.button}
                             </button>
                         </>
                     )}
