@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import { DataContext } from "./DataContext";
-import { isAuth } from "../utilities/getLocalStorageData";
+import { isAuth, userDetails } from "../utilities/getLocalStorageData";
 import { getAllUserDetails, getRefreshedCSRFToken, getUserDetails } from "../services/apiWrapper";
 import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps } from "../utilities/type";
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const navigate = useNavigate();
     const hasFetchedUser = useRef(false);
+    const decryptedUserDetails = userDetails();
     const [activeForm, setActiveForm] = useState<"signin" | "signup">("signin");
     const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
     const [toastMessage, setToastMessage] = useState("");
@@ -47,8 +48,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsLoader(true);
             setIsModalOpen(true);
             hasFetchedUser.current = true;
+            const userId = decryptedUserDetails.user._id;
 
-            getRefreshedCSRFToken()
+            getRefreshedCSRFToken(userId)
                 .then((data) => {
                     console.log(data);
 
@@ -104,7 +106,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     console.error("Error refreshing CSRF token:", refreshCSRFError);
                 });
         }
-    }, [navigate]);
+    }, [decryptedUserDetails, navigate]);
 
     const contextValue: DataContextTypeProps = {
         activeForm,

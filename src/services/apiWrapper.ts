@@ -47,8 +47,10 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
 };
 
 // API wrappers
-export const getRefreshedCSRFToken = (): Promise<ResponseProps> =>
-    wrapWithTokenRefresh(() => wrapWithPromise<ResponseProps>(refreshCSRFToken));
+export const getRefreshedCSRFToken = (userId: string): Promise<ResponseProps> =>
+    wrapWithTokenRefresh(() =>
+        wrapWithPromise<ResponseProps>((callback) => refreshCSRFToken(userId, callback))
+    );
 
 export const getUserDetails = (): Promise<StoredUserDetailsProps> =>
     wrapWithTokenRefresh(() => wrapWithPromise<StoredUserDetailsProps>(userDetails));
