@@ -6,7 +6,7 @@ import Loader from '../../loader/loader';
 import Label from '../../components/ui/input/Label';
 import Input from '../../components/ui/input/InputField';
 import { GoEye, GoEyeClosed } from 'react-icons/go';
-import { forgotPassword } from '../../services/auth/signin/forgotPassword';
+import { resetPassword } from '../../services/auth/signin/resetPassword';
 
 const ResetPassword: React.FC = () => {
     const location = useLocation();
@@ -75,7 +75,7 @@ const ResetPassword: React.FC = () => {
             setIsModalOpen(true);
 
             // Forgot Password API call
-            forgotPassword(password, (error, data) => {
+            resetPassword(password, resetLink, (error, data) => {
                 if (error) {
                     console.error("Reset Password error:", error);
                     setIsLoader(false);
