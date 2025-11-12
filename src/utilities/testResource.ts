@@ -25,6 +25,17 @@ const UIText = {
             cancel: "Cancel",
             reset_link: "Send Reset Links"
         },
+        resetPassword: {
+            title: "Reset Your Password",
+            success: {
+                title: "Password Reset Successful",
+                description: "Your password has been successfully updated. You can now log in with your new password.",
+                button: "Continue to Login"
+            },
+            failed: {
+
+            },
+        },
         signUp: {
             title: "SIGN UP",
             f_name: "First Name",
