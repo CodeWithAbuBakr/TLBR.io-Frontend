@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { useLocation } from "react-router-dom";
 import { useData } from '../../utilities/useData';
+import Toast from "../../hooks/useToast";
+import Loader from '../../loader/loader';
 import Label from '../../components/ui/input/Label';
 import Input from '../../components/ui/input/InputField';
 import { GoEye, GoEyeClosed } from 'react-icons/go';
@@ -8,9 +10,9 @@ import { forgotPassword } from '../../services/auth/signin/forgotPassword';
 
 const ResetPassword: React.FC = () => {
     const location = useLocation();
-    const { darkMode, password, setPassword, showPassword, setShowPassword,
-        passwordStrength, setPasswordStrength, setToastType, setToastMessage,
-        setIsModalOpen, setIsLoader } = useData();
+    const { darkMode, password, setPassword, showPassword, setShowPassword, passwordStrength,
+        setPasswordStrength, toastType, setToastType, toastMessage, setToastMessage, isModalOpen,
+        setIsModalOpen, isLoader, setIsLoader } = useData();
 
     // Extract token from URL
     const resetLink = useMemo(() => {
@@ -49,6 +51,15 @@ const ResetPassword: React.FC = () => {
         }
     };
 
+    if (isModalOpen && isLoader !== false) {
+        return (
+            <Loader
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+            />
+        );
+    };
+
     const handleResetPassword = () => {
         // Check if new password is empty
         if (password === "") {
@@ -57,9 +68,6 @@ const ResetPassword: React.FC = () => {
             setPasswordStrength({ message: "", color: "" });
             return;
         }
-
-        // Evaluate strength before proceeding
-        evaluatePasswordStrength(password);
 
         if (resetLink && passwordStrength.message === "Your password looks secure.") {
             // Start loading
@@ -176,6 +184,17 @@ const ResetPassword: React.FC = () => {
                     </button>
                 </div>
             </div>
+
+            {/* Toast */}
+            {toastType && (
+                <div className="fixed bottom-6 right-6 z-50">
+                    <Toast
+                        infoMessage={toastType === "info" ? toastMessage : ""}
+                        errorMessage={toastType === "error" ? toastMessage : ""}
+                        successMessage={toastType === "success" ? toastMessage : ""}
+                    />
+                </div>
+            )}
         </>
     );
 };
