@@ -9,6 +9,7 @@ import { GoEye, GoEyeClosed, GoVerified } from 'react-icons/go';
 import { resetPassword } from '../../services/auth/signin/resetPassword';
 import UIText from '../../utilities/testResource';
 import type { ResetPasswordStatus } from '../../utilities/type';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 const ResetPassword: React.FC = () => {
     const navigate = useNavigate();
@@ -85,6 +86,7 @@ const ResetPassword: React.FC = () => {
                     setIsLoader(false);
                     setResetPasswordStatus("error");
 
+                    setPassword('');
                     setToastType("error");
                     setToastMessage(error.message || "An error occurred while reset password.");
                 } else if (data) {
@@ -136,9 +138,9 @@ const ResetPassword: React.FC = () => {
                         ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}>
 
                     <div className={`shadow-lg rounded-2xl p-10 max-w-md text-center 
-                            ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}>
+                        ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}>
                         <div className="flex justify-center mb-6">
-                            <GoVerified className="w-20 h-20 text-[#FFAB00]" />
+                            <AiFillCloseCircle className="w-20 h-20 text-red-500" />
                         </div>
 
                         <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-[#0A0A04]'}`}>
@@ -151,7 +153,7 @@ const ResetPassword: React.FC = () => {
 
                         <button
                             onClick={() => navigate('/')}
-                            className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                            className="w-full bg-red-500 cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
                             {UIText.auth.resetPassword.failed.button}
                         </button>
