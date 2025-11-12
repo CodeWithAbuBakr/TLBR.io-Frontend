@@ -20,12 +20,11 @@ const PaymentResult: React.FC = () => {
 
     useEffect(() => {
         if (!sessionId) return;
-        console.log(sessionId);
 
         setIsLoader(true);
         setIsModalOpen(true);
 
-        getVerifySession("2312asdfsg235")
+        getVerifySession(sessionId)
             .then((data) => {
                 console.log("Payment verification result:", data);
                 setVerificationStatus("success");
