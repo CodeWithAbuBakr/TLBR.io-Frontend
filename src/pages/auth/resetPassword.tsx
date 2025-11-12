@@ -17,7 +17,7 @@ const ResetPassword: React.FC = () => {
     // Extract token from URL
     const resetLink = useMemo(() => {
         const path = location.pathname;
-        return path.includes("/token/") ? path.split("/token/")[1] : "";
+        return path.includes("/reset-password/") ? path.split("/reset-password/")[1] : "";
     }, [location.pathname]);
 
     // Evaluate Password Strength
