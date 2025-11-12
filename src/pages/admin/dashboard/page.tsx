@@ -31,17 +31,14 @@ const Dashboard: React.FC = () => {
 
     return (
         <>
-            <div
-                className={`flex-1 box-border min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#1E1E1E] text-white" : "bg-white text-black"
-                    }`}
-            >
+            <div className={`flex-1 box-border min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#1E1E1E] text-white" : "bg-white text-black"}`}>
+
                 {/* Stats Section */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
                     {[
                         { label: "Total Users", value: users.length },
                         { label: "Active Users", value: users.length },
                         { label: "Admins", value: users.filter(u => u.role === "admin").length },
-                        { label: "Pending Requests", value: 0 },
                     ].map((stat, index) => (
                         <div
                             key={index}
