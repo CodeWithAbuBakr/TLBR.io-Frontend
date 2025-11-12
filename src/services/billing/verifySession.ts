@@ -13,7 +13,7 @@ export const verifySession = async (
 
         const result = await response.json();
 
-        if (result) {
+        if (result.subscription.id) {
             callback(null, result);
         } else {
             callback(new Error(result.message || "Failed to retrieve user details."), null);
