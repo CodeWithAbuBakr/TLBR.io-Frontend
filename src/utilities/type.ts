@@ -47,7 +47,7 @@ export type StoredAllUserDetailsProps = {
     }[];
 };
 
-export type ResetPasswordStatus = "idle" | "pending" | "success" | "error";
+export type ResetPasswordStatus = "pending" | "success" | "error";
 
 export interface LabelProps {
     htmlFor?: string;
