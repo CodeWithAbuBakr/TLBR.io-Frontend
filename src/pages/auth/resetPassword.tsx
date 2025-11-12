@@ -8,11 +8,12 @@ import Input from '../../components/ui/input/InputField';
 import { GoEye, GoEyeClosed, GoVerified } from 'react-icons/go';
 import { resetPassword } from '../../services/auth/signin/resetPassword';
 import UIText from '../../utilities/testResource';
+import type { ResetPasswordStatus } from '../../utilities/type';
 
 const ResetPassword: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [verificationStatus, setVerificationStatus] = useState<"pending" | "success" | "error">("pending");
+    const [resetPasswordStatus, setResetPasswordStatus] = useState<ResetPasswordStatus>("pending");
     const { darkMode, password, setPassword, showPassword, setShowPassword, passwordStrength,
         setPasswordStrength, toastType, setToastType, toastMessage, setToastMessage, isModalOpen,
         setIsModalOpen, isLoader, setIsLoader } = useData();
@@ -82,14 +83,14 @@ const ResetPassword: React.FC = () => {
                 if (error) {
                     console.error("Reset Password error:", error);
                     setIsLoader(false);
-                    setVerificationStatus("error");
+                    setResetPasswordStatus("error");
 
                     setToastType("error");
                     setToastMessage(error.message || "An error occurred while reset password.");
                 } else if (data) {
                     console.log("Reset Password success:", data);
                     setIsLoader(false);
-                    setVerificationStatus("success");
+                    setResetPasswordStatus("success");
 
                     setToastType("success");
                     setToastMessage(data.message);
@@ -104,59 +105,25 @@ const ResetPassword: React.FC = () => {
 
     return (
         <>
-            {verificationStatus === "success" ? (
-                <div
-                    className={`flex flex-col items-center justify-center min-h-screen px-4 
-        ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}
-                >
-                    <div
-                        className={`shadow-lg rounded-2xl p-10 max-w-md text-center 
-            ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}
-                    >
-                        <div className="flex justify-center mb-6">
-                            <GoVerified className="w-20 h-20 text-[#FFAB00]" />
-                        </div>
+            {resetPasswordStatus === "success" ? (
+                <div className={`flex flex-col items-center justify-center min-h-screen px-4
+                    ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}>
 
-                        <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-[#0A0A04]'}`}>
-                            {UIText.auth.resetPassword.success.title}
-                        </h3>
-
-                        <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-[#666666]'}`}>
-                            {UIText.auth.resetPassword.success.description}
-                        </p>
-
-                        <button
-                            onClick={() => navigate('/')}
-                            className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
-                        >
-                            {UIText.auth.resetPassword.success.button}
-                        </button>
-                    </div>
-                </div>
-            ) : (
-                <div
-                    className={`flex flex-col items-center justify-center min-h-screen px-4
-                    ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}
-                >
-                    <div
-                        className={`shadow-lg rounded-2xl p-10 max-w-md w-full
-                        ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}
-                    >
+                    <div className={`shadow-lg rounded-2xl p-10 max-w-md w-full
+                        ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}>
                         <h1 className="text-2xl font-semibold mb-3" style={{ color: '#FFAB00' }}>
                             {UIText.auth.resetPassword.title}
                         </h1>
 
-                        <p
-                            className="text-base mb-6 leading-relaxed"
-                            style={{ color: '#666666' }}
-                        >
-                            Please enter your new password below. Make sure it is strong and secure.
+                        <p className="text-base mb-6 leading-relaxed text-[#666666]">
+                            {UIText.auth.resetPassword.description}
                         </p>
 
                         {/* Password Input */}
                         <div>
                             <Label>
-                                Password <span className="text-error-500">*</span>
+                                {UIText.auth.resetPassword.password}
+                                <span className="text-error-500">*</span>
                             </Label>
                             <div className="relative">
                                 <Input
@@ -168,7 +135,7 @@ const ResetPassword: React.FC = () => {
                                         evaluatePasswordStrength(e.target.value);
                                     }}
                                     className={`w-full p-3 rounded-xl border focus:outline-none focus:ring-2
-                            ${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"}`}
+                                        ${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"}`}
                                 />
                                 <span
                                     onClick={() => setShowPassword(!showPassword)}
@@ -215,11 +182,63 @@ const ResetPassword: React.FC = () => {
                             onClick={handleResetPassword}
                             className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
-                            Reset Password
+                            {UIText.auth.resetPassword.button}
                         </button>
                     </div>
                 </div>
-            )}
+            ) : resetPasswordStatus === "error" ? (
+                <div className={`flex flex-col items-center justify-center min-h-screen px-4 
+                        ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}>
+
+                    <div className={`shadow-lg rounded-2xl p-10 max-w-md text-center 
+                            ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}>
+                        <div className="flex justify-center mb-6">
+                            <GoVerified className="w-20 h-20 text-[#FFAB00]" />
+                        </div>
+
+                        <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-[#0A0A04]'}`}>
+                            {UIText.auth.resetPassword.failed.title}
+                        </h3>
+
+                        <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-[#666666]'}`}>
+                            {UIText.auth.resetPassword.failed.description}
+                        </p>
+
+                        <button
+                            onClick={() => navigate('/')}
+                            className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                        >
+                            {UIText.auth.resetPassword.failed.button}
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <div className={`flex flex-col items-center justify-center min-h-screen px-4 
+                    ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}>
+
+                    <div className={`shadow-lg rounded-2xl p-10 max-w-md text-center 
+                         ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}>
+                        <div className="flex justify-center mb-6">
+                            <GoVerified className="w-20 h-20 text-[#FFAB00]" />
+                        </div>
+
+                        <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-[#0A0A04]'}`}>
+                            {UIText.auth.resetPassword.success.title}
+                        </h3>
+
+                        <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-[#666666]'}`}>
+                            {UIText.auth.resetPassword.success.description}
+                        </p>
+
+                        <button
+                            onClick={() => navigate('/')}
+                            className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                        >
+                            {UIText.auth.resetPassword.success.button}
+                        </button>
+                    </div>
+                </div>
+            )};
 
             {/* Toast */}
             {toastType && (

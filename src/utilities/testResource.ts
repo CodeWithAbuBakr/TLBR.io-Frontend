@@ -27,14 +27,19 @@ const UIText = {
         },
         resetPassword: {
             title: "Reset Your Password",
+            description: "Please enter your new password below. Make sure it is strong and secure.",
+            password: "Password",
+            button: "Reset Password",
             success: {
                 title: "Password Reset Successful",
                 description: "Your password has been successfully updated. You can now log in with your new password.",
                 button: "Continue to Login"
             },
             failed: {
-
-            },
+                title: "Password Reset Failed",
+                description: "There was an error resetting your password. Please try again or contact support.",
+                button: "Try Again"
+            }
         },
         signUp: {
             title: "SIGN UP",

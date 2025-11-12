@@ -47,6 +47,8 @@ export type StoredAllUserDetailsProps = {
     }[];
 };
 
+export type ResetPasswordStatus = "idle" | "pending" | "success" | "error";
+
 export interface LabelProps {
     htmlFor?: string;
     children: ReactNode;
