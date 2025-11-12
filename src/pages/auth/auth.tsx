@@ -11,11 +11,12 @@ import Loader from "../../loader/loader";
 import UIText from "../../utilities/testResource";
 import OTPDialog from "./otpDialog";
 import { userSession } from "../../utilities/getLocalStorageData";
+import ForgotPassword from "./forgotPassword";
 
 const Auth: React.FC = () => {
     const navigate = useNavigate();
     const { darkMode, activeForm, setActiveForm, toastType, setToastType, toastMessage, setToastMessage,
-        isLoader, setIsLoader, isModalOpen, setIsModalOpen, openOTPModel, setOpenOTPModel } = useData();
+        isLoader, setIsLoader, isModalOpen, setIsModalOpen, openOTPModel, setOpenOTPModel, openForgotPasswordModel, setOpenForgotPasswordModel } = useData();
 
     const handleShowToast = (type: "error" | "success" | "info", message: string) => {
         setToastType(type);
@@ -157,6 +158,15 @@ const Auth: React.FC = () => {
                     setToastMessage={setToastMessage}
                     setIsLoader={setIsLoader}
                     setOpenOTPModel={setOpenOTPModel}
+                />
+            )}
+
+            {/* Forgot Password Modal */}
+            {isModalOpen && openForgotPasswordModel !== false && isLoader !== true && (
+                <ForgotPassword
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    setOpenForgotPasswordModel={setOpenForgotPasswordModel}
                 />
             )}
 

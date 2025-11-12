@@ -191,11 +191,11 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
             >
               {showPassword ? (
                 <GoEye
-                  className={`${darkMode ? "fill-gray-300" : "fill-gray-500"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
                 />
               ) : (
                 <GoEyeClosed
-                  className={`${darkMode ? "fill-gray-300" : "fill-gray-500"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
                 />
               )}
             </span>

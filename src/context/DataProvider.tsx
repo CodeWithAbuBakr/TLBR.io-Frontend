@@ -17,6 +17,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [isUsersLoading, setIsUsersLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [openOTPModel, setOpenOTPModel] = useState(false);
+    const [openForgotPasswordModel, setOpenForgotPasswordModel] = useState(false);
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
@@ -123,6 +124,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsModalOpen,
         openOTPModel,
         setOpenOTPModel,
+        openForgotPasswordModel,
+        setOpenForgotPasswordModel,
         fname,
         setFname,
         lname,

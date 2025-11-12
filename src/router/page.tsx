@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Auth from "../pages/auth/auth";
 import EmailVerification from "../pages/auth/emailVerification";
+import ResetPassword from "../pages/auth/resetPassword";
 import Dashboard from "../pages/dashboard/page";
 import Billing from "../pages/billing/page";
 import Download from "../pages/download/page";
@@ -16,6 +17,7 @@ const RouterApp: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Auth />} />
                 <Route path="/token/:tokenId" element={<EmailVerification />} />
+                <Route path="/reset-password/:tokenId" element={<ResetPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/billing" element={<Billing />} />
                 <Route path="/download" element={<Download />} />

@@ -3,10 +3,10 @@ import { refreshCSRFToken } from "./auth/refreshCSRFToken";
 import { userDetails } from "../services/userDetails";
 import { allUserDetails } from "../services/admin/users/getUsers";
 import { createCheckout } from "./billing/createCheckout";
+import { verifySession } from "./billing/verifySession";
 import { deleteUser } from "../services/admin/users/deleteUser";
 import { logoutUser } from "../services/auth/logout";
 import type { StoredUserDetailsProps, StoredAllUserDetailsProps, ResponseProps } from "../utilities/type";
-import { verifySession } from "./billing/verifySession";
 
 // Wraps a callback-based API in a Promise
 const wrapWithPromise = <T>(

@@ -5,7 +5,7 @@ const UIText = {
             email: "Email",
             password: "Password",
             keep_me_signed_in: "Keep me logged in",
-            forgotPassword: "Forgot Password?",
+            forgot_password: "Forgot Password?",
             button: "Sign In",
         },
         verifyOTP: {
@@ -18,6 +18,12 @@ const UIText = {
                 title: "Verification Successful!",
                 description: "Redirecting you to your dashboard..."
             }
+        },
+        forgotPassword: {
+            title: "Forgot Password",
+            description: "Enter your registered email address to receive a password reset link.",
+            cancel: "Cancel",
+            reset_link: "Send Reset Links"
         },
         signUp: {
             title: "SIGN UP",

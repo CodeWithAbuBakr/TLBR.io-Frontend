@@ -162,6 +162,12 @@ export interface DialogProps {
     setOpenOTPModel: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface ForgotPasswordDialogProps {
+    isModalOpen: boolean;
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenForgotPasswordModel: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface ConfirmDeleteUserDialogProps {
     userId: string;
     isLoader: boolean;
@@ -190,6 +196,8 @@ export interface DataContextTypeProps {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
     openOTPModel: boolean;
     setOpenOTPModel: React.Dispatch<React.SetStateAction<boolean>>;
+    openForgotPasswordModel: boolean;
+    setOpenForgotPasswordModel: React.Dispatch<React.SetStateAction<boolean>>;
     fname: string;
     setFname: React.Dispatch<React.SetStateAction<string>>;
     lname: string;

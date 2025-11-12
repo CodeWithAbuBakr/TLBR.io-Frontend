@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useData } from "../../utilities/useData";
 import Label from "../../components/ui/input/Label";
 import Input from "../../components/ui/input/InputField";
@@ -13,7 +12,7 @@ import { loginUser } from "../../services/auth/signin/loginUser";
 
 const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, setIsLoader }) => {
   const { darkMode, activeForm, showPassword, setShowPassword, isChecked, setIsChecked, email, setEmail,
-    password, setPassword, passwordStrength, setPasswordStrength, } = useData();
+    password, setPassword, passwordStrength, setPasswordStrength, setOpenForgotPasswordModel } = useData();
 
   useEffect(() => {
     if (activeForm !== "signup") {
@@ -51,6 +50,14 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
         color: "text-success-500",
       });
     }
+  };
+
+  const handleOpenForgotPasswrodDialog = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setIsLoader(false);
+    setIsModalOpen(true);
+    setOpenForgotPasswordModel(true);
   };
 
   const handleSignIn = (e: React.FormEvent) => {
@@ -101,7 +108,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
       <form className="space-y-6 mt-8" onSubmit={handleSignIn}>
         <div>
           <Label>
-            {UIText.auth.signIn.email}{" "}
+            {UIText.auth.signIn.email}
             <span className="text-error-500">*</span>
           </Label>
           <Input
@@ -111,8 +118,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
-            className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"
-              }`}
+            className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"}`}
           />
         </div>
 
@@ -139,11 +145,11 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
             >
               {showPassword ? (
                 <GoEye
-                  className={`${darkMode ? "fill-gray-300" : "fill-gray-500"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
                 />
               ) : (
                 <GoEyeClosed
-                  className={`${darkMode ? "fill-gray-300" : "fill-gray-500"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
                 />
               )}
             </span>
@@ -175,22 +181,16 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Checkbox checked={isChecked} onChange={setIsChecked} />
-            <span
-              className={`block font-normal text-theme-sm ${darkMode ? "text-gray-400" : "text-gray-700"
-                }`}
-            >
+            <span className={`block font-normal text-theme-sm ${darkMode ? "text-gray-400" : "text-gray-700"}`}>
               {UIText.auth.signIn.keep_me_signed_in}
             </span>
           </div>
-          <Link
-            to="/reset-password"
-            className={`text-sm ${darkMode
-              ? "text-[#FFAB00] hover:text-[#ffbc37]"
-              : "text-[#FFAB00] hover:text-[#ffbc37]"
-              }`}
+          <button
+            className="text-sm text-[#FFAB00] hover:text-[#ffbc37] cursor-pointer hover:underline"
+            onClick={handleOpenForgotPasswrodDialog}
           >
-            {UIText.auth.signIn.forgotPassword}
-          </Link>
+            {UIText.auth.signIn.forgot_password}
+          </button>
         </div>
 
         <button

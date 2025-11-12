@@ -32,6 +32,7 @@ const ProfileInformation: React.FC = () => {
             setToastMessage("New password cannot be same as old password.");
             setPasswordStrength({ message: "", color: "" });
         } else {
+            setToastType(null);
             setToastMessage("");
             evaluatePasswordStrength(value);
         }
