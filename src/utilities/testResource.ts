@@ -102,6 +102,7 @@ const UIText = {
             description: "Days remaining in your free trial",
             seven: "7",
             remaining_days: "/ 7 days remaining",
+            trial_expires_dynamic: "Your free trial expires in ",
             trial_expires: "Your free trial expires in 7 days"
         },
         account_status: {

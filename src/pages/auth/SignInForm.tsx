@@ -118,7 +118,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
 
         <div>
           <Label>
-            {UIText.auth.signIn.password}{" "}
+            {UIText.auth.signIn.password}
             <span className="text-error-500">*</span>
           </Label>
           <div className="relative">

@@ -36,7 +36,8 @@ const TrialPeriod: React.FC = () => {
                         <div className={`w-full h-full ${darkMode ? "bg-[#FFAB00]" : "bg-[#0A0A04]"}`}></div>
                     </div>
                     <p className={`text-xs mt-2.5 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
-                        {UIText.dashboard.trial_period.trial_expires}
+                        {UIText.dashboard.trial_period.trial_expires_dynamic}
+                        {getRemainingDays(decryptedUserDetails?.user?.subscriptionCurrentPeriodEnd)}
                     </p>
                 </div>
             ) : (

@@ -96,7 +96,7 @@ const ProfileInformation: React.FC = () => {
                 <div className="space-y-4">
                     <div>
                         <Label>
-                            {UIText.setting.profile_information.full_name}{""}
+                            {UIText.setting.profile_information.full_name}
                             <span className="text-error-500">*</span>
                         </Label>
                         <Input
@@ -112,7 +112,7 @@ const ProfileInformation: React.FC = () => {
 
                     <div>
                         <Label>
-                            {UIText.setting.profile_information.email}{" "}
+                            {UIText.setting.profile_information.email}
                             <span className="text-error-500">*</span>
                         </Label>
                         <Input
@@ -128,7 +128,7 @@ const ProfileInformation: React.FC = () => {
 
                     <div>
                         <Label>
-                            {UIText.auth.signIn.password}{" "}
+                            {UIText.auth.signIn.password}
                             <span className="text-error-500">*</span>
                         </Label>
                         <div className="relative">
@@ -140,8 +140,7 @@ const ProfileInformation: React.FC = () => {
                                     setPassword(e.target.value);
                                     evaluatePasswordStrength(e.target.value);
                                 }}
-                                className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"
-                                    }`}
+                                className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"}`}
                             />
                             <span
                                 onClick={() => setShowPassword(!showPassword)}
