@@ -16,9 +16,7 @@ const TrialPeriod: React.FC = () => {
                     ${darkMode ? "bg-[#333333] border-[#FFAB00]" : "bg-[#FFAB00] border-transparent"}`}
                 >
                     <div className="flex items-center mb-2">
-                        <IoTimeOutline
-                            className={`text-xl mr-2 ${darkMode ? "text-[#FFAB00]" : "text-[#333333]"}`}
-                        />
+                        <IoTimeOutline className={`text-xl mr-2 ${darkMode ? "text-[#FFAB00]" : "text-[#333333]"}`} />
                         <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                             {UIText.dashboard.trial_period.title}
                         </h3>
@@ -46,9 +44,7 @@ const TrialPeriod: React.FC = () => {
                     ${darkMode ? "bg-[#333333] border-[#FFAB00]" : "bg-[#FFAB00] border-transparent"}`}
                 >
                     <div className="flex items-center mb-2">
-                        <IoTimeOutline
-                            className={`text-xl mr-2 ${darkMode ? "text-[#FFAB00]" : "text-[#333333]"}`}
-                        />
+                        <IoTimeOutline className={`text-xl mr-2 ${darkMode ? "text-[#FFAB00]" : "text-[#333333]"}`} />
                         <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                             {UIText.dashboard.trial_period.title}
                         </h3>
