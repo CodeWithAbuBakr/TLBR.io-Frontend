@@ -4,7 +4,7 @@ export const isAuth = () => {
     let decryptedIsAuth;
     const encryptedIsAuth = localStorage.getItem("isAuth");
 
-    if (encryptedIsAuth) {
+    if (encryptedIsAuth !== null) {
         const bytes = CryptoJS.AES.decrypt(encryptedIsAuth, import.meta.env.VITE_SECRET_KEY);
         decryptedIsAuth = bytes.toString(CryptoJS.enc.Utf8);
     } else {
@@ -18,7 +18,7 @@ export const userSession = () => {
     let decryptedUserSession;
     const encryptedUserSession = localStorage.getItem("userSession");
 
-    if (encryptedUserSession) {
+    if (encryptedUserSession !== null) {
         const bytes = CryptoJS.AES.decrypt(encryptedUserSession, import.meta.env.VITE_SECRET_KEY);
         const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
 
@@ -39,7 +39,7 @@ export const userDetails = () => {
     let decryptedUserDetails;
     const encryptedUserDetails = localStorage.getItem("userDetails");
 
-    if (encryptedUserDetails) {
+    if (encryptedUserDetails !== null) {
         const bytes = CryptoJS.AES.decrypt(encryptedUserDetails, import.meta.env.VITE_SECRET_KEY);
         const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
 
