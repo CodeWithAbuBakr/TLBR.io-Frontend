@@ -3,7 +3,7 @@ import UIText from '../../utilities/testResource';
 import { IoTimeOutline } from 'react-icons/io5';
 import { useData } from '../../utilities/useData';
 import { userDetails } from '../../utilities/getLocalStorageData';
-import { getDaysPassed, getRemainingDays } from '../../utilities/getDays';
+import { getAllRemainingDays, getDaysPassed, getRemainingDays } from '../../utilities/getDays';
 
 const TrialPeriod: React.FC = () => {
     const { darkMode } = useData();
@@ -37,7 +37,7 @@ const TrialPeriod: React.FC = () => {
                     </div>
                     <p className={`text-xs mt-2.5 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                         {UIText.dashboard.trial_period.trial_expires_dynamic}
-                        {getRemainingDays(decryptedUserDetails?.user?.subscriptionCurrentPeriodEnd)}
+                        {getAllRemainingDays(decryptedUserDetails?.user?.subscriptionCurrentPeriodEnd)}
                     </p>
                 </div>
             ) : (
