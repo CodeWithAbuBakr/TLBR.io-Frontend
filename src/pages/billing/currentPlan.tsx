@@ -40,8 +40,9 @@ const CurrentPlan: React.FC = () => {
                             </div>
 
                             <div className={darkMode ? 'text-lg font-semibold mt-1 text-[#FFAB00]' : 'text-lg font-semibold mt-1 text-gray-900'}>
-                                ${decryptedUserDetails?.user?.planType === 'yearly' ? 200 : 20}{" "}
-                                {decryptedUserDetails?.user?.planType === 'yearly' ? ' / Yearly' : ' / Monthly'}
+                                {decryptedUserDetails?.user?.planType === 'free'
+                                    ? '$0 / Free'
+                                    : `$${decryptedUserDetails?.user?.planType === 'yearly' ? 200 : 20} / ${decryptedUserDetails?.user?.planType === 'yearly' ? 'Yearly' : 'Monthly'}`}
                             </div>
                         </div>
                     </div>
