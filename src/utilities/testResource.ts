@@ -137,30 +137,27 @@ const UIText = {
         description: "Manage your subscription and payment methods",
         current_plan: {
             title: "Current Plan",
-            description: "You’re currently on the Free Trial",
-            free_trial: "Monthly",
-            seven_day: "21-day remaining",
-            month: " / month"
+            description: "You’re currently subscribed the",
         },
         free_plan: {
             title: "Free Trial",
             description: "Enjoy full access to all features free for 7 days — no commitment required.",
-            dollar: "$0 ",
-            per_month: "/ 7-Day Free Trial",
+            dollar: "$0",
+            per_month: " / 7-Day Free Trial",
             button: "Upgrade to Professional (Monthly)"
         },
         monthly_plan: {
             title: "Monthly Plan",
             description: "Flexible plan for individuals who prefer month-to-month access",
-            dollar: "$20 ",
-            per_month: "/ per month",
+            dollar: "$20",
+            per_month: " / per month",
             button: "Upgrade to Professional (Monthly)"
         },
         yearly_plan: {
             title: "Yearly Plan",
             description: "Best value for individuals committed to long-term productivity — includes a $20 annual discount",
-            dollar: "$120 ",
-            per_year: "/ per year",
+            dollar: "$200",
+            per_year: " / per year",
             button: "Upgrade to Professional (Monthly or Yearly)"
         },
         payment: {

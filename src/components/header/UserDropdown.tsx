@@ -13,7 +13,7 @@ import { userDetails } from "../../utilities/getLocalStorageData";
 
 const UserDropdown = () => {
   const navigate = useNavigate();
-  const { darkMode, isOpen, setIsOpen, isLoader, setIsLoader, isModalOpen, setIsModalOpen,
+  const { darkMode, setEmail, setPassword, isOpen, setIsOpen, isLoader, setIsLoader, isModalOpen, setIsModalOpen,
     toastType, setToastType, toastMessage, setToastMessage, userData, hasFetchedUser } = useData();
 
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -48,6 +48,8 @@ const UserDropdown = () => {
           setIsLoader(false);
           setIsModalOpen(false);
 
+          setEmail("");
+          setPassword("");
           setIsOpen(false);
           setToastType(null);
           setToastMessage("");

@@ -14,7 +14,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
     setIsModalOpen,
     setOpenForgotPasswordModel,
 }) => {
-    const { darkMode, email, setEmail, setToastType, setToastMessage,
+    const { darkMode, email, setEmail, setPassword, setToastType, setToastMessage,
         isLoader, setIsLoader, openForgotPasswordModel, } = useData();
 
     // Email validation helper
@@ -67,6 +67,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
 
                 // Reset email input
                 setEmail('');
+                setPassword('');
             }
         });
     };
@@ -83,7 +84,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                className={`max-w-md mx-8 p-6 rounded-2xl relative transition-colors duration-300 shadow-lg
+                className={`max-w-md mx-8 p-2 md:p-4 lg:p-6 xl:p-6 rounded-2xl relative transition-colors duration-300 shadow-lg
                     ${darkMode
                         ? "bg-[#1E1E1E] text-gray-100 border border-gray-700"
                         : "bg-white text-gray-900 border border-gray-200"
@@ -100,7 +101,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
                     {/* Email Input */}
                     <div>
                         <Label>
-                            {UIText.auth.signIn.email}
+                            {UIText.auth.signIn.email}{" "}
                             <span className="text-error-500">*</span>
                         </Label>
                         <Input
@@ -116,7 +117,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
                     </div>
 
                     {/* Buttons */}
-                    <div className="flex justify-end gap-3 mt-8">
+                    <div className="flex flex-col sm:flex-col md:flex-row justify-end gap-3 mt-8">
                         <button
                             onClick={handleCancel}
                             className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
@@ -130,7 +131,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
                         <button
                             onClick={handleSendLink}
                             className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
-                ${darkMode
+                                ${darkMode
                                     ? "bg-[#FFAB00] text-black hover:bg-[#ffbc37]"
                                     : "bg-[#FFAB00] text-white hover:bg-[#ffbc37]"
                                 }`}

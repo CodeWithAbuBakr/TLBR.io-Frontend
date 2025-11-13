@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useData } from '../../utilities/useData';
 import Toast from "../../hooks/useToast";
 import Loader from '../../loader/loader';
+import CryptoJS from 'crypto-js';
 import Label from '../../components/ui/input/Label';
 import Input from '../../components/ui/input/InputField';
 import { GoEye, GoEyeClosed, GoVerified } from 'react-icons/go';
@@ -10,10 +11,12 @@ import { resetPassword } from '../../services/auth/signin/resetPassword';
 import UIText from '../../utilities/testResource';
 import type { ResetPasswordStatus } from '../../utilities/type';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { userDetails } from '../../utilities/getLocalStorageData';
 
 const ResetPassword: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const decryptedUserDetails = userDetails();
     const [resetPasswordStatus, setResetPasswordStatus] = useState<ResetPasswordStatus>("pending");
     const { darkMode, password, setPassword, showPassword, setShowPassword, passwordStrength,
         setPasswordStrength, toastType, setToastType, toastMessage, setToastMessage, isModalOpen,
@@ -94,6 +97,14 @@ const ResetPassword: React.FC = () => {
                     setIsLoader(false);
                     setResetPasswordStatus("success");
 
+                    if (decryptedUserDetails) {
+                        // Clean up stored data
+                        const encryptedIsAuth = CryptoJS.AES.encrypt("false", import.meta.env.VITE_SECRET_KEY).toString();
+                        localStorage.setItem("isAuth", encryptedIsAuth);
+                        localStorage.removeItem("userSession");
+                        localStorage.removeItem("userDetails");
+                    }
+
                     setToastType("success");
                     setToastMessage(data.message);
 
@@ -104,6 +115,14 @@ const ResetPassword: React.FC = () => {
             });
         };
     };
+
+    const handleContinueToLogin = () => {
+        setToastType(null);
+        setToastMessage("");
+
+        // Navigate to login page
+        navigate('/');
+    }
 
     return (
         <>
@@ -126,7 +145,7 @@ const ResetPassword: React.FC = () => {
                         </p>
 
                         <button
-                            onClick={() => navigate('/')}
+                            onClick={handleContinueToLogin}
                             className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
                             {UIText.auth.resetPassword.success.button}

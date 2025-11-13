@@ -1,42 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import UIText from "../../utilities/testResource";
-import { FiUser, FiSave, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiUser, FiSave } from "react-icons/fi";
 import { useData } from "../../utilities/useData";
 import { userDetails, userSession } from "../../utilities/getLocalStorageData";
 import Loader from "../../loader/loader";
+import ForgotPassword from "../auth/forgotPassword";
+import { GoEye, GoEyeClosed } from "react-icons/go";
+import Input from "../../components/ui/input/InputField";
+import Label from "../../components/ui/input/Label";
 
 const ProfileInformation: React.FC = () => {
-    const { darkMode, passwordStrength, setPasswordStrength, setToastType, setToastMessage,
-        isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
     const decryptedUserDetails = userDetails();
     const decryptedUserSession = userSession();
+    const { darkMode, fname, setFname, email, setEmail, password, setPassword, showPassword, setShowPassword, passwordStrength,
+        setPasswordStrength, isLoader, setIsLoader, setToastType, setToastMessage, isModalOpen,
+        setIsModalOpen, openForgotPasswordModel, setOpenForgotPasswordModel } = useData();
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [showNewPassword, setShowNewPassword] = useState(false);
-    const [oldPassword, setOldPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [isOldPasswordCorrect, setIsOldPasswordCorrect] = useState(false);
-
-    const handleOldPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setOldPassword(value);
-        // Compare with decrypted saved password
-        setIsOldPasswordCorrect(value === decryptedUserSession.password);
-    };
-
-    const handleNewPasswordChange = (value: string) => {
-        setNewPassword(value);
-        // Check if new password is same as old
-        if (value === decryptedUserSession.password) {
-            setToastType("info");
-            setToastMessage("New password cannot be same as old password.");
-            setPasswordStrength({ message: "", color: "" });
-        } else {
-            setToastType(null);
-            setToastMessage("");
-            evaluatePasswordStrength(value);
-        }
-    };
+    useEffect(() => {
+        if (decryptedUserDetails) {
+            setFname(decryptedUserDetails.user.name);
+            setEmail(decryptedUserDetails.user.email);
+        };
+    }, [decryptedUserDetails, setFname, setEmail]);
 
     // Evaluate Password Strength
     const evaluatePasswordStrength = (value: string) => {
@@ -72,22 +57,18 @@ const ProfileInformation: React.FC = () => {
     const isSaveEnabled = passwordStrength.message === "Your password looks secure.";
 
     const handleSaveChanges = () => {
-        setIsLoader(true);
-        setIsModalOpen(true);
+        if (password !== decryptedUserSession.password) {
+            setToastType("error");
+            setToastMessage("Please enter the correct password.");
+        } else {
+            setToastType(null);
+            setToastMessage("");
 
-        // Simulate save delay
-        setTimeout(() => {
             setIsLoader(false);
-            setIsModalOpen(false);
-
-            setToastType("success");
-            setToastMessage("Password updated successfully!");
-
-            setOldPassword("");
-            setNewPassword("");
-            setIsOldPasswordCorrect(false);
+            setIsModalOpen(true);
+            setOpenForgotPasswordModel(true);
             setPasswordStrength({ message: "", color: "" });
-        }, 2000);
+        }
     };
 
     return (
@@ -113,126 +94,117 @@ const ProfileInformation: React.FC = () => {
                 </h2>
 
                 <div className="space-y-4">
-                    {/* Name & Email */}
                     <div>
-                        <label
-                            className={`block text-sm mb-1 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}
-                        >
-                            {UIText.setting.profile_information.full_name}
-                        </label>
-                        <input
+                        <Label>
+                            {UIText.setting.profile_information.full_name}{""}
+                            <span className="text-error-500">*</span>
+                        </Label>
+                        <Input
+                            placeholder="Full Name"
                             type="text"
-                            value={decryptedUserDetails.user.name}
-                            readOnly
-                            className={`w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FFAB00]
-                                ${darkMode
-                                    ? "bg-[#444444] border-[#FFAB00] text-[#FFFFFF]"
-                                    : "bg-[#FAFAFA] border border-gray-200 text-[#0A0A04]"}`}
+                            value={fname}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                setEmail(e.target.value)
+                            }
+                            className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"}`}
                         />
+                    </div>
 
-                        <label
-                            className={`block text-sm mb-1 mt-3 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}
-                        >
-                            {UIText.setting.profile_information.email}
-                        </label>
-                        <input
+                    <div>
+                        <Label>
+                            {UIText.setting.profile_information.email}{" "}
+                            <span className="text-error-500">*</span>
+                        </Label>
+                        <Input
+                            placeholder="info@gmail.com"
                             type="email"
-                            value={decryptedUserDetails.user.email}
-                            readOnly
-                            className={`w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FFAB00]
-                                ${darkMode
-                                    ? "bg-[#444444] border-[#FFAB00] text-[#FFFFFF]"
-                                    : "bg-[#FAFAFA] border border-gray-200 text-[#0A0A04]"}`}
+                            value={email}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                setEmail(e.target.value)
+                            }
+                            className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"}`}
                         />
                     </div>
 
-                    {/* Old Password */}
-                    <label
-                        className={`block text-sm mb-1 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}
-                    >
-                        {UIText.setting.profile_information.password}
-                    </label>
-                    <div className="relative">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            value={oldPassword}
-                            onChange={handleOldPasswordChange}
-                            placeholder="Enter old password"
-                            className={`w-full rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FFAB00]
-                                ${darkMode
-                                    ? "bg-[#444444] border-[#FFAB00] text-[#FFFFFF]"
-                                    : "bg-[#FAFAFA] border border-gray-200 text-[#0A0A04]"}`}
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-500 hover:text-[#FFAB00]"
-                        >
-                            {showPassword ? <FiEyeOff /> : <FiEye />}
-                        </button>
-                    </div>
+                    <div>
+                        <Label>
+                            {UIText.auth.signIn.password}{" "}
+                            <span className="text-error-500">*</span>
+                        </Label>
+                        <div className="relative">
+                            <Input
+                                placeholder="Enter your password"
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    setPassword(e.target.value);
+                                    evaluatePasswordStrength(e.target.value);
+                                }}
+                                className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"
+                                    }`}
+                            />
+                            <span
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute z-10 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                            >
+                                {showPassword ? (
+                                    <GoEye
+                                        className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                    />
+                                ) : (
+                                    <GoEyeClosed
+                                        className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                    />
+                                )}
+                            </span>
+                        </div>
 
-                    {/* New Password */}
-                    {isOldPasswordCorrect && (
-                        <>
-                            <div className="relative">
-                                <input
-                                    type={showNewPassword ? "text" : "password"}
-                                    value={newPassword}
-                                    onChange={(e) => handleNewPasswordChange(e.target.value)}
-                                    placeholder="Enter new password"
-                                    className={`w-full rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FFAB00]
-                                        ${darkMode
-                                            ? "bg-[#444444] border-[#FFAB00] text-[#FFFFFF]"
-                                            : "bg-[#FAFAFA] border border-gray-200 text-[#0A0A04]"}`}
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowNewPassword(!showNewPassword)}
-                                    className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-500 hover:text-[#FFAB00]"
-                                >
-                                    {showNewPassword ? <FiEyeOff /> : <FiEye />}
-                                </button>
-                            </div>
-
-                            {passwordStrength.message && (
-                                <p
-                                    className={`mt-1 text-sm 
+                        {passwordStrength.message && (
+                            <p
+                                className={`mt-1 text-sm 
                                     ${passwordStrength.color === "text-error-500"
+                                        ? darkMode
+                                            ? "text-red-500"
+                                            : "text-red-600"
+                                        : passwordStrength.color === "text-[#FFAB00]"
                                             ? darkMode
-                                                ? "text-red-500"
-                                                : "text-red-600"
-                                            : passwordStrength.color === "text-[#FFAB00]"
+                                                ? "text-[#FFD166]"
+                                                : "text-[#FFAB00]"
+                                            : passwordStrength.color === "text-success-500"
                                                 ? darkMode
-                                                    ? "text-[#FFD166]"
-                                                    : "text-[#FFAB00]"
-                                                : passwordStrength.color === "text-success-500"
-                                                    ? darkMode
-                                                        ? "text-green-500"
-                                                        : "text-green-600"
-                                                    : ""
-                                        }`}
-                                >
-                                    {passwordStrength.message}
-                                </p>
-                            )}
-                        </>
-                    )}
-
-                    <button
-                        disabled={!isSaveEnabled}
-                        onClick={handleSaveChanges}
-                        className={`mt-4 inline-flex items-center gap-2 cursor-pointer font-semibold px-5 py-2 rounded-full transition-colors
-                            ${isSaveEnabled
-                                ? "bg-[#FFAB00] hover:bg-[#ffbc37] text-white"
-                                : "bg-[#CCCCCC] cursor-not-allowed text-white"
-                            }`}
-                    >
-                        <FiSave />
-                        {UIText.setting.profile_information.button}
-                    </button>
+                                                    ? "text-green-500"
+                                                    : "text-green-600"
+                                                : ""
+                                    }`}
+                            >
+                                {passwordStrength.message}
+                            </p>
+                        )}
+                    </div>
                 </div>
+
+                <button
+                    disabled={!isSaveEnabled}
+                    onClick={handleSaveChanges}
+                    className={`mt-4 inline-flex items-center gap-2 cursor-pointer font-semibold px-5 py-2 rounded-full transition-colors
+                            ${isSaveEnabled
+                            ? "bg-[#FFAB00] hover:bg-[#ffbc37] text-white"
+                            : "bg-[#CCCCCC] cursor-not-allowed text-white"
+                        }`}
+                >
+                    <FiSave />
+                    {UIText.setting.profile_information.button}
+                </button>
             </div>
+
+            {/* Forgot Password Modal */}
+            {isModalOpen && openForgotPasswordModel !== false && isLoader !== true && (
+                <ForgotPassword
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    setOpenForgotPasswordModel={setOpenForgotPasswordModel}
+                />
+            )}
         </>
     );
 };
