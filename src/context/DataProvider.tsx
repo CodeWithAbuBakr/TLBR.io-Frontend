@@ -23,7 +23,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfrimPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setConfirmShowPassword] = useState(false);
     const [isChecked, setIsChecked] = useState(true);
     const [passwordStrength, setPasswordStrength] = useState<{ message: string; color: string }>({
         message: "",
@@ -33,7 +35,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [showSuccessScreen, setShowSuccessScreen] = useState(false);
     const [userData, setUserData] = useState<StoredUserDetailsProps | null>(null);
     const [allUsers, setAllUsers] = useState<StoredAllUserDetailsProps | null>(null);
-    console.log("User is not authenticated or user details have already been fetched. Before useEffect");
 
     useEffect(() => {
         const decryptedIsAuth = isAuth();
@@ -105,12 +106,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 .catch((refreshCSRFError) => {
                     console.error("Error refreshing CSRF token:", refreshCSRFError);
                 });
-        } else {
-            console.log("User is not authenticated or user details have already been fetched. Inside useEffect");
-        };
+        }
     }, [decryptedUserDetails, navigate]);
 
-    console.log("User is not authenticated or user details have already been fetched. After useEffect");
     const contextValue: DataContextTypeProps = {
         activeForm,
         setActiveForm,
@@ -139,8 +137,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setEmail,
         password,
         setPassword,
+        confirmPassword,
+        setConfrimPassword,
         showPassword,
         setShowPassword,
+        showConfirmPassword,
+        setConfirmShowPassword,
         isChecked,
         setIsChecked,
         passwordStrength,

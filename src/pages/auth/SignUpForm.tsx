@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useData } from "../../utilities/useData";
 import Label from "../../components/ui/input/Label";
 import Input from "../../components/ui/input/InputField";
-import Checkbox from "../../components/ui/input/Checkbox";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
 import type { ShowToastProps } from "../../utilities/type";
@@ -11,14 +10,9 @@ import UIText from "../../utilities/testResource";
 import { registerUser } from "../../services/auth/signup/registerUser";
 
 const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, setIsLoader }) => {
-  const { darkMode, activeForm, showPassword, setShowPassword, isChecked, setIsChecked, fname, setFname,
-    lname, setLname, email, setEmail, password, setPassword, passwordStrength, setPasswordStrength } = useData();
-
-  useEffect(() => {
-    if (activeForm !== "signin") {
-      setIsChecked(false);
-    };
-  }, [activeForm, setIsChecked]);
+  const { darkMode, showPassword, setShowPassword, fname, setFname, confirmPassword,
+    setConfrimPassword, showConfirmPassword, setConfirmShowPassword, lname, setLname,
+    email, setEmail, password, setPassword, passwordStrength, setPasswordStrength } = useData();
 
   // Evaluate Password Strength
   const evaluatePasswordStrength = (value: string) => {
@@ -70,6 +64,12 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
     } else if (!password) {
       onShowToast("error", "Please enter your password.");
       return;
+    } else if (!confirmPassword) {
+      onShowToast("error", "Please enter confirm password.");
+      return;
+    } else if (password !== confirmPassword) {
+      onShowToast("error", "Password doesn't match with confirm password.");
+      return;
     } else if (passwordStrength.message !== "Your password looks secure.") {
       onShowToast("info", "Please use a strong password.");
       return;
@@ -97,7 +97,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           setLname("");
           setEmail("");
           setPassword("");
-          setIsChecked(false);
+          setConfrimPassword("");
           setPasswordStrength({ message: "", color: "" });
         }
       });
@@ -178,7 +178,6 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPassword(e.target.value);
-                evaluatePasswordStrength(e.target.value);
               }}
               className={`${darkMode
                 ? "bg-gray-900 text-white border-gray-700"
@@ -190,6 +189,42 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
               className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
             >
               {showPassword ? (
+                <GoEye
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                />
+              ) : (
+                <GoEyeClosed
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                />
+              )}
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <Label>
+            {UIText.auth.signUp.confirmPassword}
+            <span className="text-error-500">*</span>
+          </Label>
+          <div className="relative">
+            <Input
+              placeholder="Enter your password"
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setConfrimPassword(e.target.value);
+                evaluatePasswordStrength(e.target.value);
+              }}
+              className={`${darkMode
+                ? "bg-gray-900 text-white border-gray-700"
+                : "bg-white text-gray-900 border-gray-300"
+                }`}
+            />
+            <span
+              onClick={() => setConfirmShowPassword(!showConfirmPassword)}
+              className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+            >
+              {showConfirmPassword ? (
                 <GoEye
                   className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
                 />
@@ -224,31 +259,10 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           )}
         </div>
 
-        <div className="flex items-center gap-3">
-          <Checkbox
-            className="w-5 h-5"
-            checked={isChecked}
-            onChange={setIsChecked}
-          />
-          <p
-            className={`inline-block font-normal ${darkMode ? "text-gray-400" : "text-gray-500"
-              }`}
-          >
-            {UIText.auth.signUp.by_creating_account}{" "}
-            <span className={darkMode ? "text-white" : "text-gray-800"}>
-              {UIText.auth.signUp.terms_and_conditions}
-            </span>{" "}
-            {UIText.auth.signUp.and_our}{" "}
-            <span className={darkMode ? "text-white" : "text-gray-800"}>
-              {UIText.auth.signUp.privacy_policy}
-            </span>
-          </p>
-        </div>
-
         <button
           type="submit"
           className={`inline-flex items-center justify-center gap-3 py-3 mb-4 w-full text-sm font-normal rounded-full px-7 cursor-pointer transition-colors
-        ${darkMode
+            ${darkMode
               ? "bg-[#FFAB00] text-white hover:bg-[#ffbc37]"
               : "bg-[#FFAB00] text-white hover:bg-[#ffbc37]"
             }`}

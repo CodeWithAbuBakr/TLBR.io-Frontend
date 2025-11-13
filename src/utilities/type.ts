@@ -208,8 +208,12 @@ export interface DataContextTypeProps {
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     password: string;
     setPassword: React.Dispatch<React.SetStateAction<string>>;
+    confirmPassword: string;
+    setConfrimPassword: React.Dispatch<React.SetStateAction<string>>;
     showPassword: boolean;
     setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
+    showConfirmPassword: boolean;
+    setConfirmShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
     passwordStrength: { message: string; color: string };
     setPasswordStrength: React.Dispatch<
         React.SetStateAction<{ message: string; color: string }>

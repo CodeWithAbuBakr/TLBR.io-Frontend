@@ -47,6 +47,7 @@ const UIText = {
             l_name: "Last Name",
             email: "Email",
             password: "Password",
+            confirmPassword: "Confirm Password",
             by_creating_account: "By creating an account, you agree to the",
             terms_and_conditions: "Terms and Conditions",
             and_our: "and our",

@@ -20,7 +20,7 @@ const ResetPassword: React.FC = () => {
     const [resetPasswordStatus, setResetPasswordStatus] = useState<ResetPasswordStatus>("pending");
     const { darkMode, password, setPassword, showPassword, setShowPassword, passwordStrength,
         setPasswordStrength, toastType, setToastType, toastMessage, setToastMessage, isModalOpen,
-        setIsModalOpen, isLoader, setIsLoader } = useData();
+        setIsModalOpen, isLoader, setIsLoader, confirmPassword, setConfrimPassword, showConfirmPassword, setConfirmShowPassword } = useData();
 
     // Extract token from URL
     const resetLink = useMemo(() => {
@@ -70,14 +70,19 @@ const ResetPassword: React.FC = () => {
 
     const handleResetPassword = () => {
         // Check if new password is empty
-        if (password === "") {
+        if (!password) {
             setToastType("error");
             setToastMessage("Password cannot be empty.");
-            setPasswordStrength({ message: "", color: "" });
             return;
-        }
-
-        if (resetLink && passwordStrength.message === "Your password looks secure.") {
+        } else if (!confirmPassword) {
+            setToastType("error");
+            setToastMessage("Confirm Password cannot be empty.");
+            setPasswordStrength({ message: "", color: "" });
+        } else if (password !== confirmPassword) {
+            setToastType("error");
+            setToastMessage("Password doesn't match with confirm password.");
+            return;
+        } else if (resetLink && passwordStrength.message === "Your password looks secure.") {
             // Start loading
             setIsLoader(true);
             setIsModalOpen(true);
@@ -192,7 +197,6 @@ const ResetPassword: React.FC = () => {
                             {UIText.auth.resetPassword.description}
                         </p>
 
-                        {/* Password Input */}
                         <div>
                             <Label>
                                 {UIText.auth.resetPassword.password}
@@ -225,29 +229,42 @@ const ResetPassword: React.FC = () => {
                                     )}
                                 </span>
                             </div>
+                        </div>
 
-                            {/* Password Strength Message */}
-                            {passwordStrength.message && (
-                                <p
-                                    className={`mt-1 text-sm 
-                                        ${passwordStrength.color === "text-error-500"
-                                            ? darkMode
-                                                ? "text-red-500"
-                                                : "text-red-600"
-                                            : passwordStrength.color === "text-[#FFAB00]"
-                                                ? darkMode
-                                                    ? "text-[#FFD166]"
-                                                    : "text-[#FFAB00]"
-                                                : passwordStrength.color === "text-success-500"
-                                                    ? darkMode
-                                                        ? "text-green-500"
-                                                        : "text-green-600"
-                                                    : ""
+                        <div className='mt-4'>
+                            <Label>
+                                {UIText.auth.signUp.confirmPassword}
+                                <span className="text-error-500">*</span>
+                            </Label>
+                            <div className="relative">
+                                <Input
+                                    placeholder="Enter your password"
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    value={confirmPassword}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        setConfrimPassword(e.target.value);
+                                        evaluatePasswordStrength(e.target.value);
+                                    }}
+                                    className={`${darkMode
+                                        ? "bg-gray-900 text-white border-gray-700"
+                                        : "bg-white text-gray-900 border-gray-300"
                                         }`}
+                                />
+                                <span
+                                    onClick={() => setConfirmShowPassword(!showConfirmPassword)}
+                                    className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                                 >
-                                    {passwordStrength.message}
-                                </p>
-                            )}
+                                    {showConfirmPassword ? (
+                                        <GoEye
+                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                        />
+                                    ) : (
+                                        <GoEyeClosed
+                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                        />
+                                    )}
+                                </span>
+                            </div>
                         </div>
 
                         {/* Reset Password Button */}
