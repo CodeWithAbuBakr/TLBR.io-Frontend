@@ -48,9 +48,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsLoader(true);
             setIsModalOpen(true);
             hasFetchedUser.current = true;
-            const userId = decryptedUserDetails.user._id;
 
-            getRefreshedCSRFToken(userId)
+            getRefreshedCSRFToken()
                 .then((data) => {
                     console.log(data);
 
