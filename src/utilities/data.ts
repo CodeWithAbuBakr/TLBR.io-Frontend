@@ -21,7 +21,7 @@ export const yearlyPlan = [
     "Dedicated account manager",
     "Custom integrations and onboarding",
     "Service Level Agreement (SLA) guarantee",
-    "Includes a 7-day free trial before annual billing begins",
+    "Includes 7-days free trial before annual billing begins",
 ];
 
 export const paymentHistory: Payment[] = [

@@ -145,7 +145,7 @@ const UIText = {
         },
         free_plan: {
             title: "Free Trial",
-            description: "Enjoy full access to all features free for 7 days — no commitment required.",
+            description: "Enjoy full access to all features free for 7 days - no commitment required.",
             dollar: "$0",
             per_month: " / 7-Day Free Trial",
             button: "Start Your 7-days Free Trial"
@@ -159,10 +159,10 @@ const UIText = {
         },
         yearly_plan: {
             title: "Yearly Plan",
-            description: "Best value for individuals committed to long-term productivity — includes a $20 annual discount",
+            description: "Best value for individuals committed to long-term productivity - includes a $40 annual discount",
             dollar: "$200",
             per_year: " / per year",
-            button: "Upgrade to Professional (Monthly or Yearly)"
+            button: "Upgrade to Professional (Yearly) - Save $40"
         },
         payment: {
             success: {

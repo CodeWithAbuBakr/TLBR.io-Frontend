@@ -16,7 +16,7 @@ const Plans: React.FC = () => {
     const userId = decryptedUserDetails.user._id;
     const { darkMode, isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
 
-    const handleSelectedPlan = (plan: "free-trial" | "monthly" | "yearly") => {
+    const handleSelectedPlan = (plan: "free" | "monthly" | "yearly") => {
         setIsLoader(true);
         setIsModalOpen(true);
 
@@ -52,8 +52,7 @@ const Plans: React.FC = () => {
                     ? 'bg-[#333333] border-[#FFAB00]/40'
                     : 'bg-white border-gray-100'
                     }`}>
-                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'
-                        }`}>
+                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
                         <CiGift className="text-xl text-[#FFAB00]" />
                         {UIText.billing.free_plan.title}
                     </h3>
@@ -81,7 +80,7 @@ const Plans: React.FC = () => {
                             ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#FFAB00] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}
-                        onClick={() => handleSelectedPlan("free-trial")}
+                        onClick={() => handleSelectedPlan("free")}
                     >
                         {UIText.billing.free_plan.button}
                     </button>
@@ -92,8 +91,7 @@ const Plans: React.FC = () => {
                     ? 'bg-[#333333] border-[#FFAB00]/40'
                     : 'bg-white border-gray-100'
                     }`}>
-                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'
-                        }`}>
+                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
                         <MdOutlineCalendarMonth className="text-xl text-[#FFAB00]" />
                         {UIText.billing.monthly_plan.title}
                     </h3>
@@ -132,8 +130,7 @@ const Plans: React.FC = () => {
                     ? 'bg-[#333333] border-[#FFAB00]/40'
                     : 'bg-white border-gray-100'
                     }`}>
-                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'
-                        }`}>
+                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
                         <GiCalendarHalfYear className="text-xl text-[#FFAB00]" />
                         {UIText.billing.yearly_plan.title}
                     </h3>
