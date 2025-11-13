@@ -3,7 +3,7 @@ import UIText from '../../utilities/testResource';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { useData } from '../../utilities/useData';
 import { userDetails } from '../../utilities/getLocalStorageData';
-import { getRemainingDays } from '../../utilities/getRemainingDays';
+import { getRemainingDays } from '../../utilities/getDays';
 
 const CurrentPlan: React.FC = () => {
     const { darkMode } = useData();
