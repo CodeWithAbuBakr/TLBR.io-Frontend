@@ -140,15 +140,15 @@ const UIText = {
             description: "You’re currently subscribed the",
             free_trial_description: "You’re currently subscribed the Free Trial",
             free_trial: "Free Trial",
-            seven_day: "7-day remaining",
-            month: " / 7-Days"
+            seven_day: "7-days remaining",
+            month: " / 7-days"
         },
         free_plan: {
             title: "Free Trial",
             description: "Enjoy full access to all features free for 7 days — no commitment required.",
             dollar: "$0",
             per_month: " / 7-Day Free Trial",
-            button: "Upgrade to Professional (Monthly)"
+            button: "Start Your 7-days Free Trial"
         },
         monthly_plan: {
             title: "Monthly Plan",

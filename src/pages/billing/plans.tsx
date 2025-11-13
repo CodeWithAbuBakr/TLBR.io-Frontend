@@ -16,7 +16,7 @@ const Plans: React.FC = () => {
     const userId = decryptedUserDetails.user._id;
     const { darkMode, isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
 
-    const handleSelectedPlan = (plan: "free" | "monthly" | "yearly") => {
+    const handleSelectedPlan = (plan: "free-trial" | "monthly" | "yearly") => {
         setIsLoader(true);
         setIsModalOpen(true);
 
@@ -81,9 +81,9 @@ const Plans: React.FC = () => {
                             ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#FFAB00] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}
-                        onClick={() => handleSelectedPlan("free")}
+                        onClick={() => handleSelectedPlan("free-trial")}
                     >
-                        {UIText.billing.yearly_plan.button}
+                        {UIText.billing.free_plan.button}
                     </button>
                 </div>
 
