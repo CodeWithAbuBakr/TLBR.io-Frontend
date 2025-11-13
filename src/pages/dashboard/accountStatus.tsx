@@ -41,7 +41,7 @@ const AccountStatus: React.FC = () => {
                         >
                             <span>{UIText.dashboard.account_status.status}</span>
                             <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>
-                                {decryptedUserDetails?.user.isSubscribed !== null ? 'Active' : 'Inactive'}
+                                {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Inactive'}
                             </span>
                         </p>
                     </div>
@@ -77,7 +77,7 @@ const AccountStatus: React.FC = () => {
                         >
                             <span>{UIText.dashboard.account_status.status}</span>
                             <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>
-                                {decryptedUserDetails?.user.isSubscribed !== null ? 'Active' : 'Inactive'}
+                                {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Inactive'}
                             </span>
                         </p>
                     </div>
