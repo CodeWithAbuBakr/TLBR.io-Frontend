@@ -61,7 +61,7 @@ const CurrentPlan: React.FC = () => {
                                 </span>
                             </h2>
                             <p className={darkMode ? 'text-gray-400 text-sm' : 'text-gray-500 text-sm'}>
-                                {UIText.billing.current_plan.description}
+                                {UIText.billing.current_plan.free_trial_description}
                             </p>
                         </div>
                         <div className="text-right">
