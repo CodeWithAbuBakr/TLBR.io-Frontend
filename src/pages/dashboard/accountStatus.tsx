@@ -40,7 +40,9 @@ const AccountStatus: React.FC = () => {
                             className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}
                         >
                             <span>{UIText.dashboard.account_status.status}</span>
-                            <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>Active</span>
+                            <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>
+                                {decryptedUserDetails?.user.isSubscribed !== null ? 'Active' : 'Inactive'}
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -74,7 +76,9 @@ const AccountStatus: React.FC = () => {
                             className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}
                         >
                             <span>{UIText.dashboard.account_status.status}</span>
-                            <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>Active</span>
+                            <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>
+                                {decryptedUserDetails?.user.isSubscribed !== null ? 'Active' : 'Inactive'}
+                            </span>
                         </p>
                     </div>
                 </div >
