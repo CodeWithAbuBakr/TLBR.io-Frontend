@@ -138,7 +138,8 @@ const UIText = {
         current_plan: {
             title: "Current Plan",
             description: "You’re currently subscribed the",
-            free_trial: "Monthly",
+            free_trial_description: "You’re currently subscribed the Free Trial",
+            free_trial: "Free Trial",
             seven_day: "7-day remaining",
             month: " / 7-Days"
         },

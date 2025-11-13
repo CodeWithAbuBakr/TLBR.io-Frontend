@@ -47,11 +47,10 @@ const CurrentPlan: React.FC = () => {
                     </div>
                 </div>
             ) : (
-                <div
-                    className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 border ${darkMode
-                        ? 'bg-[#333333] border-[#FFAB00]/40'
-                        : 'bg-white border-gray-100'
-                        }`}
+                <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 border ${darkMode
+                    ? 'bg-[#333333] border-[#FFAB00]/40'
+                    : 'bg-white border-gray-100'
+                    }`}
                 >
                     <div className="flex items-center justify-between">
                         <div>
@@ -73,7 +72,7 @@ const CurrentPlan: React.FC = () => {
                                 {UIText.billing.current_plan.seven_day}
                             </div>
                             <div className={darkMode ? 'text-lg font-semibold mt-1 text-[#FFAB00]' : 'text-lg font-semibold mt-1 text-gray-900'}>
-                                $20{UIText.billing.current_plan.month}
+                                $0{UIText.billing.current_plan.month}
                             </div>
                         </div>
                     </div>
