@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
 import { useData } from "../../utilities/useData";
 import UIText from "../../utilities/testResource";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
