@@ -58,7 +58,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, isLoading, handleDelete })
                                             <td className="py-3 px-4 text-center">
                                                 <button
                                                     onClick={() => handleDelete(user._id)}
-                                                    className="inline-flex items-center justify-center cursor-pointer px-3 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
+                                                    className="inline-flex items-center justify-center cursor-pointer px-3 py-2 text-sm text-white bg-red-600 rounded hover:bg-red-700 transition-colors"
                                                     title={`Delete ${user.name}`}
                                                 >
                                                     <MdOutlineDelete size={16} />
