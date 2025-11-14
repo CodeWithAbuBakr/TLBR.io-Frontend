@@ -176,6 +176,10 @@ const UIText = {
                 description: "Your payment could not be processed. Please try again or contact support.",
                 button: "Retry Payment"
             },
+            processing: {
+                title: "Processing...",
+                description: " Please wait while we verify your payment."
+            },
             cancel: {
                 title: "Payment Canceled",
                 description: "You have canceled the payment. You can go back to billing to retry or choose a different plan.",

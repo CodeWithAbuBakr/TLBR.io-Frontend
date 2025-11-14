@@ -43,8 +43,11 @@ const PaymentResult: React.FC = () => {
 
     // Loader
     if (isModalOpen && isLoader) {
-        return <Loader isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />;
-    }
+        return <Loader
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+        />;
+    };
 
     return (
         <>
@@ -68,7 +71,7 @@ const PaymentResult: React.FC = () => {
                                 {UIText.billing.payment.success.button}
                             </button>
                         </>
-                    ) : (
+                    ) : verificationStatus === "error" ? (
                         <>
                             <div className="flex justify-center mb-6">
                                 <AiFillCloseCircle className="w-20 h-20 text-red-500" />
@@ -85,6 +88,18 @@ const PaymentResult: React.FC = () => {
                             >
                                 {UIText.billing.payment.failed.button}
                             </button>
+                        </>
+                    ) : (
+                        <>
+                            <div className="flex justify-center mb-6">
+                                <AiFillCloseCircle className="w-20 h-20 text-gray-400 animate-pulse" />
+                            </div>
+                            <h1 className={`text-2xl font-semibold mb-3 ${darkMode ? "text-gray-100" : "text-gray-600"}`}>
+                                {UIText.billing.payment.processing.title}
+                            </h1>
+                            <p className={`text-base mb-8 leading-relaxed ${darkMode ? "text-gray-300" : "text-gray-500"}`}>
+                                {UIText.billing.payment.processing.description}
+                            </p>
                         </>
                     )}
                 </div>
