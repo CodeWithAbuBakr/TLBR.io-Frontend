@@ -55,3 +55,17 @@ export const userDetails = () => {
 
     return decryptedUserDetails;
 };
+
+export const currentISO = () => {
+    let decryptedCurrentISO;
+    const encryptedCurrentISO = localStorage.getItem("currentISO");
+
+    if (encryptedCurrentISO) {
+        const bytes = CryptoJS.AES.decrypt(encryptedCurrentISO, import.meta.env.VITE_SECRET_KEY);
+        decryptedCurrentISO = bytes.toString(CryptoJS.enc.Utf8);
+    } else {
+        decryptedCurrentISO = null;
+    }
+
+    return decryptedCurrentISO;
+};
