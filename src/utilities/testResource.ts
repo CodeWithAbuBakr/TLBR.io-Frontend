@@ -100,15 +100,16 @@ const UIText = {
         trial_period: {
             title: "Trial Period",
             description: "Days remaining in your free trial",
-            seven: "7",
-            remaining_days: "/ 7 days remaining",
+            not_selected_description: "You currently have no active plan",
+            no_selection_plan: "No active plan",
             trial_expires_dynamic: "Your free trial expires in ",
-            trial_expires: "Your free trial expires in 7 days"
+            not_selected_trial_expires: "No selection plan. Start your free trial today!"
         },
         account_status: {
             title: "Account Status",
             current_plan_status: "Your current plan status",
             plan_type: "Plan Type",
+            not_selected: "Not Selected",
             status: "Status"
         },
         quick_stats: {
@@ -140,10 +141,8 @@ const UIText = {
         current_plan: {
             title: "Current Plan",
             description: "You’re currently subscribed the",
-            free_trial_description: "You’re currently subscribed the Free Trial",
-            free_trial: "Free Trial",
-            seven_day: "7-days remaining",
-            month: " / 7-days"
+            free_trial_description: "You do not have an active plan",
+            free_trial: "No Active Plan"
         },
         free_plan: {
             title: "Free Trial",

@@ -60,7 +60,7 @@ const AccountStatus: React.FC = () => {
                     <div className="space-y-2 my-4">
                         <p className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.plan_type}</span>
-                            <span>Free Trial</span>
+                            <span>{UIText.dashboard.account_status.not_selected}</span>
                         </p>
                         <p className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.status}</span>

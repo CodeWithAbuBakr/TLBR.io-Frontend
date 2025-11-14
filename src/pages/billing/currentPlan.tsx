@@ -69,12 +69,6 @@ const CurrentPlan: React.FC = () => {
                             <div className={darkMode ? 'font-semibold text-[#FFFFFF]' : 'font-semibold text-gray-700'}>
                                 {UIText.billing.current_plan.free_trial}
                             </div>
-                            <div className={darkMode ? 'text-sm text-gray-400' : 'text-sm text-gray-500'}>
-                                {UIText.billing.current_plan.seven_day}
-                            </div>
-                            <div className={darkMode ? 'text-lg font-semibold mt-1 text-[#FFAB00]' : 'text-lg font-semibold mt-1 text-gray-900'}>
-                                $0{UIText.billing.current_plan.month}
-                            </div>
                         </div>
                     </div>
                 </div>

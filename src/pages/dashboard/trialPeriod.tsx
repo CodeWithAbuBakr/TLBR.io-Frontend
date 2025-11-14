@@ -51,21 +51,18 @@ const TrialPeriod: React.FC = () => {
                         </h3>
                     </div>
                     <p className={`text-sm font-light mb-4 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
-                        {UIText.dashboard.trial_period.description}
+                        {UIText.dashboard.trial_period.not_selected_description}
                     </p>
                     <div className="flex items-baseline mb-1">
-                        <span className={`text-4xl ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
-                            {UIText.dashboard.trial_period.seven}
-                        </span>
                         <span className={`text-sm ml-1 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
-                            {UIText.dashboard.trial_period.remaining_days}
+                            {UIText.dashboard.trial_period.no_selection_plan}
                         </span>
                     </div>
                     <div className={`h-1 rounded-sm overflow-hidden ${darkMode ? "bg-[#555555]" : "bg-[#FAFAFA]"}`}>
                         <div className={`w-full h-full ${darkMode ? "bg-[#FFAB00]" : "bg-[#0A0A04]"}`}></div>
                     </div>
                     <p className={`text-xs mt-2.5 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
-                        {UIText.dashboard.trial_period.trial_expires}
+                        {UIText.dashboard.trial_period.not_selected_trial_expires}
                     </p>
                 </div >
             )}
