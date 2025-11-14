@@ -77,7 +77,8 @@ const UIText = {
                 name: "Name",
                 email: "Email",
                 role: "Role",
-                actions: "Actions",
+                plan_type: "Plan Type",
+                actions: "Delete",
                 not_found: "No users found"
             }
         },

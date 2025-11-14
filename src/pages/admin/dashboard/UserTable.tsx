@@ -29,6 +29,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, isLoading, handleDelete })
                                     <th className="py-3 px-4 rounded-tl-xl">{UIText.admin.usersDetails.table.name}</th>
                                     <th className="py-3 px-4">{UIText.admin.usersDetails.table.email}</th>
                                     <th className="py-3 px-4">{UIText.admin.usersDetails.table.role}</th>
+                                    <th className="py-3 px-4">{UIText.admin.usersDetails.table.plan_type}</th>
                                     <th className="py-3 px-4 text-center rounded-tr-xl">{UIText.admin.usersDetails.table.actions}</th>
                                 </tr>
                             </thead>
@@ -51,10 +52,13 @@ const UserTable: React.FC<UserTableProps> = ({ users, isLoading, handleDelete })
                                             <td className={`${darkMode ? "text-[#CCCCCC]" : "text-[#999999]"} py-3 px-4`}>
                                                 {user.role}
                                             </td>
+                                            <td className={`${darkMode ? "text-[#CCCCCC]" : "text-[#999999]"} py-3 px-4`}>
+                                                {user.planType ?? "No Active Plan"}
+                                            </td>
                                             <td className="py-3 px-4 text-center">
                                                 <button
                                                     onClick={() => handleDelete(user._id)}
-                                                    className="inline-flex items-center justify-center cursor-pointer px-3 py-2 text-sm text-white bg-[#FFAB00] rounded-lg hover:bg-[#e59b00] transition-colors"
+                                                    className="inline-flex items-center justify-center cursor-pointer px-3 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
                                                     title={`Delete ${user.name}`}
                                                 >
                                                     <MdOutlineDelete size={16} />

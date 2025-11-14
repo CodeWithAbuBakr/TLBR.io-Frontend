@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useData } from "../../../utilities/useData";
 import type { UserProps } from "../../../utilities/type";
-import ConfirmDeteleUser from "./confirmDeteleUser";
 import UserTable from "./UserTable";
+import ConfirmDeteleUser from "./confirmDeteleUser";
 
 const Dashboard: React.FC = () => {
     const [selectedUserId, setSelectedUserId] = useState<string>("");
@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
     useEffect(() => {
         if (allUsers && allUsers.users && allUsers.users.length > 0) {
             setIsUsersLoading(false);
-        }
+        };
     }, [allUsers, setIsUsersLoading]);
 
     const handleDelete = (userId: string) => {

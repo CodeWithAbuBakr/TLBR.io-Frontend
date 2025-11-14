@@ -42,6 +42,7 @@ export type StoredAllUserDetailsProps = {
         name: string;
         email: string;
         role: string;
+        planType: string;
         createdAt: string;
         updatedAt: string;
     }[];
@@ -239,6 +240,7 @@ export interface UserProps {
     name: string;
     email: string;
     role: string;
+    planType: string;
 }
 
 export interface UserTableProps {
