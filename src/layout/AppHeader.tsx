@@ -84,7 +84,7 @@ const AppHeader: React.FC = () => {
             onClick={toggleApplicationMenu}
             className={`flex items-center justify-center cursor-pointer w-10 h-10 rounded-lg z-10 transition-colors ${darkMode
               ? "text-gray-300 hover:bg-gray-800"
-              : "text-[#666666] hover:bg-gray-100"
+              : "text-[#666666] hover:bg-[#F2F7EF]"
               } lg:hidden`}
           >
             <BsThreeDots className="text-xl" />

@@ -96,7 +96,7 @@ const Auth: React.FC = () => {
                                     ? "bg-[#333333] text-white hover:bg-[#666666]"
                                     : `${darkMode
                                         ? "border border-[#666666] text-[#CCCCCC] hover:text-[#CCCCCC]"
-                                        : "border border-[#666666] text-[#333333] hover:bg-[#f5f5f5]"
+                                        : "border border-[#666666] text-[#333333] hover:bg-[#F2F7EF]"
                                     }`
                                 }`}
                         >
@@ -109,7 +109,7 @@ const Auth: React.FC = () => {
                                     ? "bg-[#333333] text-white hover:bg-[#666666]"
                                     : `${darkMode
                                         ? "border border-[#666666] text-[#CCCCCC] hover:text-[#CCCCCC]"
-                                        : "border border-[#666666] text-[#333333] hover:bg-[#f5f5f5]"
+                                        : "border border-[#666666] text-[#333333] hover:bg-[#F2F7EF]"
                                     }`
                                 }`}
                         >
@@ -154,6 +154,7 @@ const Auth: React.FC = () => {
                 <OTPDialog
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
+                    toastType={toastType}
                     setToastType={setToastType}
                     setToastMessage={setToastMessage}
                     setIsLoader={setIsLoader}

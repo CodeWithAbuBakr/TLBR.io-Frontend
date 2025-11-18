@@ -23,7 +23,7 @@ const UIText = {
             title: "Forgot Password",
             description: "Enter your registered email address to receive a password reset link.",
             cancel: "Cancel",
-            reset_link: "Send Reset Links"
+            reset_link: "Send Reset Link"
         },
         resetPassword: {
             title: "Reset Your Password",

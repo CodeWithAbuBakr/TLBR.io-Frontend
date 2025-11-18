@@ -25,7 +25,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           onChange={(e) => onChange(e.target.checked)}
           className={`w-5 h-5 appearance-none border border-gray-300 rounded-md cursor-pointer 
           focus:outline-none checked:border-transparent 
-          ${checked ? "bg-[#FFAB00] dark:bg-[#FFAB00]" : "bg-transparent"} 
+          ${checked ? "bg-[#94E561] dark:bg-[#94E561]" : "bg-transparent"} 
           dark:border-gray-600
           ${disabled ? "opacity-60 cursor-not-allowed" : ""} 
           ${className}`}

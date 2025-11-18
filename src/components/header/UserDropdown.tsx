@@ -133,7 +133,7 @@ const UserDropdown = () => {
             className={`flex items-center gap-3 px-3 py-2 mt-3 cursor-pointer font-medium rounded-lg group text-theme-sm transition-colors duration-300
               ${darkMode
                 ? "text-gray-300 hover:bg-gray-800 hover:text-gray-100"
-                : "text-[#666666] hover:bg-gray-100 hover:text-gray-700"
+                : "text-[#666666] hover:bg-[#F2F7EF] hover:text-gray-700"
               }`}
           >
             <TbLogout2

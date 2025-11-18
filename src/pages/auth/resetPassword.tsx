@@ -49,7 +49,7 @@ const ResetPassword: React.FC = () => {
         } else if (passed === 2 || passed === 3) {
             setPasswordStrength({
                 message: "Password is acceptable but could be stronger. Include more diverse characters.",
-                color: "text-[#FFAB00]",
+                color: "text-[#94E561]",
             });
         } else if (passed === 4 && value.length >= 8) {
             setPasswordStrength({
@@ -138,7 +138,7 @@ const ResetPassword: React.FC = () => {
                     <div className={`shadow-lg rounded-2xl p-10 max-w-md text-center 
                          ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}>
                         <div className="flex justify-center mb-6">
-                            <GoVerified className="w-20 h-20 text-[#FFAB00]" />
+                            <GoVerified className="w-20 h-20 text-[#94E561]" />
                         </div>
 
                         <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-[#0A0A04]'}`}>
@@ -151,7 +151,7 @@ const ResetPassword: React.FC = () => {
 
                         <button
                             onClick={handleContinueToLogin}
-                            className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                            className="w-full bg-[#94E561] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
                             {UIText.auth.resetPassword.success.button}
                         </button>
@@ -189,7 +189,7 @@ const ResetPassword: React.FC = () => {
 
                     <div className={`shadow-lg rounded-2xl p-10 max-w-md w-full
                         ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}>
-                        <h1 className="text-2xl font-semibold mb-3" style={{ color: '#FFAB00' }}>
+                        <h1 className="text-2xl font-semibold mb-3" style={{ color: '#94E561' }}>
                             {UIText.auth.resetPassword.title}
                         </h1>
 
@@ -220,11 +220,11 @@ const ResetPassword: React.FC = () => {
                                 >
                                     {showPassword ? (
                                         <GoEye
-                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#FFAB00]" : "fill-gray-500 hover:fill-[#FFAB00]"}`}
+                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#94E561]" : "fill-gray-500 hover:fill-[#94E561]"}`}
                                         />
                                     ) : (
                                         <GoEyeClosed
-                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#FFAB00]" : "fill-gray-500 hover:fill-[#FFAB00]"}`}
+                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#94E561]" : "fill-gray-500 hover:fill-[#94E561]"}`}
                                         />
                                     )}
                                 </span>
@@ -256,11 +256,11 @@ const ResetPassword: React.FC = () => {
                                 >
                                     {showConfirmPassword ? (
                                         <GoEye
-                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                                         />
                                     ) : (
                                         <GoEyeClosed
-                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                            className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                                         />
                                     )}
                                 </span>
@@ -270,7 +270,7 @@ const ResetPassword: React.FC = () => {
                         {/* Reset Password Button */}
                         <button
                             onClick={handleResetPassword}
-                            className="w-full bg-[#FFAB00] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                            className="w-full bg-[#94E561] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
                             {UIText.auth.resetPassword.button}
                         </button>

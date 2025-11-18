@@ -11,7 +11,7 @@ const Version: React.FC = () => {
             <div
                 className={`rounded-2xl p-6 border shadow-sm hover:shadow-lg transition-all
                 ${darkMode
-                        ? "bg-[#333333] border-[#FFAB00]"
+                        ? "bg-[#333333] border-[#94E561]"
                         : "bg-white border-gray-100"}`}
             >
                 <h2

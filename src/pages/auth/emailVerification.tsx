@@ -152,11 +152,11 @@ const EmailVerification: React.FC = () => {
                     >
                         {/* Success Icon */}
                         <div className="flex justify-center mb-6">
-                            <AiFillCheckCircle className="w-20 h-20 text-[#FFAB00]" />
+                            <AiFillCheckCircle className="w-20 h-20 text-[#94E561]" />
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-2xl font-semibold text-[#FFAB00] mb-3">
+                        <h1 className="text-2xl font-semibold text-[#94E561] mb-3">
                             {UIText.auth.verifyUser.success.title}
                         </h1>
 
@@ -166,7 +166,7 @@ const EmailVerification: React.FC = () => {
                             ${darkMode ? "text-gray-300" : "text-[#666666]"}`}
                         >
                             {UIText.auth.verifyUser.success.description_1}
-                            <span className="font-semibold text-[#FFAB00]">
+                            <span className="font-semibold text-[#94E561]">
                                 {UIText.auth.verifyUser.success.description_2}
                             </span>
                             {UIText.auth.verifyUser.success.description_3}
@@ -175,7 +175,7 @@ const EmailVerification: React.FC = () => {
                         {/* Continue Button */}
                         <button
                             onClick={handleContinueToSignin}
-                            className="bg-[#FFAB00] hover:bg-[#e09b00] cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
+                            className="bg-[#94E561] hover:bg-[#e09b00] cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
                         >
                             {UIText.auth.verifyUser.success.button}
                         </button>

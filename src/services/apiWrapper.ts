@@ -1,5 +1,4 @@
 import { refreshToken } from "../services/auth/refreshToken";
-import { refreshCSRFToken } from "./auth/refreshCSRFToken";
 import { userDetails } from "../services/userDetails";
 import { allUserDetails } from "../services/admin/users/getUsers";
 import { createCheckout } from "./billing/createCheckout";
@@ -47,9 +46,6 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
 };
 
 // API wrappers
-export const getRefreshedCSRFToken = (): Promise<ResponseProps> =>
-    wrapWithTokenRefresh(() => wrapWithPromise<ResponseProps>(refreshCSRFToken));
-
 export const getUserDetails = (): Promise<StoredUserDetailsProps> =>
     wrapWithTokenRefresh(() => wrapWithPromise<StoredUserDetailsProps>(userDetails));
 

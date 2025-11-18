@@ -73,7 +73,7 @@ const AppSidebar: React.FC = () => {
           </div>
         </div>
 
-        <nav className="mt-8">
+        <nav className="mt-10">
           <ul className="flex flex-col gap-4">
             {navItems.map((nav, index) => (
               <li key={nav.name}>
@@ -102,8 +102,8 @@ const AppSidebar: React.FC = () => {
                           ? "bg-gray-700 text-gray-200 hover:text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white"
                         : isActive(nav.path)
-                          ? "bg-amber-100 text-gray-900"
-                          : "text-[#333333] hover:bg-gray-100"
+                          ? "bg-[#C9F5A6] text-gray-900"
+                          : "text-[#333333] hover:bg-[#F2F7EF]"
                       }`}
                   >
                     {nav.icon}

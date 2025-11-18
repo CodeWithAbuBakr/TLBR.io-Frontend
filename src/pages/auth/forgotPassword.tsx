@@ -132,8 +132,8 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
                             onClick={handleSendLink}
                             className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
                                 ${darkMode
-                                    ? "bg-[#FFAB00] text-black hover:bg-[#ffbc37]"
-                                    : "bg-[#FFAB00] text-white hover:bg-[#ffbc37]"
+                                    ? "bg-[#94E561] text-black hover:bg-[#63cb23]"
+                                    : "bg-[#94E561] text-white hover:bg-[#63cb23]"
                                 }`}
                         >
                             {UIText.auth.forgotPassword.reset_link}

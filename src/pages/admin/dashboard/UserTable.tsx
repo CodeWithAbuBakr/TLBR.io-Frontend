@@ -9,15 +9,15 @@ const UserTable: React.FC<UserTableProps> = ({ users, isLoading, handleDelete })
 
     return (
         <>
-            <div className={`rounded-2xl shadow-sm p-6 transition-colors duration-300 ${darkMode ? "bg-[#1E1E1E] border border-[#666666]" : "bg-white border border-[#CCCCCC]"}`}>
-                <h2 className={`text-xl font-semibold mb-6 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
+            <div className={`rounded-2xl shadow-sm p-6 transition-colors duration-300 ${darkMode ? "bg-[#1E1E1E] border border-[#666666]" : "bg-[#FAFAFA] border border-[#CCCCCC]"}`}>
+                <h2 className={`text-xl font-semibold mb-6 ${darkMode ? "text-[#FAFAFA]" : "text-[#94E561]"}`}>
                     {UIText.admin.usersDetails.title}
                 </h2>
 
                 <div className="overflow-x-auto">
                     {isLoading ? (
                         <div className="flex flex-col items-center justify-center py-12 text-center">
-                            <div className="w-8 h-8 border-4 border-[#FFAB00] border-t-transparent rounded-full animate-spin mb-4"></div>
+                            <div className="w-8 h-8 border-4 border-[#94E561] border-t-transparent rounded-full animate-spin mb-4"></div>
                             <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"} text-sm`}>
                                 {UIText.admin.usersDetails.loading}
                             </p>
@@ -40,7 +40,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, isLoading, handleDelete })
                                             key={user._id}
                                             className={`border-b last:border-0 transition-colors duration-200 ${darkMode
                                                 ? "border-gray-700 hover:bg-[#333333]"
-                                                : "border-gray-100 hover:bg-gray-50"
+                                                : "border-gray-100 hover:bg-[#FAFAFA]"
                                                 }`}
                                         >
                                             <td className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} py-3 px-4`}>

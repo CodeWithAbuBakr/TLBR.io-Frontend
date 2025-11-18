@@ -62,9 +62,9 @@ const PaymentResult: React.FC = () => {
                     {verificationStatus === "success" ? (
                         <>
                             <div className="flex justify-center mb-6">
-                                <AiFillCheckCircle className="w-20 h-20 text-[#FFAB00]" />
+                                <AiFillCheckCircle className="w-20 h-20 text-[#94E561]" />
                             </div>
-                            <h1 className="text-2xl font-semibold text-[#FFAB00] mb-3">
+                            <h1 className="text-2xl font-semibold text-[#94E561] mb-3">
                                 {UIText.billing.payment.success.title}
                             </h1>
                             <p className={`text-base mb-8 leading-relaxed ${darkMode ? "text-gray-300" : "text-[#666666]"}`}>
@@ -72,7 +72,7 @@ const PaymentResult: React.FC = () => {
                             </p>
                             <button
                                 onClick={() => navigate("/dashboard")}
-                                className="bg-[#FFAB00] hover:bg-[#e09b00] cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
+                                className="bg-[#94E561] hover:bg-[#e09b00] cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
                             >
                                 {UIText.billing.payment.success.button}
                             </button>

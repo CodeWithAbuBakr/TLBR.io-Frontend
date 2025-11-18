@@ -31,8 +31,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <>
-            <div className={`flex-1 box-border min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#1E1E1E] text-white" : "bg-white text-black"}`}>
-
+            <div className={`flex-1 box-border min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#1E1E1E] text-white" : "bg-[#FAFAFA] border-[#94E561] text-black"}`}>
                 {/* Stats Section */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
                     {[
@@ -42,8 +41,8 @@ const Dashboard: React.FC = () => {
                     ].map((stat, index) => (
                         <div
                             key={index}
-                            className="bg-[#FFAB00] text-white p-6 rounded-2xl shadow-md"
-                        >
+                            className={`rounded-xl p-5 hover:shadow-lg transition-all border
+                                ${darkMode ? "bg-[#333333] border-[#94E561]" : "bg-[#FAFAFA] border-[#94E561]"}`}>
                             <h3 className="text-lg font-medium mb-2">{stat.label}</h3>
                             <p className="text-3xl font-bold">{stat.value}</p>
                         </div>

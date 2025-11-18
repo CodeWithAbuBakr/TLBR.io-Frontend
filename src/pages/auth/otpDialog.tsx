@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import { useData } from "../../utilities/useData";
@@ -9,12 +9,12 @@ import { GoVerified } from "react-icons/go";
 import { verifyOTP } from "../../services/auth/signin/verifyOTP";
 import { loginUser } from "../../services/auth/signin/loginUser";
 import UIText from "../../utilities/testResource";
-import { refreshCSRFToken } from "../../services/auth/refreshCSRFToken";
 import { userSession } from "../../utilities/getLocalStorageData";
 
 const OTPDialog: React.FC<DialogProps> = ({
     isModalOpen,
     setIsModalOpen,
+    toastType,
     setToastType,
     setToastMessage,
     setIsLoader,
@@ -23,8 +23,11 @@ const OTPDialog: React.FC<DialogProps> = ({
     const navigate = useNavigate();
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const { darkMode, showSuccessScreen, setShowSuccessScreen } = useData();
+    const [resendOTPVisible, setResendOTPVisible] = useState(false);
+    const [tooltipVisible, setTooltipVisible] = useState(false);
     const [resendTimer, setResendTimer] = useState(0);
     const [isResending, setIsResending] = useState(false);
+
     const decryptedUserSession = userSession();
 
     let email: string;
@@ -39,7 +42,7 @@ const OTPDialog: React.FC<DialogProps> = ({
     const handleCancel = () => {
         setIsModalOpen(false);
         localStorage.removeItem("userSession");
-    }
+    };
 
     const handleVerify = () => {
         const otp = inputsRef.current.map((input) => input?.value || "").join("");
@@ -50,11 +53,9 @@ const OTPDialog: React.FC<DialogProps> = ({
             return;
         }
 
-        // start loading
         setIsLoader(true);
         setOpenOTPModel(false);
 
-        // Call the API to verify the otp
         verifyOTP(email, otp, (error, data) => {
             if (error) {
                 console.log("Verify OTP error:", error);
@@ -74,18 +75,9 @@ const OTPDialog: React.FC<DialogProps> = ({
                 setToastType("success");
                 setToastMessage("Your account has been verified successfully.");
 
-                refreshCSRFToken((refreshCSRFError, data) => {
-                    if (refreshCSRFError) {
-                        console.log(refreshCSRFError);
-                    } else {
-                        console.log(data);
-                    }
-                });
-
-                // Redirect after short delay
                 setTimeout(() => {
                     setToastType(null);
-                    setToastMessage('');
+                    setToastMessage("");
                     setIsModalOpen(false);
                     setShowSuccessScreen(false);
 
@@ -94,6 +86,14 @@ const OTPDialog: React.FC<DialogProps> = ({
             }
         });
     };
+
+    // Show resend section and start countdown
+    useEffect(() => {
+        if (toastType === "error") {
+            setResendTimer(60);
+            setResendOTPVisible(true);
+        };
+    }, [toastType]);
 
     const handleInput = (e: React.FormEvent<HTMLInputElement>, index: number) => {
         const input = e.currentTarget;
@@ -122,8 +122,6 @@ const OTPDialog: React.FC<DialogProps> = ({
     const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
         e.preventDefault();
         const pastedData = e.clipboardData.getData("text").trim();
-
-        // Only take up to the number of inputs available
         const chars = pastedData.slice(0, inputsRef.current.length).split("");
 
         let hasInvalidChar = false;
@@ -133,11 +131,8 @@ const OTPDialog: React.FC<DialogProps> = ({
                 hasInvalidChar = true;
                 return;
             }
-
             const input = inputsRef.current[i];
-            if (input) {
-                input.value = char;
-            }
+            if (input) input.value = char;
         });
 
         if (hasInvalidChar) {
@@ -146,19 +141,27 @@ const OTPDialog: React.FC<DialogProps> = ({
             return;
         }
 
-        // Focus the next empty input
         const nextEmpty = chars.length < inputsRef.current.length ? chars.length : inputsRef.current.length - 1;
         inputsRef.current[nextEmpty]?.focus();
     };
 
-    // Handle resend OTP logic
+    // Countdown for resend OTP
+    useEffect(() => {
+        let timer: number;
+        if (resendTimer > 0) {
+            timer = setInterval(() => {
+                setResendTimer((prev) => prev - 1);
+            }, 1000);
+        }
+        return () => clearInterval(timer);
+    }, [resendTimer]);
+
     const handleResendOTP = async () => {
         if (resendTimer > 0 || isResending) return;
 
         try {
             setIsResending(true);
 
-            // Call the API to authenticate the user
             loginUser(email, password, isChecked, (error, data) => {
                 if (error) {
                     console.log("Resend OTP error:", error);
@@ -209,44 +212,63 @@ const OTPDialog: React.FC<DialogProps> = ({
                                         key={index}
                                         type="text"
                                         maxLength={1}
-                                        ref={(el) => {
-                                            inputsRef.current[index] = el;
-                                        }}
+                                        ref={(el: HTMLInputElement | null) => { inputsRef.current[index] = el; }}
                                         onInput={(e) => handleInput(e, index)}
                                         onKeyDown={(e) => handleKeyDown(e, index)}
                                         onPaste={index === 0 ? handlePaste : undefined}
                                         className={`w-12 h-12 text-center text-lg font-semibold border rounded-xl outline-none transition-all
-                                        focus:border-[#FFAB00] focus:ring-2 focus:ring-orange-200 dark:focus:ring-[#FFAB00]
-                                            ${darkMode
-                                                ? "bg-[#2A2A2A] text-gray-100 border-gray-700 focus:border-[#FFAB00]"
-                                                : "bg-white text-gray-800 border-gray-300"}`}
+                                            focus:border-[#94E561] focus:ring-2 focus:ring-[#94E561] dark:focus:ring-[#94E561]
+                                            ${darkMode ? "bg-[#2A2A2A] text-gray-100 border-gray-700 focus:border-[#94E561]" : "bg-white text-gray-800 border-gray-300"}`}
                                     />
                                 ))}
                             </div>
 
                             {/* Resend OTP Section */}
-                            <div className="mb-8 ml-3">
-                                <p
-                                    className={`text-sm transition-colors duration-300 ${darkMode ? "text-gray-400" : "text-gray-500"
-                                        }`}
-                                >
-                                    {UIText.auth.verifyOTP.code_not_recieved}
-                                    <button
-                                        onClick={handleResendOTP}
-                                        disabled={resendTimer > 0 || isResending}
-                                        className={`font-medium ml-1 transition-colors cursor-pointer ${resendTimer > 0 || isResending
-                                            ? darkMode
-                                                ? "text-gray-500 cursor-not-allowed"
-                                                : "text-gray-400 cursor-not-allowed"
-                                            : darkMode
-                                                ? "text-yellow-400 hover:underline"
-                                                : "text-[#FFAB00] hover:underline"
-                                            }`}
-                                    >
-                                        {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend OTP"}
-                                    </button>
-                                </p>
-                            </div>
+                            {resendOTPVisible !== false && (
+                                <div className="mb-8 ml-3">
+                                    <p className={`text-sm transition-colors duration-300 ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
+                                        {UIText.auth.verifyOTP.code_not_recieved}{" "}
+
+                                        <span className="relative inline-block">
+                                            <button
+                                                onClick={handleResendOTP}
+                                                disabled={resendTimer > 0 || isResending}
+                                                onMouseEnter={() => setTooltipVisible(true)}
+                                                onMouseLeave={() => setTooltipVisible(false)}
+                                                onFocus={() => setTooltipVisible(true)}
+                                                onBlur={() => setTooltipVisible(false)}
+                                                className={`font-medium ml-1 transition-colors cursor-pointer ${resendTimer > 0 || isResending
+                                                    ? darkMode
+                                                        ? "text-gray-500 cursor-not-allowed"
+                                                        : "text-gray-400 cursor-not-allowed"
+                                                    : darkMode
+                                                        ? "text-[#94E561] hover:underline"
+                                                        : "text-[#94E561] hover:underline"
+                                                    }`}
+                                            >
+                                                {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend OTP"}
+                                            </button>
+
+                                            {/* Tooltip */}
+                                            {tooltipVisible && (
+                                                <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 text-xs font-medium text-white bg-[#94E561] rounded-md whitespace-nowrap z-10">
+                                                    {resendTimer > 0
+                                                        ? `Resend available in ${resendTimer}s`
+                                                        : "Click to send a new OTP code"}
+                                                    <svg
+                                                        className="absolute top-full left-1/2 -translate-x-1/2 text-[#94E561]"
+                                                        width="12"
+                                                        height="6"
+                                                        viewBox="0 0 12 6"
+                                                    >
+                                                        <path d="M0 0L6 6L12 0" fill="currentColor" />
+                                                    </svg>
+                                                </div>
+                                            )}
+                                        </span>
+                                    </p>
+                                </div>
+                            )}
 
                             {/* Buttons */}
                             <div className="flex justify-end gap-3">
@@ -255,7 +277,7 @@ const OTPDialog: React.FC<DialogProps> = ({
                                     className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
                                         border ${darkMode
                                             ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
-                                            : "border-gray-300 text-gray-700 hover:bg-gray-700 hover:text-white"}`}
+                                            : "border-gray-300 text-gray-700 hover:bg-[#333333] hover:text-white"}`}
                                 >
                                     {UIText.auth.verifyOTP.cancel}
                                 </button>
@@ -263,8 +285,8 @@ const OTPDialog: React.FC<DialogProps> = ({
                                     onClick={handleVerify}
                                     className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
                                         ${darkMode
-                                            ? "bg-[#FFAB00] text-black hover:bg-[#ffbc37]"
-                                            : "bg-[#FFAB00] text-white hover:bg-[#ffbc37]"}`}
+                                            ? "bg-[#94E561] text-black hover:bg-[#63cb23]"
+                                            : "bg-[#94E561] text-white hover:bg-[#63cb23]"}`}
                                 >
                                     {UIText.auth.verifyOTP.verify_account}
                                 </button>
@@ -272,11 +294,11 @@ const OTPDialog: React.FC<DialogProps> = ({
                         </>
                     ) : (
                         <div className="flex flex-col items-center justify-center py-8 animate-fadeIn">
-                            <GoVerified className="text-5xl mb-8 text-[#FFAB00] animate-popIn animate-glow" />
-                            <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-[#0A0A04]'}`}>
+                            <GoVerified className="text-5xl mb-8 text-[#94E561] animate-popIn animate-glow" />
+                            <h3 className={`text-lg font-semibold ${darkMode ? "text-gray-100" : "text-[#0A0A04]"}`}>
                                 {UIText.auth.verifyOTP.success.title}
                             </h3>
-                            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-[#666666]'}`}>
+                            <p className={`text-sm mt-2 ${darkMode ? "text-gray-400" : "text-[#666666]"}`}>
                                 {UIText.auth.verifyOTP.success.description}
                             </p>
                         </div>

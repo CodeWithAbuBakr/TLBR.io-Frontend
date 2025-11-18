@@ -8,10 +8,8 @@ const PaymentHistory: React.FC = () => {
 
     return (
         <>
-            <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode ? 'bg-[#333333] border-gray-700' : 'bg-white border-gray-100'
-                }`}>
-                <h2 className={`text-lg font-semibold mb-2 ${darkMode ? 'text-[#CCCCCC]' : 'text-[#0A0A04]'
-                    }`}>
+            <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode ? 'bg-[#333333] border-gray-700' : 'bg-white border-gray-100'}`}>
+                <h2 className={`text-lg font-semibold mb-2 ${darkMode ? 'text-[#CCCCCC]' : 'text-[#0A0A04]'}`}>
                     {UIText.billing.payment_history.title}
                 </h2>
                 <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -51,7 +49,7 @@ const PaymentHistory: React.FC = () => {
                                         <td>
                                             <span
                                                 className={`font-medium ${payment.status === "Paid"
-                                                    ? "text-green-600"
+                                                    ? "text-[#94E561]"
                                                     : payment.status === "Pending"
                                                         ? "text-yellow-500"
                                                         : "text-red-500"
@@ -63,7 +61,7 @@ const PaymentHistory: React.FC = () => {
                                         <td>
                                             <a
                                                 href="#"
-                                                className="text-[#FFAB00] hover:underline font-medium"
+                                                className="text-[#94E561] hover:underline font-medium"
                                             >
                                                 {payment.invoice}
                                             </a>

@@ -12,17 +12,15 @@ const AccountStatus: React.FC = () => {
         <>
             {decryptedUserDetails?.user?.planType !== null ? (
                 <div className={`rounded-xl p-5 hover:shadow-lg transition-all border
-                    ${darkMode ? "bg-[#333333] border-[#FFAB00]" : "bg-[#FFAB00] border-transparent"}`}
+                    ${darkMode ? "bg-[#333333] border-[#94E561]" : "bg-[#FAFAFA] border-[#94E561]"}`}
                 >
                     <div className="flex items-center mb-2">
-                        <MdOutlineAccountBalance className={`text-xl mr-2 ${darkMode ? "text-[#FFAB00]" : "text-[#333333]"}`} />
+                        <MdOutlineAccountBalance className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`} />
                         <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                             {UIText.dashboard.account_status.title}
                         </h3>
                     </div>
-                    <p
-                        className={`text-sm font-light mb-2 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}
-                    >
+                    <p className={`text-sm font-light mb-2 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                         {UIText.dashboard.account_status.current_plan_status}
                     </p>
                     <div className="space-y-2 my-4">
@@ -36,7 +34,7 @@ const AccountStatus: React.FC = () => {
                             className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}
                         >
                             <span>{UIText.dashboard.account_status.status}</span>
-                            <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>
+                            <span className="text-[#94E561]">
                                 {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Inactive'}
                             </span>
                         </p>
@@ -44,11 +42,11 @@ const AccountStatus: React.FC = () => {
                 </div>
             ) : (
                 <div className={`rounded-xl p-5 hover:shadow-lg transition-all border
-                    ${darkMode ? "bg-[#333333] border-[#FFAB00]" : "bg-[#FFAB00] border-transparent"}`}
+                    ${darkMode ? "bg-[#333333] border-[#94E561]" : "bg-[#94E561] border-transparent"}`}
                 >
                     <div className="flex items-center mb-2">
                         <MdOutlineAccountBalance
-                            className={`text-xl mr-2 ${darkMode ? "text-[#FFAB00]" : "text-[#333333]"}`}
+                            className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`}
                         />
                         <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                             {UIText.dashboard.account_status.title}
@@ -64,7 +62,7 @@ const AccountStatus: React.FC = () => {
                         </p>
                         <p className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.status}</span>
-                            <span className={`${darkMode ? "text-[#FFAB00]" : "text-white"}`}>
+                            <span className="text-[#94E561]">
                                 {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Inactive'}
                             </span>
                         </p>

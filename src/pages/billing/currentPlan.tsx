@@ -13,13 +13,13 @@ const CurrentPlan: React.FC = () => {
         <>
             {decryptedUserDetails?.user?.planType !== null ? (
                 <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 border ${darkMode
-                    ? 'bg-[#333333] border-[#FFAB00]/40'
+                    ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'}`}
                 >
                     <div className="flex items-center justify-between">
                         <div>
                             <h2 className="text-lg font-semibold flex items-center gap-2" >
-                                <CiCreditCard1 className="text-xl text-[#FFAB00]" />
+                                <CiCreditCard1 className="text-xl text-[#94E561]" />
                                 <span className={darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}>
                                     {UIText.billing.current_plan.title}
                                 </span>
@@ -39,7 +39,7 @@ const CurrentPlan: React.FC = () => {
                                 {getRemainingDays(decryptedUserDetails?.user?.subscriptionCurrentPeriodEnd)}
                             </div>
 
-                            <div className={darkMode ? 'text-lg font-semibold mt-1 text-[#FFAB00]' : 'text-lg font-semibold mt-1 text-gray-900'}>
+                            <div className={darkMode ? 'text-lg font-semibold mt-1 text-[#94E561]' : 'text-lg font-semibold mt-1 text-gray-900'}>
                                 {decryptedUserDetails?.user?.planType === 'free'
                                     ? '$0 / Free'
                                     : `$${decryptedUserDetails?.user?.planType === 'yearly' ? 200 : 20} / ${decryptedUserDetails?.user?.planType === 'yearly' ? 'Yearly' : 'Monthly'}`}
@@ -49,14 +49,14 @@ const CurrentPlan: React.FC = () => {
                 </div>
             ) : (
                 <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 border ${darkMode
-                    ? 'bg-[#333333] border-[#FFAB00]/40'
+                    ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'
                     }`}
                 >
                     <div className="flex items-center justify-between">
                         <div>
                             <h2 className="text-lg font-semibold flex items-center gap-2" >
-                                <CiCreditCard1 className="text-xl text-[#FFAB00]" />
+                                <CiCreditCard1 className="text-xl text-[#94E561]" />
                                 <span className={darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}>
                                     {UIText.billing.current_plan.title}
                                 </span>

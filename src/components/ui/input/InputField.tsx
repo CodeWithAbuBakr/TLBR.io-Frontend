@@ -42,9 +42,9 @@ const Input: FC<InputProps> = ({
     // Default state
     inputClasses += darkMode
       ? ` bg-gray-900 text-white border-gray-700 
-          focus:border-[#FFAB00] focus:ring-[#FFAB00]/20`
+          focus:border-[#94E561] focus:ring-[#94E561]/20`
       : ` bg-transparent text-gray-800 border-gray-300 
-          focus:border-[#FFAB00] focus:ring-[#FFAB00]/20`;
+          focus:border-[#94E561] focus:ring-[#94E561]/20`;
   }
 
   return (

@@ -14,7 +14,7 @@
     width: 20px;
     margin-right: 10px;
     border-radius: 10px;
-    background-color: #FFAB00;
+    background-color: #94E561;
     animation: pulse 1.5s infinite ease-in-out;
 }
 
@@ -43,7 +43,7 @@
 
     50% {
         transform: scale(1.2);
-        background-color: #FFAB00;
+        background-color: #94E561;
         box-shadow: 0 0 0 10px rgba(255, 210, 76, 0);
     }
 

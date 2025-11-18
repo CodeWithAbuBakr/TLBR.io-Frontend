@@ -49,17 +49,17 @@ const Plans: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 {/* Free Trial */}
                 <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode
-                    ? 'bg-[#333333] border-[#FFAB00]/40'
+                    ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'
                     }`}>
                     <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
-                        <CiGift className="text-xl text-[#FFAB00]" />
+                        <CiGift className="text-xl text-[#94E561]" />
                         {UIText.billing.free_plan.title}
                     </h3>
                     <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {UIText.billing.free_plan.description}
                     </p>
-                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#FFAB00]' : 'text-gray-900'}`}>
+                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
                         {UIText.billing.free_plan.dollar}
                         <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
                             {UIText.billing.free_plan.per_month}
@@ -77,7 +77,7 @@ const Plans: React.FC = () => {
 
                     <button
                         className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-semibold rounded-full px-7 transition-colors ${darkMode
-                            ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#FFAB00] hover:text-black'
+                            ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#94E561] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}
                         onClick={() => handleSelectedPlan("free")}
@@ -88,17 +88,17 @@ const Plans: React.FC = () => {
 
                 {/* Monthly Plan */}
                 <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode
-                    ? 'bg-[#333333] border-[#FFAB00]/40'
+                    ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'
                     }`}>
                     <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
-                        <MdOutlineCalendarMonth className="text-xl text-[#FFAB00]" />
+                        <MdOutlineCalendarMonth className="text-xl text-[#94E561]" />
                         {UIText.billing.monthly_plan.title}
                     </h3>
                     <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {UIText.billing.monthly_plan.description}
                     </p>
-                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#FFAB00]' : 'text-gray-900'}`}>
+                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
                         {UIText.billing.monthly_plan.dollar}
                         <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
                             {UIText.billing.monthly_plan.per_month}
@@ -116,8 +116,8 @@ const Plans: React.FC = () => {
 
                     <button
                         className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-semibold rounded-full px-7 transition-colors ${darkMode
-                            ? 'bg-[#FFAB00] text-white hover:bg-[#ffbc37]/90'
-                            : 'bg-[#FFAB00] text-white hover:bg-[#ffbc37]'
+                            ? 'bg-[#94E561] text-white hover:bg-[#63cb23]/90'
+                            : 'bg-[#94E561] text-white hover:bg-[#63cb23]'
                             }`}
                         onClick={() => handleSelectedPlan("monthly")}
                     >
@@ -127,17 +127,17 @@ const Plans: React.FC = () => {
 
                 {/* Yearly Plan */}
                 <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode
-                    ? 'bg-[#333333] border-[#FFAB00]/40'
+                    ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'
                     }`}>
                     <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
-                        <GiCalendarHalfYear className="text-xl text-[#FFAB00]" />
+                        <GiCalendarHalfYear className="text-xl text-[#94E561]" />
                         {UIText.billing.yearly_plan.title}
                     </h3>
                     <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {UIText.billing.yearly_plan.description}
                     </p>
-                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#FFAB00]' : 'text-gray-900'}`}>
+                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
                         {UIText.billing.yearly_plan.dollar}
                         <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
                             {UIText.billing.yearly_plan.per_year}
@@ -155,7 +155,7 @@ const Plans: React.FC = () => {
 
                     <button
                         className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-semibold rounded-full px-7 transition-colors ${darkMode
-                            ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#FFAB00] hover:text-black'
+                            ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#94E561] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}
                         onClick={() => handleSelectedPlan("yearly")}

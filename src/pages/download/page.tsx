@@ -20,8 +20,8 @@ const Download: React.FC = () => {
                     <div
                         className={`rounded-2xl p-8 border border-transparent shadow-sm hover:shadow-lg transition-all
                         ${darkMode
-                                ? "bg-[#333333] dark:border-[#FFAB00]"
-                                : "bg-[#FFAB00]"}`
+                                ? "bg-[#333333] dark:border-[#94E561]"
+                                : "bg-[#94E561]"}`
                         }
                     >
                         <h1
@@ -30,7 +30,7 @@ const Download: React.FC = () => {
                             }
                         >
                             <MdOutlineFileDownload
-                                className={`text-3xl ${darkMode ? "text-[#FFAB00]" : ""}`}
+                                className={`text-3xl ${darkMode ? "text-[#94E561]" : ""}`}
                             />
                             {UIText.download.title}
                         </h1>

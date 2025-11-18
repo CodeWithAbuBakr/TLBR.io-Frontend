@@ -19,7 +19,7 @@ export const ThemeToggleButton: React.FC = () => {
       className={`flex items-center justify-center cursor-pointer h-11 w-11 rounded-full border transition-colors duration-300
       ${darkMode
           ? "bg-[#1E1E1E] border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
-          : "bg-white border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900"}`}
+          : "bg-white border-gray-200 text-gray-600 hover:bg-[#F2F7EF] hover:text-gray-900"}`}
       aria-label="Toggle Theme"
     >
       {darkMode ? <MdOutlineLightMode className="text-xl" /> : <MdOutlineDarkMode className="text-xl" />}

@@ -44,7 +44,7 @@ const ProfileInformation: React.FC = () => {
         } else if (passed === 2 || passed === 3) {
             setPasswordStrength({
                 message: "Password is acceptable but could be more stronger. Include more diverse characters.",
-                color: "text-[#FFAB00]",
+                color: "text-[#94E561]",
             });
         } else if (passed === 4 && value.length >= 8) {
             setPasswordStrength({
@@ -83,7 +83,7 @@ const ProfileInformation: React.FC = () => {
 
             <div
                 className={`border rounded-2xl shadow-sm p-6
-                ${darkMode ? "border-[#FFAB00] dark:bg-[#333333]" : "bg-white border-gray-100"}`}
+                ${darkMode ? "border-[#94E561] dark:bg-[#333333]" : "bg-white border-gray-100"}`}
             >
                 <h2
                     className={`text-lg font-semibold flex items-center gap-2 mb-4 
@@ -148,11 +148,11 @@ const ProfileInformation: React.FC = () => {
                             >
                                 {showPassword ? (
                                     <GoEye
-                                        className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                        className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                                     />
                                 ) : (
                                     <GoEyeClosed
-                                        className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                                        className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                                     />
                                 )}
                             </span>
@@ -165,10 +165,10 @@ const ProfileInformation: React.FC = () => {
                                         ? darkMode
                                             ? "text-red-500"
                                             : "text-red-600"
-                                        : passwordStrength.color === "text-[#FFAB00]"
+                                        : passwordStrength.color === "text-[#94E561]"
                                             ? darkMode
                                                 ? "text-[#FFD166]"
-                                                : "text-[#FFAB00]"
+                                                : "text-[#94E561]"
                                             : passwordStrength.color === "text-success-500"
                                                 ? darkMode
                                                     ? "text-green-500"
@@ -187,7 +187,7 @@ const ProfileInformation: React.FC = () => {
                     onClick={handleSaveChanges}
                     className={`mt-4 inline-flex items-center gap-2 cursor-pointer font-semibold px-5 py-2 rounded-full transition-colors
                             ${isSaveEnabled
-                            ? "bg-[#FFAB00] hover:bg-[#ffbc37] text-white"
+                            ? "bg-[#94E561] hover:bg-[#63cb23] text-white"
                             : "bg-[#CCCCCC] cursor-not-allowed text-white"
                         }`}
                 >

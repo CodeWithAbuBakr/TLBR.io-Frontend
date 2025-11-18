@@ -36,7 +36,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
     } else if (passed === 2 || passed === 3) {
       setPasswordStrength({
         message: "Password is acceptable but could be more stronger. Include more diverse characters.",
-        color: "text-[#FFAB00]",
+        color: "text-[#94E561]",
       });
     } else if (passed === 4 && value.length >= 8) {
       setPasswordStrength({
@@ -190,11 +190,11 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
             >
               {showPassword ? (
                 <GoEye
-                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                 />
               ) : (
                 <GoEyeClosed
-                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                 />
               )}
             </span>
@@ -226,11 +226,11 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
             >
               {showConfirmPassword ? (
                 <GoEye
-                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                 />
               ) : (
                 <GoEyeClosed
-                  className={`${darkMode ? "fill-gray-300 hover:fill-[#ffbc37]" : "fill-gray-500 hover:fill-[#ffbc37]"}`}
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
                 />
               )}
             </span>
@@ -243,14 +243,14 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
                   ? darkMode
                     ? "text-red-500"
                     : "text-red-600"
-                  : passwordStrength.color === "text-[#FFAB00]"
+                  : passwordStrength.color === "text-[#94E561]"
                     ? darkMode
                       ? "text-[#FFD166]"
-                      : "text-[#FFAB00]"
+                      : "text-[#FFD166]"
                     : passwordStrength.color === "text-success-500"
                       ? darkMode
-                        ? "text-green-500"
-                        : "text-green-600"
+                        ? "text-[#94E561]"
+                        : "text-[#94E561]"
                       : ""
                 }`}
             >
@@ -263,8 +263,8 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           type="submit"
           className={`inline-flex items-center justify-center gap-3 py-3 mb-4 w-full text-sm font-normal rounded-full px-7 cursor-pointer transition-colors
             ${darkMode
-              ? "bg-[#FFAB00] text-white hover:bg-[#ffbc37]"
-              : "bg-[#FFAB00] text-white hover:bg-[#ffbc37]"
+              ? "bg-[#94E561] text-white hover:bg-[#63cb23]"
+              : "bg-[#94E561] text-white hover:bg-[#63cb23]"
             }`}
         >
           {UIText.auth.signUp.button}

@@ -159,6 +159,7 @@ export type SidebarContextType = {
 export interface DialogProps {
     isModalOpen: boolean;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    toastType?: "error" | "success" | "info" | null;
     setToastType: React.Dispatch<React.SetStateAction<"error" | "success" | "info" | null>>;
     setToastMessage: React.Dispatch<React.SetStateAction<string>>;
     setIsLoader: React.Dispatch<React.SetStateAction<boolean>>;

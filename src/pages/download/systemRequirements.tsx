@@ -11,7 +11,7 @@ const SystemRequirements: React.FC = () => {
             <div
                 className={`rounded-2xl p-6 shadow-sm border transition-all hover:shadow-lg
                     ${darkMode
-                        ? "bg-[#333333] border-[#FFAB00]"
+                        ? "bg-[#333333] border-[#94E561]"
                         : "bg-white border-gray-100"}`}
             >
                 <h2 className={`text-xl font-semibold mb-4 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
@@ -20,7 +20,7 @@ const SystemRequirements: React.FC = () => {
                 <ul className={`space-y-2 text-sm ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                     {systemRequirements.map((req, index) => (
                         <li key={index} className="flex items-start">
-                            <span className="text-[#FFAB00] mr-2">•</span> {req}
+                            <span className="text-[#94E561] mr-2">•</span> {req}
                         </li>
                     ))}
                 </ul>
