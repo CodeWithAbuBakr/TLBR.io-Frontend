@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
                         <div
                             key={index}
                             className={`rounded-xl p-5 hover:shadow-lg transition-all border
-                                ${darkMode ? "bg-[#333333] border-[#94E561]" : "bg-[#FAFAFA] border-[#94E561]"}`}>
+                                ${darkMode ? "bg-[#333333] border-[#94E561]" : "bg-[#FAFAFA]"}`}>
                             <h3 className="text-lg font-medium mb-2">{stat.label}</h3>
                             <p className="text-3xl font-bold">{stat.value}</p>
                         </div>

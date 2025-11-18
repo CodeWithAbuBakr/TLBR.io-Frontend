@@ -8,22 +8,15 @@ const Version: React.FC = () => {
 
     return (
         <>
-            <div
-                className={`rounded-2xl p-6 border shadow-sm hover:shadow-lg transition-all
+            <div className={`rounded-2xl p-6 border shadow-sm hover:shadow-lg transition-all
                 ${darkMode
-                        ? "bg-[#333333] border-[#94E561]"
-                        : "bg-white border-gray-100"}`}
+                    ? "bg-[#333333] border-[#94E561]"
+                    : "bg-white border-gray-100"}`}
             >
-                <h2
-                    className={`text-xl font-semibold mb-2 ${darkMode ? "text-white" : "text-[#0A0A04]"
-                        }`}
-                >
+                <h2 className={`text-xl font-semibold mb-2 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                     {UIText.download.version.title}
                 </h2>
-                <p
-                    className={`text-sm mb-4 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"
-                        }`}
-                >
+                <p className={`text-sm mb-4 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}>
                     {UIText.download.version.description}
                     {latestVersion.version}
                     {UIText.download.version.released}

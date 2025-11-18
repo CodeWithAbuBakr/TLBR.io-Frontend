@@ -17,12 +17,9 @@ const Download: React.FC = () => {
             <DashboardLayout>
                 <div className="space-y-10">
                     {/* Page Header */}
-                    <div
-                        className={`rounded-2xl p-8 border border-transparent shadow-sm hover:shadow-lg transition-all
-                        ${darkMode
-                                ? "bg-[#333333] dark:border-[#94E561]"
-                                : "bg-[#94E561]"}`
-                        }
+                    <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 border ${darkMode
+                        ? 'bg-[#333333] border-[#94E561]/40'
+                        : 'bg-white border-gray-100'}`}
                     >
                         <h1
                             className={`text-2xl md:text-3xl font-bold mb-2 flex items-center gap-3 
