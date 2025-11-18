@@ -24,7 +24,7 @@ const Windows: React.FC = () => {
         <>
             <div className={`rounded-2xl p-6 flex flex-col items-center text-center border transition-all hover:shadow-lg
                     ${darkMode
-                    ? "bg-[#333333] border-[#94E561]"
+                    ? "bg-[#333333] border-[#94E561]/40"
                     : "bg-white border-gray-100"}`}
             >
                 <FaWindows className={`text-5xl mb-3 ${darkMode ? "text-[#94E561]" : "text-[#0A0A04]"}`} />
