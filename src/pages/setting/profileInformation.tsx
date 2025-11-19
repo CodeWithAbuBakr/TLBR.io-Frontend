@@ -83,7 +83,7 @@ const ProfileInformation: React.FC = () => {
 
             <div
                 className={`border rounded-2xl shadow-sm p-6
-                ${darkMode ? "border-[#94E561] dark:bg-[#333333]" : "bg-white border-gray-100"}`}
+                ${darkMode ? "border-[#94E561]/40 dark:bg-[#333333]" : "bg-white border-gray-100"}`}
             >
                 <h2
                     className={`text-lg font-semibold flex items-center gap-2 mb-4 

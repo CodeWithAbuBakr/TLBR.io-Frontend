@@ -45,7 +45,7 @@ const GetStarted: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {/* Download Add-in */}
                     <div
-                        className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg border border-[#94E561] ${darkMode ? "bg-[#333333]" : "bg-white"}`}
+                        className={`cursor-pointer rounded-xl p-5 shadow transition-shadow hover:shadow-lg ${darkMode ? "bg-[#333333] border border-[#94E561]/40" : "bg-white"}`}
                         onClick={handleDownload}
                     >
                         <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
@@ -58,7 +58,7 @@ const GetStarted: React.FC = () => {
 
                     {/* View Billing */}
                     <div
-                        className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg border border-[#94E561] ${darkMode ? "bg-[#333333]" : "bg-white"}`}
+                        className={`cursor-pointer rounded-xl p-5 shadow transition-shadow hover:shadow-lg ${darkMode ? "bg-[#333333] border border-[#94E561]/40" : "bg-white"}`}
                         onClick={handleBilling}
                     >
                         <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
@@ -71,7 +71,7 @@ const GetStarted: React.FC = () => {
 
                     {/* Update Settings */}
                     <div
-                        className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg border border-[#94E561] ${darkMode ? "bg-[#333333]" : "bg-white"}`}
+                        className={`cursor-pointer rounded-xl p-5 shadow transition-shadow hover:shadow-lg ${darkMode ? "bg-[#333333] border border-[#94E561]/40" : "bg-white"}`}
                         onClick={handleSetting}
                     >
                         <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
