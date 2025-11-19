@@ -82,7 +82,7 @@ const UserDropdown = () => {
             }`}
         >
           <span
-            className={`mr-3 flex justify-center items-center rounded-full h-11 w-11 font-semibold border ${darkMode ? "bg-[#1E1E1E] border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white" : "bg-white border-gray-200 text-gray-600 hover:bg-[#F2F7EF] hover:text-gray-900"
+            className={`mr-3 flex justify-center items-center rounded-full h-11 w-11 font-semibold ${darkMode ? "bg-gray-700 text-gray-100" : "bg-[#333333] text-white"
               }`}
           >
             {getInitials(userData?.user?.name ?? "")}

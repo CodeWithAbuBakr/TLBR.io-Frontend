@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
                     ].map((stat, index) => (
                         <div
                             key={index}
-                            className={`rounded-xl p-5 hover:shadow-lg transition-all shadow
+                            className={`rounded-xl p-5 shadow hover:shadow-lg transition-all 
                                 ${darkMode ? "bg-[#333333] border border-[#94E561]/40" : "bg-[#FAFAFA]"}`}>
                             <h3 className={`text-lg font-medium mb-2" ${darkMode ? "text-[#94E561]" : "text-[#666666]"}`}>{stat.label}</h3>
                             <p className="text-3xl font-bold">{stat.value}</p>
