@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+::selection {
+    background-color: #94E561;
+    color: #000000;
+}
+
 /* tlbr.io loader */
 .dots-container {
     display: flex;
