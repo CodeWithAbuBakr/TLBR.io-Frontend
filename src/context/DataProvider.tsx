@@ -39,6 +39,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         const decryptedIsAuth = isAuth();
         const decryptedTokens = tokens();
+        console.log("Decrypted isAuth:", decryptedIsAuth);
         const theme = localStorage.getItem("theme");
 
         if (theme === "dark") {
