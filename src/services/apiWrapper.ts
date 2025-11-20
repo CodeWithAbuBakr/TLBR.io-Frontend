@@ -50,15 +50,25 @@ export const wrapWithTokenRefresh = async <T>(fn: () => Promise<T>): Promise<T> 
 };
 
 // API wrappers
-export const getUserDetails = (accessToken: string): Promise<StoredUserDetailsProps> =>
-    wrapWithTokenRefresh(() =>
-        wrapWithPromise<StoredUserDetailsProps>((callback) => userDetails(accessToken, callback))
-    );
+export const getUserDetails = (): Promise<StoredUserDetailsProps> =>
+    wrapWithTokenRefresh(() => {
+        const decryptedTokens = tokens();
+        const accessToken = decryptedTokens?.accessToken;
 
-export const getAllUserDetails = (accessToken: string): Promise<StoredAllUserDetailsProps> =>
-    wrapWithTokenRefresh(() =>
-        wrapWithPromise<StoredAllUserDetailsProps>((callback) => allUserDetails(accessToken, callback))
-    );
+        return wrapWithPromise<StoredUserDetailsProps>((callback) =>
+            userDetails(accessToken, callback)
+        );
+    });
+
+export const getAllUserDetails = (): Promise<StoredAllUserDetailsProps> =>
+    wrapWithTokenRefresh(() => {
+        const decryptedTokens = tokens();
+        const accessToken = decryptedTokens?.accessToken;
+
+        return wrapWithPromise<StoredAllUserDetailsProps>((callback) =>
+            allUserDetails(accessToken, callback)
+        );
+    });
 
 export const getCreateCheckout = (accessToken: string, userId: string, plan: string): Promise<ResponseProps> =>
     wrapWithTokenRefresh(() =>

@@ -37,7 +37,7 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
                     setToastMessage(data.message || "User deleted successfully");
 
                     // Refresh all users after delete
-                    getAllUserDetails(accessToken)
+                    getAllUserDetails()
                         .then((all) => {
                             setAllUsers(all);
                             setIsLoader(false);

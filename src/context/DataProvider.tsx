@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import { DataContext } from "./DataContext";
-import { tokens } from "../utilities/getLocalStorageData";
 import { isAuth } from "../utilities/getLocalStorageData";
 import { getAllUserDetails, getUserDetails } from "../services/apiWrapper";
 import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps } from "../utilities/type";
@@ -38,8 +37,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     useEffect(() => {
         const decryptedIsAuth = isAuth();
-        const decryptedTokens = tokens();
-        console.log("decryptedTokens:", decryptedTokens);
         const theme = localStorage.getItem("theme");
 
         if (theme === "dark") {
@@ -48,13 +45,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setDarkMode(false);
         }
 
-        if (decryptedIsAuth === "true" && decryptedTokens && !hasFetchedUser.current) {
+        if (decryptedIsAuth === "true" && !hasFetchedUser.current) {
             setIsLoader(true);
             setIsModalOpen(true);
             hasFetchedUser.current = true;
-            const accessToken = decryptedTokens.accessToken;
 
-            getUserDetails(accessToken)
+            getUserDetails()
                 .then((user) => {
                     setUserData(user);
                     setIsLoader(false);
@@ -62,7 +58,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
                     if (user.user.role === "admin") {
                         setIsUsersLoading(true);
-                        getAllUserDetails(accessToken)
+                        getAllUserDetails()
                             .then((all) => {
                                 setAllUsers(all);
                                 setIsUsersLoading(false);
