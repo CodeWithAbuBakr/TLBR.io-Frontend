@@ -1,3 +1,4 @@
+import CryptoJS from "crypto-js";
 import type { ResponseProps } from "../../utilities/type";
 
 export const refreshTokens = async (
@@ -15,6 +16,10 @@ export const refreshTokens = async (
 
         const result: ResponseProps = await response.json();
         if (result.message === "Access token refreshed successfully") {
+            const tokens = result.tokens;
+            const encryptedTokens = CryptoJS.AES.encrypt(JSON.stringify(tokens), import.meta.env.VITE_SECRET_KEY).toString();
+            localStorage.setItem("tokens", encryptedTokens);
+
             callback(null, result);
         } else {
             const errorMsg = result.message;

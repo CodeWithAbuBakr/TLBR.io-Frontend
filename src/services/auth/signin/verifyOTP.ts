@@ -27,7 +27,6 @@ export const verifyOTP = async (
 
         if (result.message && result.message.includes("Welcome")) {
             const tokens = result.tokens;
-            console.log("Tokens received:", tokens);
             const encryptedTokens = CryptoJS.AES.encrypt(JSON.stringify(tokens), import.meta.env.VITE_SECRET_KEY).toString();
             localStorage.setItem("tokens", encryptedTokens);
 
