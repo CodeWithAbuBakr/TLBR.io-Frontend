@@ -6,13 +6,14 @@ import Toast from '../../hooks/useToast';
 import { useData } from '../../utilities/useData';
 
 const Windows: React.FC = () => {
-    const { darkMode } = useData();
+    const { darkMode, userData } = useData();
     const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
     const [toastMessage, setToastMessage] = useState("");
 
     const handleDownloads = () => {
         setToastType(null);
         setToastMessage("");
+        console.log("User Data in Windows Page:", userData);
 
         setTimeout(() => {
             setToastType("info");
