@@ -6,7 +6,7 @@ import { useSidebar } from "../context/SidebarContext";
 import AppHeader from "./AppHeader";
 import AppSidebar from "./AppSidebar";
 import Backdrop from "./Backdrop";
-import { userSession } from "../utilities/getLocalStorageData";
+import { userSession, tokens } from "../utilities/getLocalStorageData";
 
 export const DashboardLayout = ({
     children,
@@ -19,9 +19,10 @@ export const DashboardLayout = ({
 
     // Check login persistence on page load
     useEffect(() => {
+        const decryptedTokens = tokens();
         const decryptedUserSession = userSession();
 
-        if (!decryptedUserSession) {
+        if (!decryptedUserSession || !decryptedTokens.accessToken || !decryptedTokens.refreshToken) {
             // No session found force sign-in
             navigate("/");
             return;
@@ -30,12 +31,15 @@ export const DashboardLayout = ({
         try {
             if (decryptedUserSession.keepMeLoggedIn === false) {
                 // User didn’t choose "keep me logged in" clear session
+                localStorage.removeItem("tokens");
                 localStorage.removeItem("userSession");
                 navigate("/");
             }
         } catch (error) {
             // Invalid JSON or corrupted storage → reset
             console.error("Invalid session data", error);
+
+            localStorage.removeItem("tokens");
             localStorage.removeItem("userSession");
             navigate("/");
         }

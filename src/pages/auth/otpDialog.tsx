@@ -27,7 +27,6 @@ const OTPDialog: React.FC<DialogProps> = ({
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [resendTimer, setResendTimer] = useState(0);
     const [isResending, setIsResending] = useState(false);
-
     const decryptedUserSession = userSession();
 
     let email: string;
@@ -41,6 +40,8 @@ const OTPDialog: React.FC<DialogProps> = ({
 
     const handleCancel = () => {
         setIsModalOpen(false);
+
+        localStorage.removeItem("tokens");
         localStorage.removeItem("userSession");
     };
 

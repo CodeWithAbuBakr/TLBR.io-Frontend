@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import { DataContext } from "./DataContext";
+import { tokens } from "../utilities/getLocalStorageData";
 import { isAuth } from "../utilities/getLocalStorageData";
 import { getAllUserDetails, getUserDetails } from "../services/apiWrapper";
 import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps } from "../utilities/type";
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const navigate = useNavigate();
+    const decryptedTokens = tokens();
     const hasFetchedUser = useRef(false);
     const [activeForm, setActiveForm] = useState<"signin" | "signup">("signin");
     const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
@@ -45,12 +47,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setDarkMode(false);
         }
 
-        if (decryptedIsAuth === "true" && !hasFetchedUser.current) {
+        if (decryptedIsAuth === "true" && decryptedTokens && !hasFetchedUser.current) {
             setIsLoader(true);
             setIsModalOpen(true);
             hasFetchedUser.current = true;
+            const accessToken = decryptedTokens.accessToken;
 
-            getUserDetails()
+            getUserDetails(accessToken)
                 .then((user) => {
                     setUserData(user);
                     setIsLoader(false);
@@ -58,7 +61,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
                     if (user.user.role === "admin") {
                         setIsUsersLoading(true);
-                        getAllUserDetails()
+                        getAllUserDetails(accessToken)
                             .then((all) => {
                                 setAllUsers(all);
                                 setIsUsersLoading(false);
@@ -79,13 +82,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
                     setToastType("error");
                     setToastMessage(
-                        err.message === "Session expired. You have been logged in from another device"
-                            ? "Session expired. You have been logged in from another device"
+                        err.message === "Session expired. You may have logged in from another device."
+                            ? "Session expired. You may have logged in from another device."
                             : err.message || "Error getting user details."
                     );
 
-                    if (err.message === "Session expired. You have been logged in from another device") {
+                    if (err.message === "Session expired. You may have logged in from another device.") {
                         setTimeout(() => {
+                            localStorage.removeItem("tokens");
                             localStorage.removeItem("userDetails");
                             localStorage.removeItem("userSession");
                             const encryptedIsAuth = CryptoJS.AES.encrypt("false", import.meta.env.VITE_SECRET_KEY).toString();
@@ -98,7 +102,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     }
                 });
         }
-    }, [navigate]);
+    }, [decryptedTokens, navigate]);
 
     const contextValue: DataContextTypeProps = {
         activeForm,

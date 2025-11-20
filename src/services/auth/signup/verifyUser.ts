@@ -8,8 +8,7 @@ export const verifyUser = async (
 
     const requestOptions: RequestInit = {
         method: "GET",
-        headers: myHeaders,
-        credentials: "include"
+        headers: myHeaders
     };
 
     try {

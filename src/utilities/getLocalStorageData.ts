@@ -35,6 +35,27 @@ export const userSession = () => {
     return decryptedUserSession;
 };
 
+export const tokens = () => {
+    let decryptedTokens;
+    const encryptedTokens = localStorage.getItem("tokens");
+
+    if (encryptedTokens) {
+        const bytes = CryptoJS.AES.decrypt(encryptedTokens, import.meta.env.VITE_SECRET_KEY);
+        const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+
+        try {
+            decryptedTokens = JSON.parse(decryptedText);
+        } catch (e) {
+            console.error("Failed to parse decrypted user session JSON:", e);
+            decryptedTokens = null;
+        }
+    } else {
+        decryptedTokens = null;
+    }
+
+    return decryptedTokens;
+};
+
 export const userDetails = () => {
     let decryptedUserDetails;
     const encryptedUserDetails = localStorage.getItem("userDetails");

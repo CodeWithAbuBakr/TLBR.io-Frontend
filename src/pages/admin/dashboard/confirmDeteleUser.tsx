@@ -4,6 +4,7 @@ import Loader from '../../../loader/loader';
 import type { ConfirmDeleteUserDialogProps } from '../../../utilities/type';
 import { useData } from '../../../utilities/useData';
 import UIText from '../../../utilities/testResource';
+import { tokens } from '../../../utilities/getLocalStorageData';
 import { getAllUserDetails, removeUser } from '../../../services/apiWrapper';
 
 const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
@@ -15,16 +16,18 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
     setToastMessage,
     userId,
 }) => {
+    const decryptedTokens = tokens();
     const { darkMode, setAllUsers, setIsUsersLoading } = useData();
 
     const handleDelete = () => {
         setToastType(null);
         setToastMessage("");
 
-        if (userId) {
+        if (userId && decryptedTokens) {
             setIsLoader(true);
+            const accessToken = decryptedTokens.accessToken;
 
-            removeUser(userId)
+            removeUser(accessToken, userId)
                 .then((data) => {
                     console.log("Delete user success:", data);
                     setIsModalOpen(false);
@@ -34,7 +37,7 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
                     setToastMessage(data.message || "User deleted successfully");
 
                     // Refresh all users after delete
-                    getAllUserDetails()
+                    getAllUserDetails(accessToken)
                         .then((all) => {
                             setAllUsers(all);
                             setIsLoader(false);

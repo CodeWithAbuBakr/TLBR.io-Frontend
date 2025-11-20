@@ -30,6 +30,7 @@ export const loginUser = async (
             const userData = { email, password, keepMeLoggedIn: isChecked };
             const encryptedUserData = CryptoJS.AES.encrypt(JSON.stringify(userData), import.meta.env.VITE_SECRET_KEY).toString();
             localStorage.setItem("userSession", encryptedUserData);
+
             callback(null, result);
         } else {
             const error = new Error(result.message || "Registration failed");

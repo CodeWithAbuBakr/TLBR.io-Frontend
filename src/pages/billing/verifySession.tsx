@@ -7,9 +7,11 @@ import UIText from "../../utilities/testResource";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { getVerifySession } from "../../services/apiWrapper";
 import Loader from "../../loader/loader";
+import { tokens } from "../../utilities/getLocalStorageData";
 
 const PaymentResult: React.FC = () => {
     const navigate = useNavigate();
+    const decryptedTokens = tokens();
     const { darkMode, isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
     const [verificationStatus, setVerificationStatus] = useState<"pending" | "success" | "error">("pending");
 
@@ -21,11 +23,13 @@ const PaymentResult: React.FC = () => {
 
     useEffect(() => {
         if (!sessionId) return;
+        if (!decryptedTokens) return;
 
         setIsLoader(true);
         setIsModalOpen(true);
+        const accessToken = decryptedTokens.accessToken;
 
-        getVerifySession(sessionId)
+        getVerifySession(accessToken, sessionId)
             .then((data) => {
                 console.log("Payment verification result:", data);
                 setVerificationStatus("success");
@@ -45,7 +49,7 @@ const PaymentResult: React.FC = () => {
                 setIsLoader(false);
                 setIsModalOpen(false);
             });
-    }, [sessionId, setIsLoader, setIsModalOpen]);
+    }, [decryptedTokens, sessionId, setIsLoader, setIsModalOpen]);
 
     // Loader
     if (isModalOpen && isLoader) {

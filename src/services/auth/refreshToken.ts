@@ -1,13 +1,16 @@
 import type { ResponseProps } from "../../utilities/type";
 
-export const refreshToken = async (
+export const refreshTokens = async (
+    refreshToken: string,
     callback: (error: Error | null, data: ResponseProps | null) => void
 ): Promise<void> => {
     try {
         const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/refresh/token`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${refreshToken}`
+            }
         });
 
         const result: ResponseProps = await response.json();

@@ -15,8 +15,7 @@ export const resetPassword = async (
     const requestOptions: RequestInit = {
         method: "POST",
         headers: myHeaders,
-        body: raw,
-        credentials: "include"
+        body: raw
     };
 
     try {

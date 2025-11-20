@@ -1,13 +1,17 @@
 import type { ResponseProps } from "../../../utilities/type";
 
 export const deleteUser = async (
+    accessToken: string,
     userId: string,
     callback: (error: Error | null, data: ResponseProps | null) => void
 ): Promise<void> => {
     try {
         const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/admin/users/${userId}`, {
             method: "DELETE",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${accessToken}`
+            },
             credentials: "include",
         });
 

@@ -106,9 +106,11 @@ const ResetPassword: React.FC = () => {
                         // Clean up stored data
                         const encryptedIsAuth = CryptoJS.AES.encrypt("false", import.meta.env.VITE_SECRET_KEY).toString();
                         localStorage.setItem("isAuth", encryptedIsAuth);
+
+                        localStorage.removeItem("tokens");
                         localStorage.removeItem("userSession");
                         localStorage.removeItem("userDetails");
-                    }
+                    };
 
                     setToastType("success");
                     setToastMessage(data.message);

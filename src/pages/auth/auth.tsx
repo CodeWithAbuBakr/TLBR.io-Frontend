@@ -10,7 +10,7 @@ import Toast from "../../hooks/useToast";
 import Loader from "../../loader/loader";
 import UIText from "../../utilities/testResource";
 import OTPDialog from "./otpDialog";
-import { userSession } from "../../utilities/getLocalStorageData";
+import { userSession, tokens } from "../../utilities/getLocalStorageData";
 import ForgotPassword from "./forgotPassword";
 
 const Auth: React.FC = () => {
@@ -31,11 +31,14 @@ const Auth: React.FC = () => {
 
     // Check login persistence on page load
     useEffect(() => {
+        const decryptedTokens = tokens();
         const decryptedUserSession = userSession();
-        if (decryptedUserSession) {
+
+        if (decryptedTokens && decryptedUserSession) {
             if (decryptedUserSession.keepMeLoggedIn === true) {
                 navigate("/dashboard");
             } else {
+                localStorage.removeItem("tokens");
                 localStorage.removeItem("userSession");
                 navigate("/");
             }
