@@ -10,7 +10,7 @@ const InstallationGuide: React.FC = () => {
         <>
             <div className={`rounded-2xl p-6 shadow-sm border transition-all hover:shadow-lg
                     ${darkMode
-                    ? "bg-[#333333] border-[#94E561]"
+                    ? "bg-[#333333] border-[#94E561]/40"
                     : "bg-white border-gray-100"}`}
             >
                 <h2 className={`text-xl font-semibold mb-4 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>

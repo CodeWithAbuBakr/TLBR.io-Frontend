@@ -175,7 +175,7 @@ const EmailVerification: React.FC = () => {
                         {/* Continue Button */}
                         <button
                             onClick={handleContinueToSignin}
-                            className="bg-[#94E561] hover:bg-[#e09b00] cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
+                            className="bg-[#94E561] hover:bg-[#63cb23] cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
                         >
                             {UIText.auth.verifyUser.success.button}
                         </button>

@@ -78,31 +78,19 @@ const UserDropdown = () => {
       <div className="relative">
         <button
           onClick={toggleDropdown}
-          className={`flex items-center dropdown-toggle cursor-pointer transition-colors duration-300 ${darkMode ? "text-gray-300" : "text-gray-700"
-            }`}
+          className={`flex items-center dropdown-toggle cursor-pointer transition-colors duration-300 ${darkMode ? "text-gray-300" : "text-gray-700"}`}
         >
-          <span
-            className={`mr-3 flex justify-center items-center rounded-full h-11 w-11 font-semibold ${darkMode ? "bg-gray-700 text-gray-100" : "bg-[#333333] text-white"
-              }`}
-          >
+          <span className={`mr-3 flex justify-center items-center rounded-full h-11 w-11 font-semibold border
+            ${darkMode ? "bg-[#1E1E1E] border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white" : "bg-white border-gray-200 text-gray-600 hover:bg-[#F2F7EF] hover:text-gray-900"}`}>
             {getInitials(userData?.user?.name ?? "")}
           </span>
 
-          <span
-            className={`block mr-1 font-medium text-theme-sm ${darkMode ? "text-white" : "text-[#666666]"
-              }`}
-          >
+          <span className={`block mr-1 font-medium text-theme-sm ${darkMode ? "text-white" : "text-[#666666]"}`}>
             {userData?.user?.name ?? "User"}
           </span>
 
-          <IoIosArrowDown
-            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? "hidden" : darkMode ? "text-white" : "text-gray-500"
-              }`}
-          />
-          <IoIosArrowUp
-            className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? (darkMode ? "text-white" : "text-gray-500") : "hidden"
-              }`}
-          />
+          <IoIosArrowDown className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? "hidden" : darkMode ? "text-white" : "text-gray-500"}`} />
+          <IoIosArrowUp className={`transition-transform duration-200 w-[18px] h-5 ${isOpen ? (darkMode ? "text-white" : "text-gray-500") : "hidden"}`} />
         </button>
 
         <Dropdown
@@ -123,10 +111,7 @@ const UserDropdown = () => {
             </span>
           </div>
 
-          <div
-            className={`my-3 h-px ${darkMode ? "bg-gray-700" : "bg-[#E5E5E5]"
-              }`}
-          />
+          <div className={`my-3 h-px ${darkMode ? "bg-gray-700" : "bg-[#E5E5E5]"}`} />
 
           <button
             onClick={handleLogout}
@@ -136,10 +121,7 @@ const UserDropdown = () => {
                 : "text-[#666666] hover:bg-[#F2F7EF] hover:text-gray-700"
               }`}
           >
-            <TbLogout2
-              className={`text-xl ${darkMode ? "text-gray-400" : "text-[#666666]"
-                }`}
-            />
+            <TbLogout2 className={`text-xl ${darkMode ? "text-gray-400" : "text-[#666666]"}`} />
             {UIText.header.user_Dropdown.button}
           </button>
         </Dropdown>

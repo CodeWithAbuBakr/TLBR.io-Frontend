@@ -12,9 +12,9 @@ const TrialPeriod: React.FC = () => {
     return (
         <>
             {decryptedUserDetails?.user?.planType !== null ? (
-                <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 hover:transition-shadow hover:shadow-lg border ${darkMode
-                    ? 'bg-[#333333] border-[#94E561]/40'
-                    : 'bg-white border-gray-100'}`}
+                <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 hover:transition-shadow hover:shadow-lg ${darkMode
+                    ? 'bg-[#333333] border border-[#94E561]/40'
+                    : 'bg-white shadow'}`}
                 >
                     <div className="flex items-center mb-2">
                         <IoTimeOutline className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`} />
@@ -42,8 +42,9 @@ const TrialPeriod: React.FC = () => {
                     </p>
                 </div>
             ) : (
-                <div className={`rounded-xl p-5 hover:shadow-lg transition-all border
-                    ${darkMode ? "bg-[#333333] border-[#94E561]" : "bg-[#94E561] border-transparent"}`}
+                <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 hover:transition-shadow hover:shadow-lg ${darkMode
+                    ? 'bg-[#333333] border border-[#94E561]/40'
+                    : 'bg-white shadow'}`}
                 >
                     <div className="flex items-center mb-2">
                         <IoTimeOutline className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`} />
@@ -60,7 +61,7 @@ const TrialPeriod: React.FC = () => {
                         </span>
                     </div>
                     <div className={`h-1 rounded-sm overflow-hidden ${darkMode ? "bg-[#555555]" : "bg-[#FAFAFA]"}`}>
-                        <div className={`w-full h-full ${darkMode ? "bg-[#94E561]" : "bg-[#0A0A04]"}`}></div>
+                        <div className={`w-full h-full ${darkMode ? "bg-[#94E561]" : "bg-[#94E561]"}`}></div>
                     </div>
                     <p className={`text-xs mt-2.5 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                         {UIText.dashboard.trial_period.not_selected_trial_expires}

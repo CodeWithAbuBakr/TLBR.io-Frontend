@@ -11,9 +11,9 @@ const AccountStatus: React.FC = () => {
     return (
         <>
             {decryptedUserDetails?.user?.planType !== null ? (
-                <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 border hover:transition-shadow hover:shadow-lg ${darkMode
-                    ? 'bg-[#333333] border-[#94E561]/40'
-                    : 'bg-white border-gray-100'}`}
+                <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 hover:transition-shadow hover:shadow-lg ${darkMode
+                    ? 'bg-[#333333] border border-[#94E561]/40'
+                    : 'bg-white shadow'}`}
                 >
                     <div className="flex items-center mb-2">
                         <MdOutlineAccountBalance className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`} />
@@ -42,8 +42,9 @@ const AccountStatus: React.FC = () => {
                     </div>
                 </div>
             ) : (
-                <div className={`rounded-xl p-5 hover:shadow-lg transition-all border
-                    ${darkMode ? "bg-[#333333] border-[#94E561]" : "bg-[#94E561] border-transparent"}`}
+                <div className={`rounded-2xl shadow-sm p-6 mb-6 transition-colors duration-200 hover:transition-shadow hover:shadow-lg ${darkMode
+                    ? 'bg-[#333333] border border-[#94E561]/40'
+                    : 'bg-white shadow'}`}
                 >
                     <div className="flex items-center mb-2">
                         <MdOutlineAccountBalance
