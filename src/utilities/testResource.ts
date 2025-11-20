@@ -100,6 +100,7 @@ const UIText = {
     dashboard: {
         trial_period: {
             title: "Trial Period",
+            not_active: "No Plan Active",
             description: "Days remaining in your free trial",
             not_selected_description: "You currently have no active plan",
             no_selection_plan: "No active plan",

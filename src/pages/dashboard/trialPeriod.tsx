@@ -49,7 +49,7 @@ const TrialPeriod: React.FC = () => {
                     <div className="flex items-center mb-2">
                         <IoTimeOutline className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`} />
                         <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
-                            {UIText.dashboard.trial_period.title}
+                            {UIText.dashboard.trial_period.not_active}
                         </h3>
                     </div>
                     <p className={`text-sm font-light mb-4 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
