@@ -26,6 +26,7 @@ export type StoredUserDetailsProps = {
         name: string;
         email: string;
         role: string;
+        isSubscribed: boolean;
     };
     sessionInfo: {
         sessionId: string;

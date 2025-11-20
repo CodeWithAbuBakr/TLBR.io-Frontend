@@ -15,10 +15,13 @@ const Windows: React.FC = () => {
         setToastMessage("");
         console.log("User Data in Windows Page:", userData);
 
-        setTimeout(() => {
+        if (userData && userData.user.isSubscribed !== false) {
+            setToastType("success");
+            setToastMessage("You have permission to download the tlbr.io installer. This feature is currently in development!");
+        } else {
             setToastType("info");
-            setToastMessage("This feature is currently in development. Stay tuned!");
-        }, 10);
+            setToastMessage("You don’t have permission to download the tlbr.io installer. Upgrade your plan to access TLBR.io features.");
+        };
     };
 
     return (
