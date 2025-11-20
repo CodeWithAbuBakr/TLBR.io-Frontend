@@ -9,7 +9,6 @@ import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetails
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const navigate = useNavigate();
-    const decryptedTokens = tokens();
     const hasFetchedUser = useRef(false);
     const [activeForm, setActiveForm] = useState<"signin" | "signup">("signin");
     const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
@@ -39,6 +38,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     useEffect(() => {
         const decryptedIsAuth = isAuth();
+        const decryptedTokens = tokens();
         const theme = localStorage.getItem("theme");
 
         if (theme === "dark") {
@@ -102,7 +102,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     }
                 });
         }
-    }, [decryptedTokens, navigate]);
+    }, [navigate]);
 
     const contextValue: DataContextTypeProps = {
         activeForm,
