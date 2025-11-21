@@ -8,6 +8,7 @@ import { GoEyeClosed } from "react-icons/go";
 import type { ShowToastProps } from "../../utilities/type";
 import UIText from "../../utilities/testResource";
 import { registerUser } from "../../services/auth/signup/registerUser";
+import { showFingerprint } from "../../utilities/getFingerprint";
 
 const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, setIsLoader }) => {
   const { darkMode, showPassword, setShowPassword, fname, setFname, confirmPassword,
@@ -46,8 +47,9 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
     }
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    const fingerPrint = await showFingerprint();
 
     if (!fname && !lname && !email && !password) {
       onShowToast("error", "Please fill all the required fields.");
@@ -78,7 +80,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
       setIsModalOpen(true);
 
       // Call the API to authenticate the user
-      registerUser(fname, lname, email, password, (error, data) => {
+      await registerUser(fname, lname, email, password, fingerPrint, (error, data) => {
         if (error) {
           console.log("Registration error:", error);
           onShowToast("error", error.message || "An error occurred during registration.");

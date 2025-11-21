@@ -5,6 +5,7 @@ export const registerUser = async (
     lname: string,
     email: string,
     password: string,
+    fingerPrint: string,
     callback: (error: Error | null, data: ResponseProps | null) => void
 ): Promise<void> => {
     const myHeaders = new Headers();
@@ -13,7 +14,8 @@ export const registerUser = async (
     const raw = JSON.stringify({
         'name': `${fname} ${lname}`,
         'email': email,
-        'password': password
+        'password': password,
+        'fingerprint': fingerPrint
     });
 
     const requestOptions: RequestInit = {

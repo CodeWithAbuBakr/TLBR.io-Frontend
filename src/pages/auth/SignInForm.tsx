@@ -54,7 +54,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
     setOpenForgotPasswordModel(true);
   };
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email && !password) {
@@ -74,7 +74,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
       setIsModalOpen(true);
 
       // Call the API to authenticate the user
-      loginUser(email, password, isChecked, (error, data) => {
+      await loginUser(email, password, isChecked, (error, data) => {
         if (error) {
           console.log("Login error:", error);
           onShowToast("error", error.message || "An error occurred during login.");
