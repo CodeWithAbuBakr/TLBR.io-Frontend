@@ -231,6 +231,30 @@ const ResetPassword: React.FC = () => {
                                     )}
                                 </span>
                             </div>
+
+
+
+                            {passwordStrength.message && (
+                                <p
+                                    className={`mt-1 text-sm 
+                                        ${passwordStrength.color === "text-error-500"
+                                            ? darkMode
+                                                ? "text-red-500"
+                                                : "text-red-600"
+                                            : passwordStrength.color === "text-[#94E561]"
+                                                ? darkMode
+                                                    ? "text-[#FFD166]"
+                                                    : "text-[#FFD166]"
+                                                : passwordStrength.color === "text-success-500"
+                                                    ? darkMode
+                                                        ? "text-[#94E561]"
+                                                        : "text-[#94E561]"
+                                                    : ""
+                                        }`}
+                                >
+                                    {passwordStrength.message}
+                                </p>
+                            )}
                         </div>
 
                         <div className='mt-4'>
@@ -245,7 +269,6 @@ const ResetPassword: React.FC = () => {
                                     value={confirmPassword}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         setConfrimPassword(e.target.value);
-                                        evaluatePasswordStrength(e.target.value);
                                     }}
                                     className={`${darkMode
                                         ? "bg-gray-900 text-white border-gray-700"

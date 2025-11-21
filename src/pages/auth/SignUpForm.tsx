@@ -180,6 +180,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPassword(e.target.value);
+                evaluatePasswordStrength(e.target.value);
               }}
               className={`${darkMode
                 ? "bg-gray-900 text-white border-gray-700"
@@ -201,42 +202,8 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
               )}
             </span>
           </div>
-        </div>
 
-        <div>
-          <Label>
-            {UIText.auth.signUp.confirmPassword}
-            <span className="text-error-500">*</span>
-          </Label>
-          <div className="relative">
-            <Input
-              placeholder="Enter your password"
-              type={showConfirmPassword ? "text" : "password"}
-              value={confirmPassword}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setConfrimPassword(e.target.value);
-                evaluatePasswordStrength(e.target.value);
-              }}
-              className={`${darkMode
-                ? "bg-gray-900 text-white border-gray-700"
-                : "bg-white text-gray-900 border-gray-300"
-                }`}
-            />
-            <span
-              onClick={() => setConfirmShowPassword(!showConfirmPassword)}
-              className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
-            >
-              {showConfirmPassword ? (
-                <GoEye
-                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
-                />
-              ) : (
-                <GoEyeClosed
-                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
-                />
-              )}
-            </span>
-          </div>
+
 
           {passwordStrength.message && (
             <p
@@ -259,6 +226,41 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
               {passwordStrength.message}
             </p>
           )}
+        </div>
+
+        <div>
+          <Label>
+            {UIText.auth.signUp.confirmPassword}
+            <span className="text-error-500">*</span>
+          </Label>
+          <div className="relative">
+            <Input
+              placeholder="Enter your password"
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setConfrimPassword(e.target.value);
+              }}
+              className={`${darkMode
+                ? "bg-gray-900 text-white border-gray-700"
+                : "bg-white text-gray-900 border-gray-300"
+                }`}
+            />
+            <span
+              onClick={() => setConfirmShowPassword(!showConfirmPassword)}
+              className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+            >
+              {showConfirmPassword ? (
+                <GoEye
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
+                />
+              ) : (
+                <GoEyeClosed
+                  className={`${darkMode ? "fill-gray-300 hover:fill-[#63cb23]" : "fill-gray-500 hover:fill-[#63cb23]"}`}
+                />
+              )}
+            </span>
+          </div>
         </div>
 
         <button
