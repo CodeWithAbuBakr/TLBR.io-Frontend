@@ -12,39 +12,7 @@ import { loginUser } from "../../services/auth/signin/loginUser";
 
 const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, setIsLoader }) => {
   const { darkMode, showPassword, setShowPassword, isChecked, setIsChecked, email, setEmail,
-    password, setPassword, passwordStrength, setPasswordStrength, setOpenForgotPasswordModel } = useData();
-
-  // Evaluate Password Strength
-  const evaluatePasswordStrength = (value: string) => {
-    if (!value) {
-      setPasswordStrength({ message: "", color: "" });
-      return;
-    }
-
-    const hasLower = /[a-z]/.test(value);
-    const hasUpper = /[A-Z]/.test(value);
-    const hasNumber = /\d/.test(value);
-    const hasSpecial = /[\W_]/.test(value);
-    const passed = [hasLower, hasUpper, hasNumber, hasSpecial].filter(Boolean)
-      .length;
-
-    if (value.length < 8 || passed <= 1) {
-      setPasswordStrength({
-        message: "Password is too weak. Add uppercase, lowercase, numbers, and special characters.",
-        color: "text-error-500",
-      });
-    } else if (passed === 2 || passed === 3) {
-      setPasswordStrength({
-        message: "Password is acceptable but could be more stronger. Include more diverse characters.",
-        color: "text-[#94E561]",
-      });
-    } else if (passed === 4 && value.length >= 8) {
-      setPasswordStrength({
-        message: "Your password looks secure.",
-        color: "text-success-500",
-      });
-    }
-  };
+    password, setPassword, setOpenForgotPasswordModel } = useData();
 
   const handleOpenForgotPasswrodDialog = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -65,9 +33,6 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
       return;
     } else if (!password) {
       onShowToast("error", "Please enter your password.");
-      return;
-    } else if (passwordStrength.message !== "Your password looks secure.") {
-      onShowToast("info", "Please use a strong password.");
       return;
     } else {
       setIsLoader(true);
@@ -91,7 +56,6 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           setEmail("");
           setPassword("");
           setIsChecked(false);
-          setPasswordStrength({ message: "", color: "" });
         }
       });
     }
@@ -128,7 +92,6 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPassword(e.target.value);
-                evaluatePasswordStrength(e.target.value);
               }}
               className={`${darkMode ? "bg-gray-900 text-white border-gray-700" : "bg-white text-gray-900 border-gray-300"}`}
             />
@@ -147,28 +110,6 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
               )}
             </span>
           </div>
-
-          {passwordStrength.message && (
-            <p
-              className={`mt-1 text-sm 
-                ${passwordStrength.color === "text-error-500"
-                  ? darkMode
-                    ? "text-red-500"
-                    : "text-red-600"
-                  : passwordStrength.color === "text-[#94E561]"
-                    ? darkMode
-                      ? "text-[#FFD166]"
-                      : "text-[#FFD166]"
-                    : passwordStrength.color === "text-success-500"
-                      ? darkMode
-                        ? "text-[#94E561]"
-                        : "text-[#94E561]"
-                      : ""
-                }`}
-            >
-              {passwordStrength.message}
-            </p>
-          )}
         </div>
 
         <div className="flex items-center justify-between">

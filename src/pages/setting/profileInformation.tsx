@@ -157,28 +157,6 @@ const ProfileInformation: React.FC = () => {
                                 )}
                             </span>
                         </div>
-
-                        {passwordStrength.message && (
-                            <p
-                                className={`mt-1 text-sm 
-                                    ${passwordStrength.color === "text-error-500"
-                                        ? darkMode
-                                            ? "text-red-500"
-                                            : "text-red-600"
-                                        : passwordStrength.color === "text-[#94E561]"
-                                            ? darkMode
-                                                ? "text-[#FFD166]"
-                                                : "text-[#94E561]"
-                                            : passwordStrength.color === "text-success-500"
-                                                ? darkMode
-                                                    ? "text-green-500"
-                                                    : "text-green-600"
-                                                : ""
-                                    }`}
-                            >
-                                {passwordStrength.message}
-                            </p>
-                        )}
                     </div>
                 </div>
 
