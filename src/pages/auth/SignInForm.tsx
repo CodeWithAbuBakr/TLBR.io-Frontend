@@ -63,7 +63,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
 
   return (
     <>
-      <form className="space-y-6 mt-8" onSubmit={handleSignIn}>
+      <form className="space-y-6 mt-2" onSubmit={handleSignIn}>
         <div>
           <Label>
             {UIText.auth.signIn.email}
@@ -115,12 +115,12 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Checkbox checked={isChecked} onChange={setIsChecked} />
-            <span className={`block font-normal text-theme-sm ${darkMode ? "text-gray-400" : "text-gray-700"}`}>
+            <span className={`block font-normal text-xs text-theme-sm ${darkMode ? "text-gray-400" : "text-gray-700"}`}>
               {UIText.auth.signIn.keep_me_signed_in}
             </span>
           </div>
           <button
-            className="text-sm text-[#6060E5] hover:text-[#2828ff] cursor-pointer hover:underline"
+            className="text-xs text-[#6060E5] hover:text-[#2828ff] cursor-pointer hover:underline"
             onClick={handleOpenForgotPasswrodDialog}
           >
             {UIText.auth.signIn.forgot_password}
@@ -129,7 +129,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
 
         <button
           type="submit"
-          className={`inline-flex items-center justify-center gap-3 py-3 w-full text-sm cursor-pointer font-normal rounded-full px-7 transition-colors
+          className={`inline-flex items-center justify-center gap-3 py-2 w-full text-sm cursor-pointer font-normal rounded-full px-7 transition-colors
             ${darkMode
               ? "bg-[#94E561] text-white hover:bg-[#63cb23]"
               : "bg-[#94E561] text-white hover:bg-[#63cb23]"
