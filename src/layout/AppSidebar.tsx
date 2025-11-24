@@ -67,7 +67,7 @@ const AppSidebar: React.FC = () => {
                 />
               </>
             ) : (
-              <img src={tlbr_icon} alt="Logo" width={100} height={100} />
+              <img src={tlbr_icon} alt="Logo" width={30} height={30} />
             )}
           </div>
         </div>
