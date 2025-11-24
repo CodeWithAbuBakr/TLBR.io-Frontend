@@ -4,14 +4,13 @@ import CryptoJS from "crypto-js";
 import { DataContext } from "./DataContext";
 import { isAuth } from "../utilities/getLocalStorageData";
 import { getAllUserDetails, getUserDetails } from "../services/apiWrapper";
-import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps } from "../utilities/type";
+import type { DataContextTypeProps, StoredUserDetailsProps, StoredAllUserDetailsProps, ToastMessage } from "../utilities/type";
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const navigate = useNavigate();
     const hasFetchedUser = useRef(false);
     const [activeForm, setActiveForm] = useState<"signin" | "signup">("signin");
-    const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
-    const [toastMessage, setToastMessage] = useState("");
+    const [toastMessage, setToastMessage] = useState<ToastMessage | null>(null);
     const [isLoader, setIsLoader] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
     const [isUsersLoading, setIsUsersLoading] = useState(false);
@@ -65,8 +64,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             })
                             .catch((err) => {
                                 console.error(err);
-                                setToastType("error");
-                                setToastMessage(err.message || "Error getting all users details.");
+
+                                setToastMessage({
+                                    type: "error",
+                                    message: err.message || "Error getting all users details.",
+                                    id: Date.now(),
+                                });
                                 setIsUsersLoading(false);
                             });
                     }
@@ -77,12 +80,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     setIsModalOpen(false);
                     hasFetchedUser.current = false;
 
-                    setToastType("error");
-                    setToastMessage(
-                        err.message === "Session expired. You may have logged in from another device."
+                    setToastMessage({
+                        type: "error",
+                        message: err.message === "Session expired. You may have logged in from another device."
                             ? "Session expired. You may have logged in from another device."
-                            : err.message || "Error getting user details."
-                    );
+                            : err.message || "Error getting user details.",
+                        id: Date.now(),
+                    });
 
                     if (err.message === "Session expired. You may have logged in from another device.") {
                         setTimeout(() => {
@@ -93,8 +97,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             localStorage.setItem("isAuth", encryptedIsAuth);
 
                             navigate("/");
-                            setToastType(null);
-                            setToastMessage("");
+                            setToastMessage(null);
                         }, 2000);
                     }
                 });
@@ -105,8 +108,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         activeForm,
         setActiveForm,
         hasFetchedUser,
-        toastType,
-        setToastType,
         toastMessage,
         setToastMessage,
         isLoader,

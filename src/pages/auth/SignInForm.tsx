@@ -50,7 +50,7 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           console.log("Login success:", data);
 
           setIsLoader(false);
-          onShowToast("info", data.message);
+          onShowToast("success", data.message);
 
           // Clear form
           setEmail("");

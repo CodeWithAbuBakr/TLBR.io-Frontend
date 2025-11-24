@@ -8,7 +8,7 @@ import ConfirmDeteleUser from "./confirmDeteleUser";
 const Dashboard: React.FC = () => {
     const [selectedUserId, setSelectedUserId] = useState<string>("");
     const { darkMode, allUsers, isLoader, setIsLoader, isModalOpen, setIsModalOpen,
-        setToastType, setToastMessage, isUsersLoading, setIsUsersLoading } = useData();
+        setToastMessage, isUsersLoading, setIsUsersLoading } = useData();
 
     // Safely extract the array (handle both null and object forms)
     const users: UserProps[] = Array.isArray(allUsers?.users)
@@ -65,7 +65,6 @@ const Dashboard: React.FC = () => {
                     setIsLoader={setIsLoader}
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
-                    setToastType={setToastType}
                     setToastMessage={setToastMessage}
                 />
             )}

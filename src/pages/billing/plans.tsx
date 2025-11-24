@@ -16,7 +16,7 @@ const Plans: React.FC = () => {
     const decryptedTokens = tokens();
     const decryptedUserDetails = userDetails();
     const userId = decryptedUserDetails.user._id;
-    const { darkMode, isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
+    const { darkMode, isLoader, setIsLoader, isModalOpen, setIsModalOpen, setToastMessage } = useData();
 
     const handleSelectedPlan = (plan: "free" | "monthly" | "yearly") => {
         setIsLoader(true);
@@ -31,10 +31,18 @@ const Plans: React.FC = () => {
                     if (data.url && typeof data.url === "string") {
                         // redirect to Stripe Checkout
                         window.location.href = data.url;
-                    }
+                    };
                 })
                 .catch((error: Error) => {
-                    console.error("Checkout error:", error);
+                    console.log("Checkout error:", error.message);
+                    setIsLoader(false);
+                    setIsModalOpen(false);
+
+                    setToastMessage({
+                        type: "error",
+                        message: error.message,
+                        id: Date.now(),
+                    });
                 });
         }
     };

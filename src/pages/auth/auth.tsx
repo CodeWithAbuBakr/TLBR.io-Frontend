@@ -6,7 +6,7 @@ import tlbr_white from "../../assets/tlbr.io-white.png";
 import tlbr_dark from "../../assets/tlbr.io-dark.png";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
-import Toast from "../../hooks/useToast";
+import Toast from "../../toast/toast";
 import Loader from "../../loader/loader";
 import UIText from "../../utilities/testResource";
 import OTPDialog from "./otpDialog";
@@ -15,14 +15,17 @@ import ForgotPassword from "./forgotPassword";
 
 const Auth: React.FC = () => {
     const navigate = useNavigate();
-    const { darkMode, activeForm, setActiveForm, toastType, setToastType, toastMessage, setToastMessage,
-        isLoader, setIsLoader, isModalOpen, setIsModalOpen, openOTPModel, setOpenOTPModel, openForgotPasswordModel, setOpenForgotPasswordModel } = useData();
+    const { darkMode, activeForm, setActiveForm, toastMessage, setToastMessage, isLoader, setIsLoader,
+        isModalOpen, setIsModalOpen, openOTPModel, setOpenOTPModel, openForgotPasswordModel, setOpenForgotPasswordModel } = useData();
 
     const handleShowToast = (type: "error" | "success" | "info", message: string) => {
-        setToastType(type);
-        setToastMessage(message);
+        setToastMessage({
+            type: type,
+            message: message,
+            id: Date.now(),
+        });
 
-        if (type === "info") {
+        if (type === "success") {
             setIsLoader(false);
             setIsModalOpen(true);
             setOpenOTPModel(true);
@@ -54,10 +57,7 @@ const Auth: React.FC = () => {
                 />
             )}
 
-            <div
-                className={`flex items-center justify-center min-h-screen ${darkMode ? "bg-gray-900" : "bg-white"
-                    }`}
-            >
+            <div className={`flex items-center justify-center min-h-screen ${darkMode ? "bg-gray-900" : "bg-white"}`}>
                 <div className="flex flex-col justify-center w-full max-w-md px-6 pt-8">
                     {/* Logo */}
                     <div className="flex justify-center items-center mb-6">
@@ -70,23 +70,14 @@ const Auth: React.FC = () => {
                     </div>
 
                     {/* Title */}
-                    <div
-                        className={`mb-6 text-center ${darkMode ? "text-white/90" : "text-[#0A0A04]"
-                            }`}
-                    >
-                        <h1
-                            className={`mb-2 font-semibold text-2xl ${darkMode ? "text-white/90" : "text-gray-800"
-                                }`}
-                        >
-                            {activeForm === "signin" ? "Welcome to tlbr.io" : "Create tlbr.io account"}
+                    <div className={`mb-6 text-center ${darkMode ? "text-white/90" : "text-[#0A0A04]"}`}>
+                        <h1 className={`mb-2 font-semibold text-2xl ${darkMode ? "text-white/90" : "text-gray-800"}`} >
+                            {activeForm === "signin" ? "Welcome to tlbr.io" : "Create account"}
                         </h1>
-                        <p
-                            className={`text-sm ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"
-                                }`}
-                        >
+                        <p className={`text-sm ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             {activeForm === "signin"
-                                ? "Sign in to get started – your slides are waiting!"
-                                : "Create your account – your slides are awaiting!"}
+                                ? "Your slides are waiting"
+                                : "Your slides are awaiting"}
                         </p>
                     </div>
 
@@ -157,8 +148,7 @@ const Auth: React.FC = () => {
                 <OTPDialog
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
-                    toastType={toastType}
-                    setToastType={setToastType}
+                    toastMessage={toastMessage}
                     setToastMessage={setToastMessage}
                     setIsLoader={setIsLoader}
                     setOpenOTPModel={setOpenOTPModel}
@@ -175,15 +165,7 @@ const Auth: React.FC = () => {
             )}
 
             {/* Global Toast */}
-            {toastType && (
-                <div className="fixed bottom-6 right-6 z-50">
-                    <Toast
-                        infoMessage={toastType === "info" ? toastMessage : ""}
-                        errorMessage={toastType === "error" ? toastMessage : ""}
-                        successMessage={toastType === "success" ? toastMessage : ""}
-                    />
-                </div>
-            )}
+            {toastMessage && <Toast toastMessage={toastMessage} />}
         </>
     );
 };

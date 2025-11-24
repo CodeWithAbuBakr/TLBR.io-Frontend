@@ -89,7 +89,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           setIsModalOpen(false);
         } else if (data) {
           console.log("Registration success:", data);
-          onShowToast("info", data.message);
+          onShowToast("success", data.message);
 
           setIsLoader(false);
           setIsModalOpen(false);

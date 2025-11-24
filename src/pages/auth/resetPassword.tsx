@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useData } from '../../utilities/useData';
-import Toast from "../../hooks/useToast";
+import Toast from "../../toast/toast";
 import Loader from '../../loader/loader';
 import CryptoJS from 'crypto-js';
 import Label from '../../components/ui/input/Label';
@@ -19,8 +19,8 @@ const ResetPassword: React.FC = () => {
     const decryptedUserDetails = userDetails();
     const [resetPasswordStatus, setResetPasswordStatus] = useState<ResetPasswordStatus>("pending");
     const { darkMode, password, setPassword, showPassword, setShowPassword, passwordStrength,
-        setPasswordStrength, toastType, setToastType, toastMessage, setToastMessage, isModalOpen,
-        setIsModalOpen, isLoader, setIsLoader, confirmPassword, setConfrimPassword, showConfirmPassword, setConfirmShowPassword } = useData();
+        setPasswordStrength, toastMessage, setToastMessage, isModalOpen, setIsModalOpen, isLoader,
+        setIsLoader, confirmPassword, setConfrimPassword, showConfirmPassword, setConfirmShowPassword } = useData();
 
     // Extract token from URL
     const resetLink = useMemo(() => {
@@ -71,16 +71,25 @@ const ResetPassword: React.FC = () => {
     const handleResetPassword = () => {
         // Check if new password is empty
         if (!password) {
-            setToastType("error");
-            setToastMessage("Password cannot be empty.");
+            setToastMessage({
+                type: "error",
+                message: "Password cannot be empty.",
+                id: Date.now(),
+            });
             return;
         } else if (!confirmPassword) {
-            setToastType("error");
-            setToastMessage("Confirm Password cannot be empty.");
+            setToastMessage({
+                type: "error",
+                message: "Confirm Password cannot be empty.",
+                id: Date.now(),
+            });
             setPasswordStrength({ message: "", color: "" });
         } else if (password !== confirmPassword) {
-            setToastType("error");
-            setToastMessage("Password doesn't match with confirm password.");
+            setToastMessage({
+                type: "error",
+                message: "Password doesn't match with confirm password.",
+                id: Date.now(),
+            });
             return;
         } else if (resetLink && passwordStrength.message === "Your password looks secure.") {
             // Start loading
@@ -95,8 +104,11 @@ const ResetPassword: React.FC = () => {
                     setResetPasswordStatus("error");
 
                     setPassword('');
-                    setToastType("error");
-                    setToastMessage(error.message || "An error occurred while reset password.");
+                    setToastMessage({
+                        type: "error",
+                        message: error.message || "An error occurred while reset password.",
+                        id: Date.now(),
+                    });
                 } else if (data) {
                     console.log("Reset Password success:", data);
                     setIsLoader(false);
@@ -112,8 +124,11 @@ const ResetPassword: React.FC = () => {
                         localStorage.removeItem("userDetails");
                     };
 
-                    setToastType("success");
-                    setToastMessage(data.message);
+                    setToastMessage({
+                        type: "success",
+                        message: data.message,
+                        id: Date.now(),
+                    });
 
                     // Reset inputs
                     setPassword('');
@@ -124,8 +139,7 @@ const ResetPassword: React.FC = () => {
     };
 
     const handleContinueToLogin = () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
 
         // Navigate to login page
         navigate('/');
@@ -304,15 +318,7 @@ const ResetPassword: React.FC = () => {
             )};
 
             {/* Toast */}
-            {toastType && (
-                <div className="fixed bottom-6 right-6 z-50">
-                    <Toast
-                        infoMessage={toastType === "info" ? toastMessage : ""}
-                        errorMessage={toastType === "error" ? toastMessage : ""}
-                        successMessage={toastType === "success" ? toastMessage : ""}
-                    />
-                </div>
-            )}
+            {toastMessage && <Toast toastMessage={toastMessage} />}
         </>
     );
 };

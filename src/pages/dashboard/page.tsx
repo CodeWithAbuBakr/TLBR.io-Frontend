@@ -1,6 +1,7 @@
 'use client';
 import { useData } from "../../utilities/useData";
 import { DashboardLayout } from "../../layout/page";
+import AppToast from "../../toast/toast";
 import AdminDashboard from "../../pages/admin/dashboard/page";
 import GetStarted from "./getStarted";
 import TrialPeriod from "./trialPeriod";
@@ -9,7 +10,7 @@ import QuickStats from "./quickStats";
 import { userDetails } from "../../utilities/getLocalStorageData";
 
 const Dashboard = () => {
-    const { darkMode, userData } = useData();
+    const { darkMode, userData, toastMessage } = useData();
 
     // Safely get and parse user data from localStorage
     let decryptedUserDetails;
@@ -51,6 +52,9 @@ const Dashboard = () => {
                     )}
                 </div>
             </DashboardLayout>
+
+            {/* Global Toast */}
+            {toastMessage && <AppToast toastMessage={toastMessage} />}
         </>
     );
 };

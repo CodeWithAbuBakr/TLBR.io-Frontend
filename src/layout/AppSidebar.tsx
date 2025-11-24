@@ -22,16 +22,15 @@ const navItems: NavItem[] = [
 const AppSidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { darkMode, setToastType, setToastMessage } = useData();
+  const { darkMode, setToastMessage } = useData();
   const { isExpanded, isMobileOpen, isHovered, setIsHovered, setIsMobileOpen } = useSidebar();
   const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
   const isActive = (path: string) => path === location.pathname;
 
   // Clear toast on navigation
   useEffect(() => {
-    setToastType(null);
-    setToastMessage("");
-  }, [location.pathname, setToastType, setToastMessage]);
+    setToastMessage(null);
+  }, [location.pathname, setToastMessage]);
 
   const handleSubmenuToggle = (index: number) => {
     setOpenSubmenu((prev) => (prev === index ? null : index));

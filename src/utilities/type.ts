@@ -7,6 +7,10 @@ export interface ToastProps {
     infoMessage: string;
 }
 
+export interface ToastPropsMsg {
+    toastMessage: ToastMessage | null;
+}
+
 export interface ShowToastProps {
     onShowToast: (type: "error" | "success" | "info", message: string) => void;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -157,12 +161,17 @@ export type SidebarContextType = {
     setIsMobileOpen: (isOpen: boolean) => void;
 }
 
+export interface ToastMessage {
+    id: number;
+    type: "error" | "success" | "info" | "promise";
+    message: string;
+}
+
 export interface DialogProps {
     isModalOpen: boolean;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    toastType?: "error" | "success" | "info" | null;
-    setToastType: React.Dispatch<React.SetStateAction<"error" | "success" | "info" | null>>;
-    setToastMessage: React.Dispatch<React.SetStateAction<string>>;
+    toastMessage: ToastMessage | null;
+    setToastMessage: React.Dispatch<React.SetStateAction<ToastMessage | null>>;
     setIsLoader: React.Dispatch<React.SetStateAction<boolean>>;
     setOpenOTPModel: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -179,18 +188,15 @@ export interface ConfirmDeleteUserDialogProps {
     setIsLoader: React.Dispatch<React.SetStateAction<boolean>>;
     isModalOpen: boolean;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setToastType: React.Dispatch<React.SetStateAction<"error" | "success" | "info" | null>>;
-    setToastMessage: React.Dispatch<React.SetStateAction<string>>;
+    setToastMessage: React.Dispatch<React.SetStateAction<ToastMessage | null>>;
 }
 
 export interface DataContextTypeProps {
     activeForm: "signin" | "signup";
     setActiveForm: React.Dispatch<React.SetStateAction<"signin" | "signup">>;
     hasFetchedUser: React.MutableRefObject<boolean>;
-    toastType: "error" | "success" | "info" | null;
-    setToastType: React.Dispatch<React.SetStateAction<"error" | "success" | "info" | null>>;
-    toastMessage: string;
-    setToastMessage: React.Dispatch<React.SetStateAction<string>>;
+    toastMessage: ToastMessage | null;
+    setToastMessage: React.Dispatch<React.SetStateAction<ToastMessage | null>>;
     isLoader: boolean;
     setIsLoader: React.Dispatch<React.SetStateAction<boolean>>;
     darkMode: boolean;

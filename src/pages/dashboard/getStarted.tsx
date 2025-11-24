@@ -6,25 +6,22 @@ import { useData } from '../../utilities/useData';
 
 const GetStarted: React.FC = () => {
     const navigate = useNavigate();
-    const { darkMode, setToastType, setToastMessage } = useData();
+    const { darkMode, setToastMessage } = useData();
 
     const handleDownload = () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
 
         navigate('/download');
     }
 
     const handleBilling = () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
 
         navigate('/billing');
     }
 
     const handleSetting = () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
 
         navigate('/setting');
     }

@@ -14,7 +14,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
     setIsModalOpen,
     setOpenForgotPasswordModel,
 }) => {
-    const { darkMode, email, setEmail, setPassword, setToastType, setToastMessage,
+    const { darkMode, email, setEmail, setPassword, setToastMessage,
         isLoader, setIsLoader, openForgotPasswordModel, } = useData();
 
     // Email validation helper
@@ -34,14 +34,20 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
     const handleSendLink = () => {
         // Basic validation
         if (!email) {
-            setToastType("info");
-            setToastMessage("Please enter your email address.");
+            setToastMessage({
+                type: "info",
+                message: "Please enter your email address.",
+                id: Date.now(),
+            });
             return;
         }
 
         if (!isValidEmail(email)) {
-            setToastType("error");
-            setToastMessage("Please enter a valid email address.");
+            setToastMessage({
+                type: "error",
+                message: "Please enter a valid email address.",
+                id: Date.now(),
+            });
             return;
         }
 
@@ -56,14 +62,20 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
                 setIsLoader(false);
                 setOpenForgotPasswordModel(true);
 
-                setToastType("error");
-                setToastMessage(error.message || "An error occurred while sending the reset link.");
+                setToastMessage({
+                    type: "error",
+                    message: error.message || "An error occurred while sending the reset link.",
+                    id: Date.now(),
+                });
             } else if (data) {
                 console.log("Forgot Password success:", data);
                 setIsLoader(false);
 
-                setToastType("info");
-                setToastMessage(data.message);
+                setToastMessage({
+                    type: "info",
+                    message: data.message,
+                    id: Date.now(),
+                });
 
                 // Reset email input
                 setEmail('');

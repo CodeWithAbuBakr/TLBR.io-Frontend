@@ -12,7 +12,6 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
     setIsLoader,
     isModalOpen,
     setIsModalOpen,
-    setToastType,
     setToastMessage,
     userId,
 }) => {
@@ -20,8 +19,7 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
     const { darkMode, setAllUsers, setIsUsersLoading } = useData();
 
     const handleDelete = () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
 
         if (userId && decryptedTokens) {
             setIsLoader(true);
@@ -33,8 +31,11 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
                     setIsModalOpen(false);
                     setIsUsersLoading(true);
 
-                    setToastType("success");
-                    setToastMessage(data.message || "User deleted successfully");
+                    setToastMessage({
+                        type: "success",
+                        message: data.message || "User deleted successfully",
+                        id: Date.now(),
+                    });
 
                     // Refresh all users after delete
                     getAllUserDetails()
@@ -44,8 +45,11 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
                             setIsUsersLoading(false);
                         })
                         .catch((err) => {
-                            setToastType("error");
-                            setToastMessage(err.message || "Error getting all users details.");
+                            setToastMessage({
+                                type: "error",
+                                message: err.message || "Error getting all users details.",
+                                id: Date.now(),
+                            });
                             setIsLoader(false);
                             setIsUsersLoading(false);
                         });
@@ -59,11 +63,18 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
                         error.message === "You cannot delete your own account"
                     ) {
                         setIsModalOpen(false);
-                        setToastType("info");
-                        setToastMessage(error.message);
+
+                        setToastMessage({
+                            type: "info",
+                            message: error.message,
+                            id: Date.now(),
+                        });
                     } else {
-                        setToastType("error");
-                        setToastMessage(error.message || "Error deleting user.");
+                        setToastMessage({
+                            type: "error",
+                            message: error.message || "Error deleting user.",
+                            id: Date.now(),
+                        });
                     }
                 });
         }

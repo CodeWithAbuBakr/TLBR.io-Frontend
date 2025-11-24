@@ -12,7 +12,7 @@ import { IoClose } from "react-icons/io5";
 import { BsThreeDots } from "react-icons/bs";
 
 const AppHeader: React.FC = () => {
-  const { darkMode, setToastType, setToastMessage } = useData();
+  const { darkMode, setToastMessage } = useData();
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,8 +26,7 @@ const AppHeader: React.FC = () => {
   };
 
   const toggleApplicationMenu = () => {
-    setToastType(null);
-    setToastMessage('');
+    setToastMessage(null);
     setApplicationMenuOpen(!isApplicationMenuOpen);
   };
 

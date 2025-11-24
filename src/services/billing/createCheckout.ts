@@ -18,10 +18,10 @@ export const createCheckout = async (
 
         const result = await response.json();
 
-        if (result) {
+        if (result.user !== undefined) {
             callback(null, result);
         } else {
-            callback(new Error(result.message || "Failed to retrieve user details."), null);
+            callback(new Error(result.message || result.error || "Failed to retrieve user details."), null);
         }
     } catch (error) {
         callback(error as Error, null);

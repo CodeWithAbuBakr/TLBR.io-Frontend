@@ -1,3 +1,4 @@
+@import "@nuxt/ui";
 @import "tailwindcss";
 
 ::selection {

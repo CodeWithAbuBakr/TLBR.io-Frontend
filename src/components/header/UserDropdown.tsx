@@ -6,15 +6,15 @@ import { Dropdown } from "../ui/dropdown/Dropdown";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { TbLogout2 } from "react-icons/tb";
 import UIText from "../../utilities/testResource";
-import Toast from "../../hooks/useToast";
+import Toast from "../../toast/toast";
 import Loader from "../../loader/loader";
 import { doLogout } from "../../services/apiWrapper";
 import { userDetails, tokens } from "../../utilities/getLocalStorageData";
 
 const UserDropdown = () => {
   const navigate = useNavigate();
-  const { darkMode, setEmail, setPassword, isOpen, setIsOpen, isLoader, setIsLoader, isModalOpen, setIsModalOpen,
-    toastType, setToastType, toastMessage, setToastMessage, userData, hasFetchedUser } = useData();
+  const { darkMode, setEmail, setPassword, isOpen, setIsOpen, isLoader, setIsLoader,
+    isModalOpen, setIsModalOpen, toastMessage, setToastMessage, userData, hasFetchedUser } = useData();
 
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -53,15 +53,18 @@ const UserDropdown = () => {
           setEmail("");
           setPassword("");
           setIsOpen(false);
-          setToastType(null);
-          setToastMessage("");
+          setToastMessage(null);
           hasFetchedUser.current = false;
           navigate("/");
         })
         .catch((error) => {
           console.log("Logout error:", error);
-          setToastType("error");
-          setToastMessage(error.message || "An error occurred during logout.");
+
+          setToastMessage({
+            type: "error",
+            message: error.message || "An error occurred during logout.",
+            id: Date.now(),
+          });
           setIsLoader(false);
           setIsModalOpen(false);
         });
@@ -129,15 +132,8 @@ const UserDropdown = () => {
         </Dropdown>
       </div>
 
-      {toastType && (
-        <div className="fixed bottom-6 right-6 z-50">
-          <Toast
-            infoMessage={toastType === "info" ? toastMessage : ""}
-            errorMessage={toastType === "error" ? toastMessage : ""}
-            successMessage={toastType === "success" ? toastMessage : ""}
-          />
-        </div>
-      )}
+      {/* Global Toast */}
+      {toastMessage && <Toast toastMessage={toastMessage} />}
     </>
   );
 };

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Loader from "../../loader/loader";
-import Toast from "../../hooks/useToast";
+import Toast from "../../toast/toast";
 import CryptoJS from "crypto-js";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { useData } from "../../utilities/useData";
@@ -13,7 +13,7 @@ const EmailVerification: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const hasVerified = useRef(false);
-    const { darkMode, setActiveForm, toastType, setToastType, toastMessage, setToastMessage,
+    const { darkMode, setActiveForm, toastMessage, setToastMessage,
         isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
     const [verificationStatus, setVerificationStatus] = useState<"pending" | "success" | "error">("pending");
 
@@ -43,33 +43,37 @@ const EmailVerification: React.FC = () => {
                         hasVerified.current = true;
                         setVerificationStatus("error");
 
-                        setToastType("error");
-                        setToastMessage(error.message || "An error occurred during verification.");
+                        setToastMessage({
+                            type: "error",
+                            message: error.message || "An error occurred during verification.",
+                            id: Date.now(),
+                        });
                     } else if (data) {
                         console.log("Verification success:", data);
                         setIsLoader(false);
                         setIsModalOpen(false);
                         setVerificationStatus("success");
 
-                        setToastType("success");
-                        setToastMessage("User verified successfully");
+                        setToastMessage({
+                            type: "success",
+                            message: "User verified successfully",
+                            id: Date.now(),
+                        });
                     }
                 });
             }
         }
-    }, [token, setIsLoader, setIsModalOpen, setToastType, setToastMessage]);
+    }, [token, setIsLoader, setIsModalOpen, setToastMessage]);
 
     const handleContinueToSignin = async () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
 
         setActiveForm("signin");
         navigate('/');
     }
 
     const handleContinueToSignup = async () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
 
         setActiveForm("signup");
         navigate('/');
@@ -126,15 +130,7 @@ const EmailVerification: React.FC = () => {
                 </div>
 
                 {/* Toast */}
-                {toastType && (
-                    <div className="fixed bottom-6 right-6 z-50">
-                        <Toast
-                            infoMessage={toastType === "info" ? toastMessage : ""}
-                            errorMessage={toastType === "error" ? toastMessage : ""}
-                            successMessage={toastType === "success" ? toastMessage : ""}
-                        />
-                    </div>
-                )}
+                {toastMessage && <Toast toastMessage={toastMessage} />}
             </>
         );
     };
@@ -184,15 +180,7 @@ const EmailVerification: React.FC = () => {
             )}
 
             {/* Toast */}
-            {toastType && (
-                <div className="fixed bottom-6 right-6 z-50">
-                    <Toast
-                        infoMessage={toastType === "info" ? toastMessage : ""}
-                        errorMessage={toastType === "error" ? toastMessage : ""}
-                        successMessage={toastType === "success" ? toastMessage : ""}
-                    />
-                </div>
-            )}
+            {toastMessage && <Toast toastMessage={toastMessage} />}
         </>
     );
 };

@@ -1,26 +1,28 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import UIText from '../../utilities/testResource';
 import { FaWindows } from 'react-icons/fa';
-import Toast from '../../hooks/useToast';
 import { useData } from '../../utilities/useData';
 
 const Windows: React.FC = () => {
-    const { darkMode, userData } = useData();
-    const [toastType, setToastType] = useState<"error" | "success" | "info" | null>(null);
-    const [toastMessage, setToastMessage] = useState("");
+    const { darkMode, userData, setToastMessage } = useData();
 
     const handleDownloads = () => {
-        setToastType(null);
-        setToastMessage("");
+        setToastMessage(null);
         console.log("User Data in Windows Page:", userData);
 
         if (userData && userData.user.isSubscribed !== false) {
-            setToastType("success");
-            setToastMessage("You have permission to download the tlbr.io installer. This feature is currently in development!");
+            setToastMessage({
+                type: "success",
+                message: "You have permission to download the tlbr.io installer. This feature is currently in development!",
+                id: Date.now(),
+            });
         } else {
-            setToastType("info");
-            setToastMessage("You don’t have permission to download the tlbr.io installer. Upgrade your plan to access TLBR.io features.");
+            setToastMessage({
+                type: "info",
+                message: "You don’t have permission to download the tlbr.io installer. Upgrade your plan to access TLBR.io features.",
+                id: Date.now(),
+            });
         };
     };
 
@@ -46,17 +48,6 @@ const Windows: React.FC = () => {
                     {UIText.download.windows.button}
                 </button>
             </div>
-
-            {/* Global Toast */}
-            {toastType && (
-                <div className="fixed bottom-6 right-6 z-50">
-                    <Toast
-                        infoMessage={toastType === "info" ? toastMessage : ""}
-                        errorMessage={toastType === "error" ? toastMessage : ""}
-                        successMessage={toastType === "success" ? toastMessage : ""}
-                    />
-                </div>
-            )}
         </>
     );
 };

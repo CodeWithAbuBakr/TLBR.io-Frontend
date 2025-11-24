@@ -14,8 +14,7 @@ import { userSession } from "../../utilities/getLocalStorageData";
 const OTPDialog: React.FC<DialogProps> = ({
     isModalOpen,
     setIsModalOpen,
-    toastType,
-    setToastType,
+    toastMessage,
     setToastMessage,
     setIsLoader,
     setOpenOTPModel,
@@ -49,8 +48,11 @@ const OTPDialog: React.FC<DialogProps> = ({
         const otp = inputsRef.current.map((input) => input?.value || "").join("");
 
         if (otp.length !== 6) {
-            setToastType("info");
-            setToastMessage("Please enter a valid 6-digit code.");
+            setToastMessage({
+                type: "info",
+                message: "Please enter a valid 6-digit code.",
+                id: Date.now(),
+            });
             return;
         }
 
@@ -63,8 +65,11 @@ const OTPDialog: React.FC<DialogProps> = ({
                 setIsLoader(false);
                 setOpenOTPModel(true);
 
-                setToastType("error");
-                setToastMessage(error.message || "An error occurred during verifying OTP.");
+                setToastMessage({
+                    type: "error",
+                    message: error.message || "An error occurred during verifying OTP.",
+                    id: Date.now(),
+                });
             } else if (data) {
                 console.log("Verify OTP success:", data);
 
@@ -73,12 +78,14 @@ const OTPDialog: React.FC<DialogProps> = ({
                 const encryptedIsAuth = CryptoJS.AES.encrypt("true", import.meta.env.VITE_SECRET_KEY).toString();
                 localStorage.setItem("isAuth", encryptedIsAuth);
 
-                setToastType("success");
-                setToastMessage("Your account has been verified successfully.");
+                setToastMessage({
+                    type: "success",
+                    message: "Your account has been verified successfully.",
+                    id: Date.now(),
+                });
 
                 setTimeout(() => {
-                    setToastType(null);
-                    setToastMessage("");
+                    setToastMessage(null);
                     setIsModalOpen(false);
                     setShowSuccessScreen(false);
 
@@ -88,13 +95,12 @@ const OTPDialog: React.FC<DialogProps> = ({
         });
     };
 
-    // Show resend section and start countdown
     useEffect(() => {
-        if (toastType === "error") {
+        if (toastMessage?.type === "error") {
             setResendTimer(60);
             setResendOTPVisible(true);
-        };
-    }, [toastType]);
+        }
+    }, [toastMessage?.type]);
 
     const handleInput = (e: React.FormEvent<HTMLInputElement>, index: number) => {
         const input = e.currentTarget;
@@ -102,8 +108,12 @@ const OTPDialog: React.FC<DialogProps> = ({
 
         if (!/^[0-9]$/.test(value) && value !== "") {
             input.value = "";
-            setToastType("info");
-            setToastMessage("Please enter only digits.");
+
+            setToastMessage({
+                type: "info",
+                message: "Please enter only digits.",
+                id: Date.now(),
+            });
             return;
         }
 
@@ -137,8 +147,11 @@ const OTPDialog: React.FC<DialogProps> = ({
         });
 
         if (hasInvalidChar) {
-            setToastType("info");
-            setToastMessage("Please enter only digits.");
+            setToastMessage({
+                type: "info",
+                message: "Please enter only digits.",
+                id: Date.now(),
+            });
             return;
         }
 
@@ -167,21 +180,31 @@ const OTPDialog: React.FC<DialogProps> = ({
                 if (error) {
                     console.log("Resend OTP error:", error);
 
-                    setToastType("error");
-                    setToastMessage("Failed to resend OTP. Please try again.");
+                    setToastMessage({
+                        type: "error",
+                        message: "Failed to resend OTP. Please try again.",
+                        id: Date.now(),
+                    });
                 } else if (data) {
                     console.log("Resend OTP success:", data);
 
-                    setToastType("success");
-                    setToastMessage(`A new OTP has been sent to your ${email}.`);
+                    setToastMessage({
+                        type: "success",
+                        message: `A new OTP has been sent to your ${email}.`,
+                        id: Date.now(),
+                    });
                 }
             });
 
             setResendTimer(60);
         } catch (error) {
             console.log(error);
-            setToastType("error");
-            setToastMessage("Failed to resend verification code. Please try again.");
+
+            setToastMessage({
+                type: "error",
+                message: "Failed to resend verification code. Please try again.",
+                id: Date.now(),
+            });
         } finally {
             setIsLoader(false);
             setIsResending(false);

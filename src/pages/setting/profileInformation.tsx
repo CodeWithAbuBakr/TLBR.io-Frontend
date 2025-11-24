@@ -12,9 +12,9 @@ import Label from "../../components/ui/input/Label";
 const ProfileInformation: React.FC = () => {
     const decryptedUserDetails = userDetails();
     const decryptedUserSession = userSession();
-    const { darkMode, fname, setFname, email, setEmail, password, setPassword, showPassword, setShowPassword, passwordStrength,
-        setPasswordStrength, isLoader, setIsLoader, setToastType, setToastMessage, isModalOpen,
-        setIsModalOpen, openForgotPasswordModel, setOpenForgotPasswordModel } = useData();
+    const { darkMode, fname, setFname, email, setEmail, password, setPassword, showPassword,
+        setShowPassword, passwordStrength, setPasswordStrength, isLoader, setIsLoader, setToastMessage,
+        isModalOpen, setIsModalOpen, openForgotPasswordModel, setOpenForgotPasswordModel } = useData();
 
     useEffect(() => {
         if (decryptedUserDetails) {
@@ -58,11 +58,13 @@ const ProfileInformation: React.FC = () => {
 
     const handleSaveChanges = () => {
         if (password !== decryptedUserSession.password) {
-            setToastType("error");
-            setToastMessage("Please enter the correct password.");
+            setToastMessage({
+                type: "error",
+                message: "Please enter the correct password.",
+                id: Date.now(),
+            });
         } else {
-            setToastType(null);
-            setToastMessage("");
+            setToastMessage(null);
 
             setIsLoader(false);
             setIsModalOpen(true);
