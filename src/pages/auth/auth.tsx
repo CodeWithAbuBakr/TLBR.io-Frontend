@@ -58,20 +58,20 @@ const Auth: React.FC = () => {
             )}
 
             <div className={`flex items-center justify-center min-h-screen ${darkMode ? "bg-gray-900" : "bg-white"}`}>
-                <div className="flex flex-col justify-center w-full max-w-md px-6 pt-8">
+                <div className="flex flex-col justify-center w-full max-w-md px-6 pt-4">
                     {/* Logo */}
-                    <div className="flex justify-center items-center mb-6">
+                    <div className="flex justify-center items-center mb-4">
                         <img
                             src={darkMode ? tlbr_white : tlbr_dark}
                             alt="Logo"
-                            width={130}
+                            width={150}
                             height={30}
                         />
                     </div>
 
                     {/* Title */}
                     <div className={`mb-6 text-center ${darkMode ? "text-white/90" : "text-[#0A0A04]"}`}>
-                        <h1 className={`mb-2 font-semibold text-2xl ${darkMode ? "text-white/90" : "text-gray-800"}`} >
+                        <h1 className={`mb-2 font-semibold text-xl ${darkMode ? "text-white/90" : "text-gray-800"}`} >
                             {activeForm === "signin" ? "Welcome to tlbr.io" : "Create account"}
                         </h1>
                         <p className={`text-sm ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
@@ -85,7 +85,7 @@ const Auth: React.FC = () => {
                     <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 w-full">
                         <button
                             onClick={() => setActiveForm("signin")}
-                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 text-sm font-normal rounded-full px-7 transition-colors w-full
+                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2 px-6 text-sm font-normal rounded-full transition-colors
                             ${activeForm === "signin"
                                     ? "bg-[#333333] text-white hover:bg-[#666666]"
                                     : `${darkMode
@@ -98,7 +98,7 @@ const Auth: React.FC = () => {
                         </button>
                         <button
                             onClick={() => setActiveForm("signup")}
-                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 text-sm font-normal rounded-full px-7 transition-colors w-full
+                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2 px-6 text-sm font-normal rounded-full transition-colors
                             ${activeForm === "signup"
                                     ? "bg-[#333333] text-white hover:bg-[#666666]"
                                     : `${darkMode

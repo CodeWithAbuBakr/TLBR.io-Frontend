@@ -25,7 +25,7 @@ export const loginUser = async (
         const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/login`, requestOptions);
         const result: ResponseProps = await response.json();
 
-        if (result.message === "If your email is valid, an OTP has been sent to your email address. It will expire in 5 minutes.") {
+        if (result.message === "If your email is valid, an OTP has been sent to your email address. It will expire in 2 minutes.") {
             const userData = { email, password, keepMeLoggedIn: isChecked };
             const encryptedUserData = CryptoJS.AES.encrypt(JSON.stringify(userData), import.meta.env.VITE_SECRET_KEY).toString();
             localStorage.setItem("userSession", encryptedUserData);

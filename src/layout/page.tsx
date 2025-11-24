@@ -53,19 +53,17 @@ export const DashboardLayout = ({
             : "lg:ml-[90px]";
 
     return (
-        <div
-            className={`min-h-screen xl:flex transition-colors duration-300
-                ${darkMode ? "bg-[#1E1E1E] text-gray-100" : "bg-white text-gray-900"}`}
-        >
+        <div className={`min-h-screen xl:flex transition-colors duration-300
+            ${darkMode ? "bg-[#1E1E1E] text-gray-100" : "bg-white text-gray-900"}`}>
             {/* Sidebar and Backdrop */}
             <AppSidebar />
             <Backdrop />
+
             {/* Main Content Area */}
-            <div
-                className={`flex-1 transition-all  duration-300 ease-in-out ${mainContentMargin}`}
-            >
+            <div className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}>
                 {/* Header */}
                 <AppHeader />
+
                 {/* Page Content */}
                 <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">{children}</div>
             </div>

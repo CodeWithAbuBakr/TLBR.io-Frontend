@@ -10,8 +10,7 @@ const Backdrop: React.FC = () => {
 
   return (
     <div
-      className={`fixed inset-0 z-40 lg:hidden transition-colors duration-300 ${darkMode ? "bg-black/60" : "bg-gray-900/50"
-        }`}
+      className={`fixed inset-0 z-40 lg:hidden transition-colors duration-300 ${darkMode ? "bg-black/60" : "bg-gray-900/50"}`}
       onClick={toggleMobileSidebar}
     />
   );

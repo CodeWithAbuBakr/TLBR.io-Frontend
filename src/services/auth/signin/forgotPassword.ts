@@ -21,7 +21,7 @@ export const forgotPassword = async (
         const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/forgot/password`, requestOptions);
         const result: ResponseProps = await response.json();
 
-        if (result.message === "If your email is valid, a password reset link has been sent to your email address. It will expire in 5 minutes.") {
+        if (result.message === "If your email is valid, a password reset link has been sent to your email address. It will expire in 2 minutes.") {
             callback(null, result);
         } else {
             const error = new Error(result.message || "Fogot password failed");
