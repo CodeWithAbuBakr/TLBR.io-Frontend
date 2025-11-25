@@ -265,7 +265,7 @@ const SignUpForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
 
         <button
           type="submit"
-          className={`inline-flex items-center justify-center gap-3 py-3 mb-4 w-full text-sm font-normal rounded-full px-7 cursor-pointer transition-colors
+          className={`inline-flex items-center justify-center gap-3 py-2 mb-4 w-full text-sm font-normal rounded-full px-7 cursor-pointer transition-colors
             ${darkMode
               ? "bg-[#94E561] text-white hover:bg-[#63cb23]"
               : "bg-[#94E561] text-white hover:bg-[#63cb23]"
