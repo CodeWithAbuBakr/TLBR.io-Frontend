@@ -132,7 +132,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
                     <div className="flex flex-col sm:flex-col md:flex-row justify-end gap-3 mt-8">
                         <button
                             onClick={handleCancel}
-                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
+                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-sm font-normal rounded-full px-7 transition-colors
                             border ${darkMode
                                     ? "border-gray-600 text-gray-300 hover:bg-[#CCCCCC] hover:text-white"
                                     : "border-gray-300 text-gray-700 hover:bg-[#666666] hover:text-white"
@@ -142,7 +142,7 @@ const ForgotPassword: React.FC<ForgotPasswordDialogProps> = ({
                         </button>
                         <button
                             onClick={handleSendLink}
-                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
+                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-sm font-normal rounded-full px-7 transition-colors
                                 ${darkMode
                                     ? "bg-[#94E561] text-black hover:bg-[#63cb23]"
                                     : "bg-[#94E561] text-white hover:bg-[#63cb23]"

@@ -298,7 +298,7 @@ const OTPDialog: React.FC<DialogProps> = ({
                             <div className="flex justify-end gap-3">
                                 <button
                                     onClick={handleCancel}
-                                    className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
+                                    className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-sm font-normal rounded-full px-7 transition-colors
                                         border ${darkMode
                                             ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
                                             : "border-gray-300 text-gray-700 hover:bg-[#333333] hover:text-white"}`}
@@ -307,7 +307,7 @@ const OTPDialog: React.FC<DialogProps> = ({
                                 </button>
                                 <button
                                     onClick={handleVerify}
-                                    className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-normal rounded-full px-7 transition-colors
+                                    className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-sm font-normal rounded-full px-7 transition-colors
                                         ${darkMode
                                             ? "bg-[#94E561] text-black hover:bg-[#63cb23]"
                                             : "bg-[#94E561] text-white hover:bg-[#63cb23]"}`}

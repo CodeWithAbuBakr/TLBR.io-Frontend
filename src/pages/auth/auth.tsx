@@ -85,7 +85,7 @@ const Auth: React.FC = () => {
                     <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 w-full">
                         <button
                             onClick={() => setActiveForm("signin")}
-                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2 px-6 text-sm font-normal rounded-full transition-colors
+                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 px-6 text-sm font-normal rounded-full transition-colors
                             ${activeForm === "signin"
                                     ? "bg-[#333333] text-white hover:bg-[#666666]"
                                     : `${darkMode
@@ -98,7 +98,7 @@ const Auth: React.FC = () => {
                         </button>
                         <button
                             onClick={() => setActiveForm("signup")}
-                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2 px-6 text-sm font-normal rounded-full transition-colors
+                            className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 px-6 text-sm font-normal rounded-full transition-colors
                             ${activeForm === "signup"
                                     ? "bg-[#333333] text-white hover:bg-[#666666]"
                                     : `${darkMode

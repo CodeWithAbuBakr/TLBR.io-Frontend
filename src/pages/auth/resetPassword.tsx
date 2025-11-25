@@ -167,7 +167,7 @@ const ResetPassword: React.FC = () => {
 
                         <button
                             onClick={handleContinueToLogin}
-                            className="w-full bg-[#94E561] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                            className="w-full bg-[#94E561] cursor-pointer text-white py-2.5 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
                             {UIText.auth.resetPassword.success.button}
                         </button>
@@ -193,7 +193,7 @@ const ResetPassword: React.FC = () => {
 
                         <button
                             onClick={() => navigate('/')}
-                            className="w-full bg-red-500 cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                            className="w-full bg-red-500 cursor-pointer text-white py-2.5 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
                             {UIText.auth.resetPassword.failed.button}
                         </button>
@@ -245,8 +245,6 @@ const ResetPassword: React.FC = () => {
                                     )}
                                 </span>
                             </div>
-
-
 
                             {passwordStrength.message && (
                                 <p
@@ -309,7 +307,7 @@ const ResetPassword: React.FC = () => {
                         {/* Reset Password Button */}
                         <button
                             onClick={handleResetPassword}
-                            className="w-full bg-[#94E561] cursor-pointer text-white py-3 px-8 mt-6 rounded-full font-medium transition-all duration-200"
+                            className="w-full bg-[#94E561] cursor-pointer text-white py-2.5 px-8 mt-6 rounded-full font-medium transition-all duration-200"
                         >
                             {UIText.auth.resetPassword.button}
                         </button>

@@ -122,7 +122,7 @@ const EmailVerification: React.FC = () => {
                         {/* Go to Signup Button */}
                         <button
                             onClick={handleContinueToSignup}
-                            className="bg-red-500 hover:bg-red-600 cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
+                            className="bg-red-500 hover:bg-red-600 cursor-pointer text-white font-medium py-2.5 px-8 rounded-full transition-all duration-200"
                         >
                             {UIText.auth.verifyUser.failed.button}
                         </button>
@@ -171,7 +171,7 @@ const EmailVerification: React.FC = () => {
                         {/* Continue Button */}
                         <button
                             onClick={handleContinueToSignin}
-                            className="bg-[#94E561] hover:bg-[#63cb23] cursor-pointer text-white font-medium py-3 px-8 rounded-full transition-all duration-200"
+                            className="bg-[#94E561] hover:bg-[#63cb23] cursor-pointer text-white font-medium py-2.5 px-8 rounded-full transition-all duration-200"
                         >
                             {UIText.auth.verifyUser.success.button}
                         </button>
