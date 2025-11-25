@@ -5,6 +5,7 @@ import CryptoJS from "crypto-js";
 import { useData } from "../../utilities/useData";
 import UIText from "../../utilities/testResource";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
+import { FcProcess } from "react-icons/fc";
 import { getVerifySession } from "../../services/apiWrapper";
 import Loader from "../../loader/loader";
 import { tokens } from "../../utilities/getLocalStorageData";
@@ -102,7 +103,7 @@ const PaymentResult: React.FC = () => {
                     ) : (
                         <>
                             <div className="flex justify-center mb-6">
-                                <AiFillCloseCircle className="w-20 h-20 text-gray-400 animate-pulse" />
+                                <FcProcess className="w-20 h-20 text-gray-400 animate-pulse" />
                             </div>
                             <h1 className={`text-2xl font-semibold mb-3 ${darkMode ? "text-gray-100" : "text-gray-600"}`}>
                                 {UIText.billing.payment.processing.title}

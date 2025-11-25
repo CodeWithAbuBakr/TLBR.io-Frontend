@@ -49,24 +49,26 @@ export const DashboardLayout = ({
     const mainContentMargin = isMobileOpen
         ? "ml-0"
         : isExpanded || isHovered
-            ? "lg:ml-[290px]"
-            : "lg:ml-[90px]";
+            ? "lg:ml-60"
+            : "lg:ml-20";
 
     return (
-        <div className={`min-h-screen xl:flex transition-colors duration-300
+        <>
+            <div className={`min-h-screen xl:flex transition-colors duration-300
             ${darkMode ? "bg-[#1E1E1E] text-gray-100" : "bg-white text-gray-900"}`}>
-            {/* Sidebar and Backdrop */}
-            <AppSidebar />
-            <Backdrop />
+                {/* Sidebar and Backdrop */}
+                <AppSidebar />
+                <Backdrop />
 
-            {/* Main Content Area */}
-            <div className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}>
-                {/* Header */}
-                <AppHeader />
+                {/* Main Content Area */}
+                <div className={`flex-2 transition-all duration-300 ease-in-out ${mainContentMargin}`}>
+                    {/* Header */}
+                    <AppHeader />
 
-                {/* Page Content */}
-                <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">{children}</div>
+                    {/* Page Content */}
+                    <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">{children}</div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }

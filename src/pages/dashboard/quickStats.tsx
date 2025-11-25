@@ -13,9 +13,7 @@ const QuickStats: React.FC = () => {
                 : 'bg-white shadow'}`}
             >
                 <div className="flex items-center mb-2">
-                    <TfiStatsUp
-                        className={`text-xl mr-2 ${darkMode ? 'text-[#94E561]' : 'text-[#333333]'}`}
-                    />
+                    <TfiStatsUp className={`text-lg mr-2 ${darkMode ? 'text-[#94E561]' : 'text-[#333333]'}`} />
                     <h3 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-[#0A0A04]'}`}>
                         {UIText.dashboard.quick_stats.title}
                     </h3>
@@ -24,11 +22,11 @@ const QuickStats: React.FC = () => {
                     {UIText.dashboard.quick_stats.usage_overview}
                 </p>
                 <div className="space-y-2 my-4">
-                    <p className={`flex justify-between text-md font-light ${darkMode ? 'text-[#CCCCCC]' : 'text-[#333333]'}`}>
+                    <p className={`flex justify-between text-sm font-light ${darkMode ? 'text-[#CCCCCC]' : 'text-[#333333]'}`}>
                         <span>{UIText.dashboard.quick_stats.downloads}</span>
                         <span>0</span>
                     </p>
-                    <p className={`flex justify-between text-md font-light ${darkMode ? 'text-[#CCCCCC]' : 'text-[#333333]'}`}>
+                    <p className={`flex justify-between text-sm font-light ${darkMode ? 'text-[#CCCCCC]' : 'text-[#333333]'}`}>
                         <span>{UIText.dashboard.quick_stats.version}</span>
                         <span>1.0.0</span>
                     </p>

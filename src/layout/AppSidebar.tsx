@@ -44,12 +44,12 @@ const AppSidebar: React.FC = () => {
   return (
     <>
       <aside
-        className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 h-screen transition-all duration-300 ease-in-out border-r 
+        className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 text-sm h-screen transition-all duration-300 ease-in-out border-r 
           ${darkMode
             ? "bg-[#1E1E1E] text-gray-100 border-gray-800"
             : "bg-white text-gray-900 border-gray-200"
           }
-          ${isExpanded || isMobileOpen ? "w-[290px]" : isHovered ? "w-[290px]" : "w-[90px]"}
+          ${isExpanded || isMobileOpen ? "w-60" : isHovered ? "w-60" : "w-20"}
           ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 
           ${isMobileOpen ? "z-50" : "z-10"}`}
         onMouseEnter={() => !isExpanded && setIsHovered(true)}
@@ -67,7 +67,7 @@ const AppSidebar: React.FC = () => {
                 />
               </>
             ) : (
-              <img src={tlbr_icon} alt="Logo" width={30} height={30} />
+              <img src={tlbr_icon} alt="Logo" width={100} height={100} />
             )}
           </div>
         </div>

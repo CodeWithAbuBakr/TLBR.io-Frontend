@@ -30,22 +30,22 @@ const GetStarted: React.FC = () => {
         <>
             <div className={`${darkMode ? "bg-[#333333]" : "bg-[#FAFAFA]"} rounded-2xl p-6 shadow-md`}>
                 {/* Header */}
-                <div className="mb-10">
-                    <h1 className={`${darkMode ? "text-[#94E561]" : "text-[#94E561]"} text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold`}>
+                <div className='mb-4 md:mb-6 lg:md-8 xl:mb-10'>
+                    <h1 className={`${darkMode ? "text-[#94E561]" : "text-[#94E561]"} text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold`}>
                         {UIText.dashboard.get_started.title}
                     </h1>
-                    <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm md:text-base mt-1`}>
+                    <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm mt-1`}>
                         {UIText.dashboard.get_started.description}
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {/* Download Add-in */}
                     <div
                         className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg ${darkMode ? "bg-[#333333] border border-[#94E561]/40" : "bg-white shadow"}`}
                         onClick={handleDownload}
                     >
-                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
+                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg font-semibold mb-1`}>
                             {UIText.dashboard.get_started.download.title}
                         </h3>
                         <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm font-light`}>
@@ -58,7 +58,7 @@ const GetStarted: React.FC = () => {
                         className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg ${darkMode ? "bg-[#333333] border border-[#94E561]/40" : "bg-white shadow"}`}
                         onClick={handleBilling}
                     >
-                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
+                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg font-semibold mb-1`}>
                             {UIText.dashboard.get_started.billing.title}
                         </h3>
                         <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm font-light`}>
@@ -71,7 +71,7 @@ const GetStarted: React.FC = () => {
                         className={`cursor-pointer rounded-xl p-5 transition-shadow hover:shadow-lg ${darkMode ? "bg-[#333333] border border-[#94E561]/40" : "bg-white shadow"}`}
                         onClick={handleSetting}
                     >
-                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg md:text-xl font-semibold mb-1`}>
+                        <h3 className={`${darkMode ? "text-[#CCCCCC]" : "text-[#0A0A04]"} text-lg font-semibold mb-1`}>
                             {UIText.dashboard.get_started.setting.title}
                         </h3>
                         <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"} text-sm font-light`}>

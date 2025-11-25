@@ -28,7 +28,7 @@ const Dashboard = () => {
                     ${darkMode ? "bg-[#1E1E1E] text-gray-100" : "bg-white text-[#0A0A04]"}`}
                 >
                     <h1
-                        className={`text-xl md:text-2xl lg:text-4xl xl:text-5xl mb-10 font-semibold
+                        className={`text-lg md:text-xl lg:text-3xl xl:text-4xl mb-4 md:mb-6 lg:md-8 xl:mb-10 font-semibold
                         ${darkMode ? "text-gray-100" : "text-[#0A0A04]"}`}>
                         {userData?.user?.name !== undefined
                             ? `Welcome ${userData?.user?.name}`
@@ -38,7 +38,7 @@ const Dashboard = () => {
                     {userRole !== "admin" ? (
                         <>
                             {/* Stats Cards */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                                 <TrialPeriod />
                                 <AccountStatus />
                                 <QuickStats />

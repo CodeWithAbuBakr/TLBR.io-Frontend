@@ -45,8 +45,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
 
         if (decryptedIsAuth === "true" && !hasFetchedUser.current) {
-            setIsLoader(true);
-            setIsModalOpen(true);
+            // setIsLoader(true);
+            // setIsModalOpen(true);
             hasFetchedUser.current = true;
 
             getUserDetails()

@@ -16,7 +16,7 @@ const AccountStatus: React.FC = () => {
                     : 'bg-white shadow'}`}
                 >
                     <div className="flex items-center mb-2">
-                        <MdOutlineAccountBalance className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`} />
+                        <MdOutlineAccountBalance className={`text-lg mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`} />
                         <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                             {UIText.dashboard.account_status.title}
                         </h3>
@@ -25,15 +25,13 @@ const AccountStatus: React.FC = () => {
                         {UIText.dashboard.account_status.current_plan_status}
                     </p>
                     <div className="space-y-2 my-4">
-                        <p className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
+                        <p className={`flex justify-between text-sm font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.plan_type}</span>
                             {decryptedUserDetails?.user?.planType
                                 ? decryptedUserDetails.user.planType.charAt(0).toUpperCase() + decryptedUserDetails.user.planType.slice(1)
                                 : 'Free Trial'}
                         </p>
-                        <p
-                            className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}
-                        >
+                        <p className={`flex justify-between text-sm font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.status}</span>
                             <span className="text-[#94E561]">
                                 {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Inactive'}
@@ -48,7 +46,7 @@ const AccountStatus: React.FC = () => {
                 >
                     <div className="flex items-center mb-2">
                         <MdOutlineAccountBalance
-                            className={`text-xl mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`}
+                            className={`text-lg mr-2 ${darkMode ? "text-[#94E561]" : "text-[#333333]"}`}
                         />
                         <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                             {UIText.dashboard.account_status.title}
@@ -58,11 +56,11 @@ const AccountStatus: React.FC = () => {
                         {UIText.dashboard.account_status.current_plan_status}
                     </p>
                     <div className="space-y-2 my-4">
-                        <p className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
+                        <p className={`flex justify-between text-sm font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.plan_type}</span>
                             <span>{UIText.dashboard.account_status.not_selected}</span>
                         </p>
-                        <p className={`flex justify-between text-md font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
+                        <p className={`flex justify-between text-sm font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.status}</span>
                             <span className="text-[#94E561]">
                                 {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Inactive'}
