@@ -22,13 +22,10 @@ const Download: React.FC = () => {
                         : 'bg-white border-gray-100'}`}
                     >
                         <h1
-                            className={`text-2xl md:text-3xl font-bold mb-2 flex items-center gap-3 
-                            ${darkMode ? "text-white" : "text-[#0A0A04]"}`
-                            }
+                            className={`text-md md:text-lg lg:text-2xl xl:lg-2xl font-bold mb-2 flex items-center gap-3 
+                            ${darkMode ? "text-white" : "text-[#0A0A04]"}`}
                         >
-                            <MdOutlineFileDownload
-                                className={`text-3xl ${darkMode ? "text-[#94E561]" : ""}`}
-                            />
+                            <MdOutlineFileDownload className={`text-xl lg:text-2xl xl:text-2xl ${darkMode ? "text-[#94E561]" : ""}`} />
                             {UIText.download.title}
                         </h1>
                         <p className={`text-sm font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
@@ -36,7 +33,7 @@ const Download: React.FC = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         {/* Windows Download Card */}
                         <Windows />
 
@@ -44,7 +41,7 @@ const Download: React.FC = () => {
                         <Version />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         {/* System Requirements */}
                         <SystemRequirements />
 

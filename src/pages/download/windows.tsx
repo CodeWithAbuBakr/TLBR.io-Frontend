@@ -28,21 +28,23 @@ const Windows: React.FC = () => {
 
     return (
         <>
-            <div className={`rounded-2xl p-6 flex flex-col items-center text-center border transition-all hover:shadow-lg
-                    ${darkMode
+            <div className={`rounded-2xl p-6 border shadow-sm hover:shadow-lg transition-all
+                ${darkMode
                     ? "bg-[#333333] border-[#94E561]/40"
                     : "bg-white border-gray-100"}`}
             >
-                <FaWindows className={`text-5xl mb-3 ${darkMode ? "text-[#94E561]" : "text-[#0A0A04]"}`} />
-                <h3 className={`font-semibold text-xl mb-2 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
-                    {UIText.download.windows.title}
-                </h3>
+                <div className='flex flex-row gap-2 mb-2'>
+                    <FaWindows className={`text-xl lg:text-2xl xl:text-2xl ${darkMode ? "text-[#94E561]" : "text-[#0A0A04]"}`} />
+                    <h3 className={`font-semibold text-md md:text-md lg:text-lg xl:lg-lg ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
+                        {UIText.download.windows.title}
+                    </h3>
+                </div>
                 <p className={`text-sm mb-4 ${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"}`}>
                     {UIText.download.windows.description}
                 </p>
 
                 <button
-                    className="bg-[#94E561] text-white cursor-pointer font-semibold px-6 py-2.5 rounded-full hover:bg-[#63cb23] transition-colors w-full sm:w-auto"
+                    className="bg-[#94E561] text-white cursor-pointer font-semibold px-6 py-2 rounded-full hover:bg-[#63cb23] transition-colors w-full sm:w-auto"
                     onClick={handleDownloads}
                 >
                     {UIText.download.windows.button}

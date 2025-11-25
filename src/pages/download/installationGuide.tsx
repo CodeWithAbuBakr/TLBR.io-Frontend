@@ -13,7 +13,7 @@ const InstallationGuide: React.FC = () => {
                     ? "bg-[#333333] border-[#94E561]/40"
                     : "bg-white border-gray-100"}`}
             >
-                <h2 className={`text-xl font-semibold mb-4 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
+                <h2 className={`text-md md:text-md lg:text-lg xl:lg-lg font-semibold mb-4 ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
                     {UIText.download.installation_instructions.title}
                 </h2>
                 <ol className={`list-decimal list-inside space-y-2 text-sm ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
