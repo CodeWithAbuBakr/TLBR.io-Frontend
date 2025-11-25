@@ -1,27 +1,27 @@
 import type { Payment } from "./type";
 
 export const freePlan = [
-    "Includes a 7-day free trial with full feature access",
-    "Everything in Professional",
-    "Dedicated account manager",
-    "Custom integrations",
-    "SLA guarantee",
+    "Full-feature 7-day trial included",
+    "All options from Professional plan",
+    "Dedicated account manager support",
+    "Custom system integrations provided",
+    "Guaranteed service-level assurance"
 ];
 
 export const monthlyPlan = [
-    "Access to all core features",
-    "Unlimited presentations and projects",
-    "Priority email support",
-    "Team collaboration tools",
-    "Includes a 7-day free trial before billing begins",
+    "Access to all essential core tools",
+    "Unlimited workspaces and projects",
+    "Priority assistance through email",
+    "Teamwide collaboration features",
+    "Includes 7-day trial before billing"
 ];
 
 export const yearlyPlan = [
-    "Everything in the Monthly Plan",
-    "Dedicated account manager",
-    "Custom integrations and onboarding",
-    "Service Level Agreement (SLA) guarantee",
-    "Includes 7-days free trial before annual billing begins",
+    "Everything offered in Monthly plan",
+    "Dedicated account manager support",
+    "Custom onboarding and integrations",
+    "Full service-level agreement (SLA)",
+    "Includes 7-day trial before annual pay"
 ];
 
 export const paymentHistory: Payment[] = [

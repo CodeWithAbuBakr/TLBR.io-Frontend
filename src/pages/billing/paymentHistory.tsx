@@ -9,7 +9,7 @@ const PaymentHistory: React.FC = () => {
     return (
         <>
             <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode ? 'bg-[#333333] border-gray-700' : 'bg-white border-gray-100'}`}>
-                <h2 className={`text-lg font-semibold mb-2 ${darkMode ? 'text-[#CCCCCC]' : 'text-[#0A0A04]'}`}>
+                <h2 className={`text-md md:text-lg lg:text-lg xl:text-xl font-semibold mb-2 ${darkMode ? 'text-[#CCCCCC]' : 'text-[#0A0A04]'}`}>
                     {UIText.billing.payment_history.title}
                 </h2>
                 <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -17,16 +17,14 @@ const PaymentHistory: React.FC = () => {
                 </p>
 
                 {paymentHistory.length === 0 ? (
-                    <div className={`text-center text-sm py-6 ${darkMode ? 'text-gray-400' : 'text-gray-500'
-                        }`}>
+                    <div className={`text-center text-sm py-6 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {UIText.billing.payment_history.not_found}
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="min-w-full text-sm text-left">
                             <thead>
-                                <tr className={`border-b transition-colors duration-200 ${darkMode ? 'text-gray-400 border-gray-700' : 'text-gray-500 border-gray-200'
-                                    }`}>
+                                <tr className={`border-b transition-colors duration-200 ${darkMode ? 'text-gray-400 border-gray-700' : 'text-gray-500 border-gray-200'}`}>
                                     <th className="pb-3 font-medium">{UIText.billing.payment_history.table.date}</th>
                                     <th className="pb-3 font-medium">{UIText.billing.payment_history.table.plan}</th>
                                     <th className="pb-3 font-medium">{UIText.billing.payment_history.table.amount}</th>

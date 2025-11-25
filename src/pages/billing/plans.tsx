@@ -63,16 +63,16 @@ const Plans: React.FC = () => {
                     ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'
                     }`}>
-                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
-                        <CiGift className="text-xl text-[#94E561]" />
+                    <h3 className={`text-md md:text-md lg:text-lg xl:text-lg font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
+                        <CiGift className="text-md md:text-md lg:text-lg xl:text-lg text-[#94E561]" />
                         {UIText.billing.free_plan.title}
                     </h3>
-                    <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <p className={`text-xs mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {UIText.billing.free_plan.description}
                     </p>
-                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
+                    <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
                         {UIText.billing.free_plan.dollar}
-                        <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
+                        <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
                             {UIText.billing.free_plan.per_month}
                         </span>
                     </div>
@@ -80,14 +80,14 @@ const Plans: React.FC = () => {
                     <ul className={`space-y-4 mb-6 text-sm mt-8 ${darkMode ? 'text-gray-300' : 'text-[#666666]'}`}>
                         {freePlan.map((feature, index) => (
                             <li key={index} className="flex flex-row gap-2 items-center">
-                                <FaRegCheckCircle className="text-xl text-green-600" />
+                                <FaRegCheckCircle className="text-md text-green-600" />
                                 {feature}
                             </li>
                         ))}
                     </ul>
 
                     <button
-                        className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-semibold rounded-full px-7 transition-colors ${darkMode
+                        className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-xs font-semibold rounded-full px-7 transition-colors ${darkMode
                             ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#94E561] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}
@@ -102,16 +102,16 @@ const Plans: React.FC = () => {
                     ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'
                     }`}>
-                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
-                        <MdOutlineCalendarMonth className="text-xl text-[#94E561]" />
+                    <h3 className={`text-md md:text-md lg:text-lg xl:text-lg font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
+                        <MdOutlineCalendarMonth className="text-md md:text-md lg:text-lg xl:text-lg text-[#94E561]" />
                         {UIText.billing.monthly_plan.title}
                     </h3>
-                    <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <p className={`text-xs mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {UIText.billing.monthly_plan.description}
                     </p>
-                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
+                    <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
                         {UIText.billing.monthly_plan.dollar}
-                        <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
+                        <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
                             {UIText.billing.monthly_plan.per_month}
                         </span>
                     </div>
@@ -119,14 +119,14 @@ const Plans: React.FC = () => {
                     <ul className={`space-y-4 mb-6 text-sm mt-8 ${darkMode ? 'text-gray-300' : 'text-[#666666]'}`}>
                         {monthlyPlan.map((feature, index) => (
                             <li key={index} className="flex flex-row gap-2 items-center">
-                                <FaRegCheckCircle className="text-xl text-green-600" />
+                                <FaRegCheckCircle className="text-md text-green-600" />
                                 {feature}
                             </li>
                         ))}
                     </ul>
 
                     <button
-                        className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-semibold rounded-full px-7 transition-colors ${darkMode
+                        className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-xs font-semibold rounded-full px-7 transition-colors ${darkMode
                             ? 'bg-[#94E561] text-white hover:bg-[#63cb23]/90'
                             : 'bg-[#94E561] text-white hover:bg-[#63cb23]'
                             }`}
@@ -141,14 +141,14 @@ const Plans: React.FC = () => {
                     ? 'bg-[#333333] border-[#94E561]/40'
                     : 'bg-white border-gray-100'
                     }`}>
-                    <h3 className={`text-xl font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
-                        <GiCalendarHalfYear className="text-xl text-[#94E561]" />
+                    <h3 className={`text-md md:text-md lg:text-lg xl:text-lg font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
+                        <GiCalendarHalfYear className="text-md md:text-md lg:text-lg xl:text-lg text-[#94E561]" />
                         {UIText.billing.yearly_plan.title}
                     </h3>
-                    <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <p className={`text-xs mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {UIText.billing.yearly_plan.description}
                     </p>
-                    <div className={`text-3xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
+                    <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-[#94E561]' : 'text-gray-900'}`}>
                         {UIText.billing.yearly_plan.dollar}
                         <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#333333]'}`}>
                             {UIText.billing.yearly_plan.per_year}
@@ -158,14 +158,14 @@ const Plans: React.FC = () => {
                     <ul className={`space-y-4 mb-6 text-sm mt-8 ${darkMode ? 'text-gray-300' : 'text-[#666666]'}`}>
                         {yearlyPlan.map((feature, index) => (
                             <li key={index} className="flex flex-row gap-2 items-center">
-                                <FaRegCheckCircle className="text-xl text-green-600" />
+                                <FaRegCheckCircle className="text-md text-green-600" />
                                 {feature}
                             </li>
                         ))}
                     </ul>
 
                     <button
-                        className={`inline-flex items-center justify-center cursor-pointer gap-3 py-3 w-full text-sm font-semibold rounded-full px-7 transition-colors ${darkMode
+                        className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-xs font-semibold rounded-full px-7 transition-colors ${darkMode
                             ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#94E561] hover:text-black'
                             : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
                             }`}

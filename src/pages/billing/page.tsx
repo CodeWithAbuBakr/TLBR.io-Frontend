@@ -17,7 +17,7 @@ const Billing: React.FC = () => {
                 >
                     {UIText.billing.title}
                 </h1>
-                <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"} mb-8`}>
+                <p className={`${darkMode ? "text-[#CCCCCC]" : "text-[#666666]"} text-sm mb-8`}>
                     {UIText.billing.description}
                 </p>
 

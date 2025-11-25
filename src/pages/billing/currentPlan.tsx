@@ -31,15 +31,15 @@ const CurrentPlan: React.FC = () => {
                             </p>
                         </div>
                         <div className="text-right">
-                            <div className={darkMode ? 'font-semibold text-[#FFFFFF]' : 'font-semibold text-gray-700'}>
+                            <div className={darkMode ? 'font-semibold text-[#FFFFFF]' : 'text-sm md:text-md lg:text-md xl:text-md text-mdfont-semibold text-gray-700'}>
                                 {decryptedUserDetails.user.planType.charAt(0).toUpperCase()}{decryptedUserDetails.user.planType.slice(1)}
                             </div>
 
-                            <div className={darkMode ? 'text-sm text-gray-400' : 'text-sm text-gray-500'}>
+                            <div className={darkMode ? 'text-gray-400' : 'text-sm md:text-md lg:text-md xl:text-md text-gray-500'}>
                                 {getRemainingDays(decryptedUserDetails?.user?.subscriptionCurrentPeriodEnd)}
                             </div>
 
-                            <div className={darkMode ? 'text-lg font-semibold mt-1 text-[#94E561]' : 'text-lg font-semibold mt-1 text-gray-900'}>
+                            <div className={darkMode ? 'font-semibold mt-1 text-[#94E561]' : 'text-sm md:text-md lg:text-md xl:text-md font-semibold mt-1 text-gray-900'}>
                                 {decryptedUserDetails?.user?.planType === 'free'
                                     ? '$0 / Free'
                                     : `$${decryptedUserDetails?.user?.planType === 'yearly' ? 200 : 20} / ${decryptedUserDetails?.user?.planType === 'yearly' ? 'Yearly' : 'Monthly'}`}
