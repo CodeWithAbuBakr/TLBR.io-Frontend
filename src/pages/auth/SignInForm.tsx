@@ -55,7 +55,6 @@ const SignInForm: React.FC<ShowToastProps> = ({ onShowToast, setIsModalOpen, set
           // Clear form
           setEmail("");
           setPassword("");
-          setIsChecked(false);
         }
       });
     }

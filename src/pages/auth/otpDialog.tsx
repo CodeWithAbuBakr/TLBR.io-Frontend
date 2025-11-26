@@ -80,7 +80,7 @@ const OTPDialog: React.FC<DialogProps> = ({
 
                 setToastMessage({
                     type: "success",
-                    message: "Your account has been verified successfully.",
+                    message: "Your OTP has been verified successfully.",
                     id: Date.now(),
                 });
 
