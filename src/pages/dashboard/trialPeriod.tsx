@@ -2,11 +2,12 @@ import React from 'react';
 import UIText from '../../utilities/testResource';
 import { IoTimeOutline } from 'react-icons/io5';
 import { useData } from '../../utilities/useData';
-import { userDetails } from '../../utilities/getLocalStorageData';
+import { currentISO, userDetails } from '../../utilities/getLocalStorageData';
 import { getAllRemainingDays, getDaysPassed, getRemainingDays } from '../../utilities/getDays';
 
 const TrialPeriod: React.FC = () => {
     const { darkMode } = useData();
+    const decryptedCurrentISO = currentISO();
     const decryptedUserDetails = userDetails();
 
     return (
@@ -27,7 +28,9 @@ const TrialPeriod: React.FC = () => {
                     </p>
                     <div className="flex items-baseline mb-1">
                         <span className={`text-3xl ${darkMode ? "text-white" : "text-[#0A0A04]"}`}>
-                            {getDaysPassed(decryptedUserDetails?.user?.subscriptionCurrentPeriodStart, decryptedUserDetails?.user?.subscriptionCurrentPeriodEnd)}
+                            {decryptedCurrentISO && decryptedUserDetails?.user?.expiresAt
+                                ? getDaysPassed(decryptedCurrentISO, decryptedUserDetails?.user?.expiresAt)
+                                : '0'}
                         </span>
                         <span className={`text-sm ml-1 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             / {getRemainingDays(decryptedUserDetails?.user?.subscriptionCurrentPeriodEnd)}

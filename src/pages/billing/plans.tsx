@@ -128,8 +128,7 @@ const Plans: React.FC = () => {
                     <button
                         className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-xs font-semibold rounded-full px-7 transition-colors ${darkMode
                             ? 'bg-[#94E561] text-white hover:bg-[#63cb23]/90'
-                            : 'bg-[#94E561] text-white hover:bg-[#63cb23]'
-                            }`}
+                            : 'bg-[#94E561] text-white hover:bg-[#63cb23]'}`}
                         onClick={() => handleSelectedPlan("monthly")}
                     >
                         {UIText.billing.monthly_plan.button}
@@ -137,10 +136,10 @@ const Plans: React.FC = () => {
                 </div>
 
                 {/* Yearly Plan */}
-                <div className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode
-                    ? 'bg-[#333333] border-[#94E561]/40'
-                    : 'bg-white border-gray-100'
-                    }`}>
+                <div
+                    className={`rounded-2xl shadow-sm p-6 border transition-colors duration-200 ${darkMode
+                        ? 'bg-[#333333] border-[#94E561]/40'
+                        : 'bg-white border-gray-100'}`}>
                     <h3 className={`text-md md:text-md lg:text-lg xl:text-lg font-semibold flex items-center gap-2 ${darkMode ? 'text-[#EAEAEA]' : 'text-gray-900'}`}>
                         <GiCalendarHalfYear className="text-md md:text-md lg:text-lg xl:text-lg text-[#94E561]" />
                         {UIText.billing.yearly_plan.title}
@@ -167,8 +166,7 @@ const Plans: React.FC = () => {
                     <button
                         className={`inline-flex items-center justify-center cursor-pointer gap-3 py-2.5 w-full text-xs font-semibold rounded-full px-7 transition-colors ${darkMode
                             ? 'bg-[#444444] text-[#EAEAEA] hover:bg-[#94E561] hover:text-black'
-                            : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'
-                            }`}
+                            : 'bg-[#eeeeee] text-[#666666] hover:bg-[#666666] hover:text-white'}`}
                         onClick={() => handleSelectedPlan("yearly")}
                     >
                         {UIText.billing.yearly_plan.button}

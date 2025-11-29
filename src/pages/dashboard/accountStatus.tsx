@@ -28,13 +28,15 @@ const AccountStatus: React.FC = () => {
                         <p className={`flex justify-between text-sm font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.plan_type}</span>
                             {decryptedUserDetails?.user?.planType
-                                ? decryptedUserDetails.user.planType.charAt(0).toUpperCase() + decryptedUserDetails.user.planType.slice(1)
-                                : 'Free Trial'}
+                                ? (decryptedUserDetails.user.planType === "free"
+                                    ? "Free Trial"
+                                    : decryptedUserDetails.user.planType.charAt(0).toUpperCase() + decryptedUserDetails.user.planType.slice(1))
+                                : "Free Trial"}
                         </p>
                         <p className={`flex justify-between text-sm font-light ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                             <span>{UIText.dashboard.account_status.status}</span>
                             <span className="text-[#94E561]">
-                                {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Inactive'}
+                                {decryptedUserDetails?.user?.isSubscribed !== false ? 'Active' : 'Trialing'}
                             </span>
                         </p>
                     </div>

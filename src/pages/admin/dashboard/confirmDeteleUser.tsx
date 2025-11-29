@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal } from '../../../components/ui/modal';
+import { useNavigate } from 'react-router-dom';
 import Loader from '../../../loader/loader';
 import type { ConfirmDeleteUserDialogProps } from '../../../utilities/type';
 import { useData } from '../../../utilities/useData';
@@ -15,6 +16,7 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
     setToastMessage,
     userId,
 }) => {
+    const navigate = useNavigate();
     const decryptedTokens = tokens();
     const { darkMode, setAllUsers, setIsUsersLoading } = useData();
 
@@ -25,7 +27,7 @@ const ConfirmDeteleUser: React.FC<ConfirmDeleteUserDialogProps> = ({
             setIsLoader(true);
             const accessToken = decryptedTokens.accessToken;
 
-            removeUser(accessToken, userId)
+            removeUser(accessToken, userId, navigate)
                 .then((data) => {
                     console.log("Delete user success:", data);
                     setIsModalOpen(false);

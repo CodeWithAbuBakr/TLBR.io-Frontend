@@ -44,7 +44,7 @@ const UserDropdown = () => {
 
     const accessToken = decryptedTokens?.accessToken;
     if (decryptedUserDetails && accessToken) {
-      doLogout(accessToken)
+      doLogout(accessToken, navigate)
         .then((data) => {
           console.log("Logout success:", data);
           setIsLoader(false);

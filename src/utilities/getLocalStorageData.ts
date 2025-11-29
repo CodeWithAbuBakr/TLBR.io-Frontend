@@ -9,7 +9,7 @@ export const isAuth = () => {
         decryptedIsAuth = bytes.toString(CryptoJS.enc.Utf8);
     } else {
         decryptedIsAuth = null;
-    }
+    };
 
     return decryptedIsAuth;
 };
@@ -30,7 +30,7 @@ export const userSession = () => {
         }
     } else {
         decryptedUserSession = null;
-    }
+    };
 
     return decryptedUserSession;
 };
@@ -51,7 +51,7 @@ export const tokens = () => {
         }
     } else {
         decryptedTokens = null;
-    }
+    };
 
     return decryptedTokens;
 };
@@ -72,7 +72,7 @@ export const userDetails = () => {
         }
     } else {
         decryptedUserDetails = null;
-    }
+    };
 
     return decryptedUserDetails;
 };
@@ -86,7 +86,7 @@ export const currentISO = () => {
         decryptedCurrentISO = bytes.toString(CryptoJS.enc.Utf8);
     } else {
         decryptedCurrentISO = null;
-    }
+    };
 
     return decryptedCurrentISO;
 };

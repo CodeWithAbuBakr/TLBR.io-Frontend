@@ -49,7 +49,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsModalOpen(true);
             hasFetchedUser.current = true;
 
-            getUserDetails()
+            getUserDetails(navigate)
                 .then((user) => {
                     setUserData(user);
                     setIsLoader(false);
@@ -57,7 +57,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
                     if (user.user.role === "admin") {
                         setIsUsersLoading(true);
-                        getAllUserDetails()
+                        getAllUserDetails(navigate)
                             .then((all) => {
                                 setAllUsers(all);
                                 setIsUsersLoading(false);
@@ -99,9 +99,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             navigate("/");
                             setToastMessage(null);
                         }, 2000);
-                    }
+                    };
                 });
-        }
+        };
     }, [navigate]);
 
     const contextValue: DataContextTypeProps = {

@@ -28,8 +28,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   const contentClasses = isFullscreen
     ? "w-full h-full"
-    : `relative w-full rounded-3xl ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-    }`;
+    : `relative w-full rounded-3xl ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`;
 
   return (
     <>

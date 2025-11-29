@@ -112,7 +112,8 @@ const UIText = {
             current_plan_status: "Your current plan status",
             plan_type: "Plan Type",
             not_selected: "Not Selected",
-            status: "Status"
+            status: "Status",
+            in_active: "InActive"
         },
         quick_stats: {
             title: "Quick Stats",

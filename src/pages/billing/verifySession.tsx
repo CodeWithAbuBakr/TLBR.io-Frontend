@@ -12,7 +12,6 @@ import { tokens } from "../../utilities/getLocalStorageData";
 
 const PaymentResult: React.FC = () => {
     const navigate = useNavigate();
-    const decryptedTokens = tokens();
     const { darkMode, isLoader, setIsLoader, isModalOpen, setIsModalOpen } = useData();
     const [verificationStatus, setVerificationStatus] = useState<"pending" | "success" | "error">("pending");
 
@@ -24,11 +23,12 @@ const PaymentResult: React.FC = () => {
 
     useEffect(() => {
         if (!sessionId) return;
-        if (!decryptedTokens) return;
 
         setIsLoader(true);
         setIsModalOpen(true);
+        const decryptedTokens = tokens();
         const accessToken = decryptedTokens.accessToken;
+        if (!decryptedTokens) return;
 
         getVerifySession(accessToken, sessionId)
             .then((data) => {
@@ -50,7 +50,7 @@ const PaymentResult: React.FC = () => {
                 setIsLoader(false);
                 setIsModalOpen(false);
             });
-    }, [decryptedTokens, sessionId, setIsLoader, setIsModalOpen]);
+    }, [sessionId, setIsLoader, setIsModalOpen]);
 
     // Loader
     if (isModalOpen && isLoader) {
