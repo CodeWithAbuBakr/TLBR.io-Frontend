@@ -8,7 +8,6 @@ import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { FcProcess } from "react-icons/fc";
 import { getVerifySession } from "../../services/apiWrapper";
 import Loader from "../../loader/loader";
-import { tokens } from "../../utilities/getLocalStorageData";
 
 const PaymentResult: React.FC = () => {
     const navigate = useNavigate();
@@ -26,11 +25,8 @@ const PaymentResult: React.FC = () => {
 
         setIsLoader(true);
         setIsModalOpen(true);
-        const decryptedTokens = tokens();
-        const accessToken = decryptedTokens.accessToken;
-        if (!decryptedTokens) return;
 
-        getVerifySession(accessToken, sessionId)
+        getVerifySession(sessionId)
             .then((data) => {
                 console.log("Payment verification result:", data);
                 setVerificationStatus("success");

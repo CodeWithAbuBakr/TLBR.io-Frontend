@@ -7,11 +7,9 @@ import { MdOutlineCalendarMonth } from 'react-icons/md';
 import { useData } from '../../utilities/useData';
 import { monthlyPlan, yearlyPlan } from '../../utilities/data';
 import { userDetails } from '../../utilities/getLocalStorageData';
-import { tokens } from '../../utilities/getLocalStorageData';
 import { getCreateCheckout } from '../../services/apiWrapper';
 
 const Plans: React.FC = () => {
-    const decryptedTokens = tokens();
     const decryptedUserDetails = userDetails();
     const userId = decryptedUserDetails.user._id;
     const [isYearly, setIsYearly] = useState(false);
@@ -22,10 +20,9 @@ const Plans: React.FC = () => {
     const handleSelectedPlan = (plan: "free" | "monthly" | "yearly") => {
         setIsLoader(true);
         setIsModalOpen(true);
-        const accessToken = decryptedTokens.accessToken;
 
         if (userId && plan) {
-            getCreateCheckout(accessToken, userId, plan)
+            getCreateCheckout(userId, plan)
                 .then((data) => {
                     console.log("Checkout success:", data);
 

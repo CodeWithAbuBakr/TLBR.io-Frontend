@@ -88,47 +88,51 @@ export const getAllUserDetails = (navigate?: (path: string) => void): Promise<St
     }, navigate);
 
 export const getCreateCheckout = (
-    accessToken: string,
     userId: string,
     plan: string,
     navigate?: (path: string) => void
 ): Promise<ResponseProps> =>
-    wrapWithTokenRefresh(() =>
-        wrapWithPromise<ResponseProps>((callback) => createCheckout(accessToken, userId, plan, callback)),
-        navigate
-    );
+    wrapWithTokenRefresh(() => {
+        const decryptedTokens = tokens();
+        const accessToken = decryptedTokens?.accessToken;
+
+        return wrapWithPromise<ResponseProps>((callback) =>
+            createCheckout(accessToken, userId, plan, callback)
+        );
+    }, navigate);
 
 export const getVerifySession = (
-    accessToken: string,
     sessionId: string,
     navigate?: (path: string) => void
 ): Promise<ResponseProps> =>
-    wrapWithTokenRefresh(() =>
-        wrapWithPromise<ResponseProps>((callback) => verifySession(accessToken, sessionId, callback)),
-        navigate
-    );
+    wrapWithTokenRefresh(() => {
+        const decryptedTokens = tokens();
+        const accessToken = decryptedTokens?.accessToken;
+
+        return wrapWithPromise<ResponseProps>((callback) =>
+            verifySession(accessToken, sessionId, callback)
+        );
+    }, navigate);
 
 export const removeUser = (
-    accessToken: string,
     userId: string,
     navigate?: (path: string) => void
 ): Promise<ResponseProps> =>
-    wrapWithTokenRefresh(() =>
-        new Promise<ResponseProps>((resolve, reject) => {
-            deleteUser(accessToken, userId, (err, data) => {
-                if (err) reject(err);
-                else if (data) resolve(data);
-                else reject(new Error("No data returned from deleteUser"));
-            });
-        }),
-        navigate
-    );
+    wrapWithTokenRefresh(() => {
+        const decryptedTokens = tokens();
+        const accessToken = decryptedTokens?.accessToken;
 
-export const doLogout = (
-    accessToken: string,
-    navigate?: (path: string) => void
-): Promise<ResponseProps> =>
-    wrapWithTokenRefresh(() =>
-        wrapWithPromise<ResponseProps>((callback) => logoutUser(accessToken, callback)),
-        navigate
-    );
+        return wrapWithPromise<ResponseProps>((callback) =>
+            deleteUser(accessToken, userId, callback)
+        );
+    }, navigate);
+
+export const doLogout = (navigate?: (path: string) => void): Promise<ResponseProps> =>
+    wrapWithTokenRefresh(() => {
+        const decryptedTokens = tokens();
+        const accessToken = decryptedTokens?.accessToken;
+
+        return wrapWithPromise<ResponseProps>((callback) =>
+            logoutUser(accessToken, callback)
+        );
+    }, navigate);
