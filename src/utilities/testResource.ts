@@ -147,26 +147,22 @@ const UIText = {
             free_trial_description: "You do not have an active plan",
             free_trial: "No Active Plan"
         },
-        free_plan: {
-            title: "Free Trial",
-            description: "Enjoy full access to all features free for 7 days - no commitment required.",
-            dollar: "$0",
-            per_month: " / 7-Day Free Trial",
-            button: "Start Your 7-days Free Trial"
-        },
         monthly_plan: {
-            title: "Monthly Plan",
+            title: "Professional",
             description: "Flexible plan for individuals who prefer month-to-month access",
-            dollar: "$20",
+            dollar: "£20",
             per_month: " / per month",
-            button: "Upgrade to Professional (Monthly)"
+            button: "Activate Plan"
         },
         yearly_plan: {
-            title: "Yearly Plan",
+            title: "Professional",
             description: "Best value for individuals committed to long-term productivity - includes a $40 annual discount",
-            dollar: "$200",
+            dollar: "£200",
             per_year: " / per year",
-            button: "Upgrade to Professional (Yearly) - Save $40"
+            button: "Request a Demo"
+        },
+        enterprise: {
+            title: "Enterprise",
         },
         payment: {
             success: {
