@@ -149,15 +149,15 @@ const UIText = {
         },
         monthly_plan: {
             title: "Professional",
-            description: "Flexible plan for individuals who prefer month-to-month access",
+            description: "£20/month subscription. Unlock Visto features inside PowerPoint. Cancel anytime.",
             dollar: "£20",
             per_month: " / per month",
             button: "Activate Plan"
         },
         yearly_plan: {
             title: "Professional",
-            description: "Best value for individuals committed to long-term productivity - includes a $40 annual discount",
-            dollar: "£200",
+            description: "£192/year — save £48. Powerful Visto features in PowerPoint. Billed yearly, cancel anytime.",
+            dollar: "£192",
             per_year: " / per year",
             button: "Request a Demo"
         },

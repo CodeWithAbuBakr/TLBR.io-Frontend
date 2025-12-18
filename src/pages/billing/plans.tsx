@@ -70,13 +70,13 @@ const Plans: React.FC = () => {
                         <MdOutlineCalendarMonth className="text-md md:text-md lg:text-lg xl:text-lg text-[#94E561]" />
                         {plan.title}
                     </h3>
-                    <p className={`text-xs mb-4 ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{plan.description}</p>
+                    <p className={`text-xs mb-4 ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{isYearly ? UIText.billing.yearly_plan.description : UIText.billing.monthly_plan.description}</p>
 
                     {/* Price */}
                     <div className={`text-2xl font-bold mb-2 ${darkMode ? "text-[#94E561]" : "text-gray-900"}`}>
                         {plan.dollar}
                         <span className={`text-xs font-medium ${darkMode ? "text-gray-300" : "text-[#333333]"}`}>
-                            {isYearly ? UIText.billing.monthly_plan.per_month : UIText.billing.yearly_plan.per_year}
+                            {isYearly ? UIText.billing.yearly_plan.per_year : UIText.billing.monthly_plan.per_month}
                         </span>
                     </div>
 
