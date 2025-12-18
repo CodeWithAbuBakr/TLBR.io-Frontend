@@ -1,7 +1,7 @@
 import type { Payment } from "./type";
 
 export const professional = [
-    "£20 per year",
+    "£20 per month or £192 per year",
     "Access to all core toolbar features",
     "Unlimited projects",
     "Priority email support",
